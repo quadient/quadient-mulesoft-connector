@@ -24,12 +24,9 @@ import org.mule.runtime.http.api.client.proxy.ProxyConfig;
 import org.mule.sdk.api.exception.ModuleException;
 
 import javax.inject.Inject;
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import static org.mule.runtime.core.api.lifecycle.LifecycleUtils.initialiseIfNeeded;
 import static org.mule.runtime.extension.api.annotation.param.display.Placement.SECURITY_TAB;
-import static org.mule.sdk.api.annotation.param.display.Placement.ADVANCED_TAB;
 
 public class ConnectionProvider implements
         CachedConnectionProvider<Connection>, Startable, Stoppable {
@@ -49,24 +46,6 @@ public class ConnectionProvider implements
     @Parameter
     @Summary("Type of the API key. It will be used for validation of connection.")
     private ApplicationType applicationType;
-
-    /**
-     * The socket connection timeout value. This attribute works in tandem with {@link #connectionTimeoutUnit}.
-     */
-    @Parameter
-    @Optional(defaultValue = "30")
-    @Placement(tab = ADVANCED_TAB, order = 1)
-    @Summary("Socket connection timeout value")
-    private int connectionTimeout;
-
-    /**
-     * A {@link TimeUnit} that qualifies the {@link #connectionTimeout}
-     */
-    @Parameter
-    @Optional(defaultValue = "SECONDS")
-    @Placement(tab = ADVANCED_TAB, order = 2)
-    @Summary("Time unit to be used in the Timeout configurations")
-    private TimeUnit connectionTimeoutUnit;
 
     @Inject
     private HttpService httpService;
@@ -115,7 +94,7 @@ public class ConnectionProvider implements
 
     @Override
     public Connection connect() {
-        return new Connection(httpClient, companyHostname, apiToken, connectionTimeoutUnit.toMillis(connectionTimeout), transformationService);
+        return new Connection(httpClient, companyHostname, apiToken, transformationService);
     }
 
     @Override

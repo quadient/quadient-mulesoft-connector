@@ -6,7 +6,6 @@ import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.transformation.TransformationService;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.client.HttpClient;
-import org.mule.runtime.http.api.client.HttpRequestOptions;
 import org.mule.runtime.http.api.domain.entity.EmptyHttpEntity;
 import org.mule.runtime.http.api.domain.entity.InputStreamHttpEntity;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
@@ -26,15 +25,13 @@ import static org.mule.runtime.api.metadata.DataType.BYTE_ARRAY;
 public final class Connection {
     private final String companyHostname;
     private final String apiToken;
-    private final long timeoutInMilliseconds;
     private final HttpClient client;
     private final TransformationService transformationService;
 
-    public Connection(HttpClient httpClient, String companyHostname, String apiToken, long timeoutInMilliseconds, TransformationService transformationService) {
+    public Connection(HttpClient httpClient, String companyHostname, String apiToken, TransformationService transformationService) {
         String hostname = companyHostname.trim();
         this.companyHostname = hostname.endsWith("/") ? hostname.substring(0, hostname.length() - 1) : hostname;
         this.apiToken = apiToken;
-        this.timeoutInMilliseconds = timeoutInMilliseconds;
         client = httpClient;
         this.transformationService = transformationService;
     }
@@ -60,7 +57,7 @@ public final class Connection {
         }
         HttpResponse response;
         try {
-            response = client.send(requestBuilder.build(), HttpRequestOptions.builder().responseTimeout(Long.valueOf(timeoutInMilliseconds).intValue()).build());
+            response = client.send(requestBuilder.build());
         } catch (Exception e) {
             throw new UnknownErrorException(e);
         }
@@ -86,7 +83,7 @@ public final class Connection {
 
         HttpResponse response;
         try {
-            response = client.send(requestBuilder.build(), HttpRequestOptions.builder().responseTimeout(Long.valueOf(timeoutInMilliseconds).intValue()).build());
+            response = client.send(requestBuilder.build());
         } catch (Exception e) {
             throw new UnknownErrorException(e);
         }
