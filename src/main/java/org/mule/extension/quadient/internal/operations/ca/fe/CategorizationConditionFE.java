@@ -4,7 +4,7 @@ import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
 import org.mule.sdk.api.annotation.param.display.Summary;
 
-public class CategorizationConditionDto {
+public class CategorizationConditionFE {
     @Parameter
     @Summary("Condition field name.")
     String fieldName;
@@ -20,12 +20,11 @@ public class CategorizationConditionDto {
     
     @Parameter
     @Summary("Occurrence operator.")
-    OperatorEnumDto operator;
+    OperatorEnumFE operator;
     
     @Parameter
     @Summary("Condition value.")
     String value;
-
 
     public String getFieldName() {
         return fieldName;
@@ -51,11 +50,11 @@ public class CategorizationConditionDto {
         this.negation = negation;
     }
 
-    public OperatorEnumDto getOperator() {
+    public OperatorEnumFE getOperator() {
         return operator;
     }
 
-    public void setOperator(OperatorEnumDto operator) {
+    public void setOperator(OperatorEnumFE operator) {
         this.operator = operator;
     }
 

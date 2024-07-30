@@ -7,12 +7,12 @@ import org.mule.sdk.api.annotation.param.display.Summary;
 
 import java.util.List;
 
-public class ConditionDto {
+public class ConditionFE {
 
     @Parameter
     @Optional
     @NullSafe
-    List<CategorizationConditionDto> categorizations;
+    List<CategorizationConditionFE> categorizations;
 
     @Parameter
     @Summary("List of conditions is JSON format.")
@@ -23,7 +23,7 @@ public class ConditionDto {
     @Parameter
     @Optional
     @NullSafe
-    List<MetadataConditionDto> metadata;
+    List<MetadataConditionFE> metadata;
 
 
     @Parameter
@@ -33,13 +33,13 @@ public class ConditionDto {
 
     @Parameter
     @Summary("Logical operator (and, or).")
-    LogicalOperatorDto operator;
+    LogicalOperatorFE operator;
 
-    public List<CategorizationConditionDto> getCategorizations() {
+    public List<CategorizationConditionFE> getCategorizations() {
         return categorizations;
     }
 
-    public void setCategorizations(List<CategorizationConditionDto> categorizations) {
+    public void setCategorizations(List<CategorizationConditionFE> categorizations) {
         this.categorizations = categorizations;
     }
 
@@ -51,11 +51,11 @@ public class ConditionDto {
         this.conditions = conditions;
     }
 
-    public List<MetadataConditionDto> getMetadata() {
+    public List<MetadataConditionFE> getMetadata() {
         return metadata;
     }
 
-    public void setMetadata(List<MetadataConditionDto> metadata) {
+    public void setMetadata(List<MetadataConditionFE> metadata) {
         this.metadata = metadata;
     }
 
@@ -67,11 +67,11 @@ public class ConditionDto {
         this.negation = negation;
     }
 
-    public LogicalOperatorDto getOperator() {
+    public LogicalOperatorFE getOperator() {
         return operator;
     }
 
-    public void setOperator(LogicalOperatorDto operator) {
+    public void setOperator(LogicalOperatorFE operator) {
         this.operator = operator;
     }
 }

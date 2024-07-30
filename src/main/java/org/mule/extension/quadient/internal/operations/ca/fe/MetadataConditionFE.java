@@ -4,7 +4,7 @@ import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
 import org.mule.sdk.api.annotation.param.display.Summary;
 
-public class MetadataConditionDto {
+public class MetadataConditionFE {
     @Parameter
     @Summary("Metadata field name.")
     String name;
@@ -16,7 +16,7 @@ public class MetadataConditionDto {
 
     @Parameter
     @Summary("Occurrence operator.")
-    OperatorEnumDto operator;
+    OperatorEnumFE operator;
 
     @Parameter
     @Summary("Metadata field value.")
@@ -38,11 +38,11 @@ public class MetadataConditionDto {
         this.name = name;
     }
 
-    public OperatorEnumDto getOperator() {
+    public OperatorEnumFE getOperator() {
         return operator;
     }
 
-    public void setOperator(OperatorEnumDto operator) {
+    public void setOperator(OperatorEnumFE operator) {
         this.operator = operator;
     }
 

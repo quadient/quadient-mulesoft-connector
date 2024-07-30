@@ -10,7 +10,6 @@ import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
 import org.mule.extension.quadient.internal.errors.exception.InvalidInputParameterException;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
 import org.mule.extension.quadient.internal.operations.ca.fe.*;
-import org.mule.extension.quadient.internal.operations.ca.fe.*;
 import org.mule.runtime.extension.api.annotation.param.Config;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
@@ -62,7 +61,7 @@ public class ContentAuthorTemplatesOperation {
 
             @Optional
             @Summary("Conditions can be nested and can contain the same elements as the main condition.")
-            ConditionDto condition
+            ConditionFE condition
     ) {
         if (limit > 100) {
             throw new InvalidInputParameterException(new Exception("The number of items to return cannot exceed 100."));
@@ -88,7 +87,7 @@ public class ContentAuthorTemplatesOperation {
         return connection.sendRequest(HttpConstants.Method.GET, endpoint, null, uriParams);
     }
 
-    private Condition.OperatorEnum convertLogicalOperatorDto(LogicalOperatorDto operator) {
+    private Condition.OperatorEnum convertLogicalOperatorDto(LogicalOperatorFE operator) {
         for (Condition.OperatorEnum en : Condition.OperatorEnum.values()) {
             if (en.getValue().toLowerCase().equals(operator.name().toLowerCase())) {
                 return en;
@@ -97,7 +96,7 @@ public class ContentAuthorTemplatesOperation {
         return null;
     }
 
-    private MetadataCondition.OperatorEnum convertOperatorEnumDtoToMetadataEnum(OperatorEnumDto operator) {
+    private MetadataCondition.OperatorEnum convertOperatorEnumDtoToMetadataEnum(OperatorEnumFE operator) {
         for (MetadataCondition.OperatorEnum en : MetadataCondition.OperatorEnum.values()) {
             if (en.getValue().toLowerCase().equals(operator.name().toLowerCase())) {
                 return en;
@@ -106,7 +105,7 @@ public class ContentAuthorTemplatesOperation {
         return null;
     }
 
-    private CategorizationCondition.OperatorEnum convertOperatorEnumDtoToCategorizationEnum(OperatorEnumDto operator) {
+    private CategorizationCondition.OperatorEnum convertOperatorEnumDtoToCategorizationEnum(OperatorEnumFE operator) {
         for (CategorizationCondition.OperatorEnum en : CategorizationCondition.OperatorEnum.values()) {
             if (en.getValue().toLowerCase().equals(operator.name().toLowerCase())) {
                 return en;
@@ -115,30 +114,30 @@ public class ContentAuthorTemplatesOperation {
         return null;
     }
 
-    private Condition convertCondition(ConditionDto condition) {
+    private Condition convertCondition(ConditionFE condition) {
         Condition resultCondition = new Condition();
         resultCondition.setNegation(condition.isNegation());
         resultCondition.setOperator(convertLogicalOperatorDto(condition.getOperator()));
 
         if (condition.getMetadata() != null) {
-            for (MetadataConditionDto metadataConditionDto : condition.getMetadata()) {
+            for (MetadataConditionFE metadataConditionFE : condition.getMetadata()) {
                 MetadataCondition metadataCondition = new MetadataCondition();
-                metadataCondition.setName(metadataConditionDto.getName());
-                metadataCondition.setNegation(metadataConditionDto.isNegation());
-                metadataCondition.setOperator(convertOperatorEnumDtoToMetadataEnum(metadataConditionDto.getOperator()));
-                metadataCondition.setValue(metadataConditionDto.getValue());
+                metadataCondition.setName(metadataConditionFE.getName());
+                metadataCondition.setNegation(metadataConditionFE.isNegation());
+                metadataCondition.setOperator(convertOperatorEnumDtoToMetadataEnum(metadataConditionFE.getOperator()));
+                metadataCondition.setValue(metadataConditionFE.getValue());
                 resultCondition.addMetadataItem(metadataCondition);
             }
         }
 
         if (condition.getCategorizations() != null) {
-            for (CategorizationConditionDto categorizationConditionDto : condition.getCategorizations()) {
+            for (CategorizationConditionFE categorizationConditionFE : condition.getCategorizations()) {
                 CategorizationCondition categorizationCondition = new CategorizationCondition();
-                categorizationCondition.setFieldName(categorizationConditionDto.getFieldName());
-                categorizationCondition.setName(categorizationConditionDto.getName());
-                categorizationCondition.setNegation(categorizationConditionDto.isNegation());
-                categorizationCondition.setOperator(convertOperatorEnumDtoToCategorizationEnum(categorizationConditionDto.getOperator()));
-                categorizationCondition.setValue(categorizationConditionDto.getValue());
+                categorizationCondition.setFieldName(categorizationConditionFE.getFieldName());
+                categorizationCondition.setName(categorizationConditionFE.getName());
+                categorizationCondition.setNegation(categorizationConditionFE.isNegation());
+                categorizationCondition.setOperator(convertOperatorEnumDtoToCategorizationEnum(categorizationConditionFE.getOperator()));
+                categorizationCondition.setValue(categorizationConditionFE.getValue());
                 resultCondition.addCategorizationsItem(categorizationCondition);
             }
 
