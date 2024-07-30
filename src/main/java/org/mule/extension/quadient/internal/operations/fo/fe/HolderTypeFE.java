@@ -1,11 +1,11 @@
-package org.mule.extension.quadient.internal.operations.fo;
+package org.mule.extension.quadient.internal.operations.fo.fe;
 
-public enum HolderType {
+public enum HolderTypeFE {
     USER_NAME("userName"),
     USER_GROUP("userGroup");
     private final String value;
 
-    HolderType(String value) {
+    HolderTypeFE(String value) {
         this.value = value;
     }
 

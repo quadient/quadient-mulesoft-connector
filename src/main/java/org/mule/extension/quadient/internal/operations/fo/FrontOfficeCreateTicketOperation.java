@@ -7,7 +7,6 @@ import org.mule.extension.quadient.internal.ObjectConverter;
 import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
 import org.mule.extension.quadient.internal.operations.fo.fe.*;
-import org.mule.extension.quadient.internal.operations.fo.fe.*;
 import org.mule.runtime.extension.api.annotation.param.Config;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
@@ -44,7 +43,7 @@ public class FrontOfficeCreateTicketOperation {
 
             @Summary("Define the holder of the ticket.")
             @DisplayName("Holder Type")
-            HolderType crateTicketHolderType,
+            HolderTypeFE crateTicketHolderType,
 
             @Summary("Name of the processing pipeline to be run.")
             @Optional
