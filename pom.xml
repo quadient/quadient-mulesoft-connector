@@ -20,7 +20,7 @@
     <properties>
         <openapitools.version>0.2.6</openapitools.version>
         <spotbugs.version>4.8.6</spotbugs.version>
-        <openapi.generator.version>7.8.0-SNAPSHOT</openapi.generator.version>
+        <openapi.generator.version>7.7.0</openapi.generator.version>
         <munit.version>3.2.1</munit.version>
         <jackson.version>2.17.2</jackson.version>
         <jakarta.version>2.1.6</jakarta.version>
@@ -224,55 +224,16 @@
 
     <repositories>
         <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>Maven Repository Switchboard</name>
-            <url>http://repo1.maven.org/maven2</url>
-        </repository>
-        <repository>
-            <id>mulesoft-releases</id>
-            <name>MuleSoft Releases Repository</name>
-            <url>https://repository.mulesoft.org/releases/</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <id>mulesoft-snapshots</id>
-            <name>MuleSoft Snapshots Repository</name>
-            <url>https://repository.mulesoft.org/snapshots/</url>
-            <layout>default</layout>
+            <id>mule-releases</id>
+            <name>Nexus Public Releases</name>
+            <url>https://repository-master.mulesoft.org/nexus/content/repositories/releases/</url>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <releases>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <url>http://repo1.maven.org/maven2</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>mulesoft-release</id>
-            <name>mulesoft release repository</name>
-            <layout>default</layout>
-            <url>https://repository.mulesoft.org/releases/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>openapi</id>
-            <name>oss sonatype openapi</name>
-            <layout>default</layout>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <id>mule-releases</id>
+            <name>Nexus Public Releases</name>
+            <url>https://repository-master.mulesoft.org/nexus/content/repositories/releases/</url>
         </pluginRepository>
     </pluginRepositories>
 </project>
