@@ -2,12 +2,16 @@ package org.mule.extension.quadient.internal;
 
 
 import org.mule.extension.quadient.internal.errors.exception.*;
+import org.mule.extension.quadient.internal.operations.v6.fe.MultipartAttachmentFE;
+import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.transformation.TransformationService;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.client.HttpClient;
 import org.mule.runtime.http.api.domain.entity.EmptyHttpEntity;
 import org.mule.runtime.http.api.domain.entity.InputStreamHttpEntity;
+import org.mule.runtime.http.api.domain.entity.multipart.HttpPart;
+import org.mule.runtime.http.api.domain.entity.multipart.MultipartHttpEntity;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
 import org.mule.runtime.http.api.domain.message.request.HttpRequestBuilder;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
@@ -15,8 +19,11 @@ import org.mule.runtime.http.api.domain.message.response.HttpResponse;
 import static org.mule.runtime.api.message.Message.of;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -66,11 +73,71 @@ public final class Connection {
         return response.getEntity().getContent();
     }
 
+    public InputStream sendRequestMultiPart(HttpConstants.Method method, String endpoint, String body, List<MultipartAttachmentFE> attachments) {
+        List<HttpPart> parts = new ArrayList<>();
+        byte[] bodyBytes = body.getBytes();
+        parts.add(new HttpPart("command", "command.json", bodyBytes, "application/json", bodyBytes.length));
+        for (MultipartAttachmentFE attachment : attachments) {
+            DataType dataType = attachment.getMultipartData().getDataType();
+            byte[] byteArray;
+            try {
+                InputStream value = attachment.getMultipartData().getValue();
+                byteArray = readAllBytes(value);
+            } catch (IOException e) {
+                throw new UnknownErrorException(e);
+            }
+            parts.add(new HttpPart(attachment.getName(), attachment.getName(), byteArray, dataType.getMediaType().toRfcString(), byteArray.length));
+
+        }
+        HttpRequestBuilder requestBuilder = HttpRequest.builder()
+                .uri(companyHostname + endpoint)
+                .method(method)
+                .addHeader("Authorization", "Bearer " + apiToken)
+                .addHeader("Content-Type", "multipart/form-data");
+
+        requestBuilder.entity(new MultipartHttpEntity(parts));
+        HttpResponse response;
+        try {
+            response = client.send(requestBuilder.build());
+        } catch (Exception e) {
+            throw new UnknownErrorException(e);
+        }
+
+        ErrorHandling(response);
+        return response.getEntity().getContent();
+    }
+
+    byte[] readAllBytes(InputStream inputStream) throws IOException {
+        final int bufLen = 4 * 0x400; // 4KB
+        byte[] buf = new byte[bufLen];
+        int readLen;
+        IOException exception = null;
+
+        try {
+            try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+                while ((readLen = inputStream.read(buf, 0, bufLen)) != -1)
+                    outputStream.write(buf, 0, readLen);
+
+                return outputStream.toByteArray();
+            }
+        } catch (IOException e) {
+            exception = e;
+            throw e;
+        } finally {
+            if (exception == null) inputStream.close();
+            else try {
+                inputStream.close();
+            } catch (IOException e) {
+                exception.addSuppressed(e);
+            }
+        }
+    }
+
     public InputStream sendPOSTRequest(String endpoint, TypedValue<Object> body, Map<String, String> headers) {
 
         Object payload = body.getValue();
         byte[] payloadAsBytes = getPayloadAsBytes(payload, transformationService);
-        InputStreamHttpEntity entity = new InputStreamHttpEntity(new ByteArrayInputStream(payloadAsBytes), (long) payloadAsBytes.length);
+        InputStreamHttpEntity entity = new InputStreamHttpEntity(new ByteArrayInputStream(payloadAsBytes), payloadAsBytes.length);
 
         HttpRequestBuilder requestBuilder = HttpRequest.builder()
                 .uri(companyHostname + endpoint)

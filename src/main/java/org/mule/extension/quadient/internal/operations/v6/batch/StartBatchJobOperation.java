@@ -8,12 +8,14 @@ import org.mule.extension.quadient.internal.ObjectConverter;
 import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
 import org.mule.extension.quadient.internal.errors.exception.InvalidInputParameterException;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
-import org.mule.extension.quadient.internal.operations.v6.InputVariablesOptions;
+import org.mule.extension.quadient.internal.operations.v6.fe.InputVariablesOptionsFE;
+import org.mule.extension.quadient.internal.operations.v6.fe.MultipartAttachmentFE;
 import org.mule.runtime.extension.api.annotation.param.Config;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
+import org.mule.runtime.http.api.HttpConstants;
 import org.mule.sdk.api.annotation.error.Throws;
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
@@ -57,7 +59,7 @@ public class StartBatchJobOperation {
             @Optional
             @NullSafe
             @Summary("List of processing pipeline variables. It can be used to override values of existing variables in the given processing pipeline. E.g. when a variable is used in the pipeline&#39;s output path, by defining a different value for the same codeName, you can easily change the output path as you start the pipeline without having to re-configure the pipeline itself.")
-            List<InputVariablesOptions> variables,
+            List<InputVariablesOptionsFE> variables,
 
             @Optional
             @Summary("Specifies the job priority. Jobs with higher priority are run first. The  value set here overwrites any priority set when designing the pipeline.\n" +
@@ -76,9 +78,11 @@ public class StartBatchJobOperation {
 
             @Optional(defaultValue = "false")
             @Summary("If true, the job will be run using a draft version of the relevant resources (scripts, connectors).")
-            boolean useDraftResources
+            boolean useDraftResources,
 
-            //todo multipart
+            @Optional
+            @NullSafe
+            List<MultipartAttachmentFE> attachments
     ) {
         if (priority != null && (priority < 1 || priority > 100)) {
             throw new InvalidInputParameterException(new Exception("Priority must be between 1 and 100"));
@@ -105,11 +109,15 @@ public class StartBatchJobOperation {
         variables.forEach(v -> {
             List<String> options = Arrays.asList(v.getOptions());
             request.addVariablesItem(new BatchVariableWithTypeEnterpriseDto()
-                    .type(v.getType())
+                    .type( BatchVariableWithTypeEnterpriseDto.TypeEnum.fromValue(v.getType().getValue()))
                     .codeName(v.getCodeName())
                     .value(v.getValue())
                     .options(options));
         });
+
+        if (attachments != null && !attachments.isEmpty()) {
+            return connection.sendRequestMultiPart(HttpConstants.Method.POST, endpoint, new ObjectConverter().convertToJson(request), attachments);
+        }
 
         return connection.sendPOSTRequest(endpoint, new ObjectConverter().convertToJson(request));
     }

@@ -8,16 +8,19 @@ import org.mule.extension.quadient.internal.ObjectConverter;
 import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
 import org.mule.extension.quadient.internal.errors.exception.InvalidInputParameterException;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
-import org.mule.extension.quadient.internal.operations.v6.InputVariablesOptions;
+import org.mule.extension.quadient.internal.operations.v6.fe.InputVariablesOptionsFE;
+import org.mule.extension.quadient.internal.operations.v6.fe.MultipartAttachmentFE;
 import org.mule.runtime.extension.api.annotation.param.Config;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
+import org.mule.runtime.http.api.HttpConstants;
 import org.mule.sdk.api.annotation.error.Throws;
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,7 +51,7 @@ public class OnDemandOnDemandOperation {
             @Optional
             @NullSafe
             @Summary("List of processing pipeline variables. It can be used to override values of existing variables in the given processing pipeline. E.g. when a variable is used in the pipeline&#39;s output path, by defining a different value for the same codeName, you can easily change the output path as you start the pipeline without having to re-configure the pipeline itself.")
-            List<InputVariablesOptions> variables,
+            List<InputVariablesOptionsFE> variables,
 
             @Optional(defaultValue = "false")
             @Summary("If true, the job will be run using a draft version of the processing pipeline.")
@@ -56,9 +59,11 @@ public class OnDemandOnDemandOperation {
 
             @Optional(defaultValue = "false")
             @Summary("If true, the job will be run using a draft version of the relevant resources (scripts, connectors).")
-            boolean useDraftResources
-            
-            //todo multipart
+            boolean useDraftResources,
+
+            @Optional
+            @NullSafe
+            List<MultipartAttachmentFE> attachments
     ) {
         if (variables != null && variables.size() > 50) {
             throw new InvalidInputParameterException(new Exception("The number of variables cannot exceed 50."));
@@ -70,13 +75,21 @@ public class OnDemandOnDemandOperation {
         request.setUseDraftResources(useDraftResources);
 
         variables.forEach(v -> {
-            List<String> options = Arrays.asList(v.getOptions());
+            List<String> options = new ArrayList<>();
+            if (v.getOptions() != null){
+                options.addAll(Arrays.asList(v.getOptions()));
+            }
             request.addVariablesItem(new BatchVariableWithTypeEnterpriseDto()
                     .type(BatchVariableWithTypeEnterpriseDto.TypeEnum.fromValue(v.getType().toString()))
                     .codeName(v.getCodeName())
                     .value(v.getValue())
                     .options(options));
         });
+        
+        if (attachments != null && !attachments.isEmpty()) {
+            return connection.sendRequestMultiPart(HttpConstants.Method.POST, endpoint, new ObjectConverter().convertToJson(request), attachments);
+        }
+        
         return connection.sendPOSTRequest(endpoint, new ObjectConverter().convertToJson(request));
     }
 }

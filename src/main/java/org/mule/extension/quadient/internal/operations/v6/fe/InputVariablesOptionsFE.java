@@ -1,13 +1,12 @@
-package org.mule.extension.quadient.internal.operations.v6;
+package org.mule.extension.quadient.internal.operations.v6.fe;
 
-import com.quadient.mule.model.v6.batch.BatchVariableWithTypeEnterpriseDto;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
 
-public class InputVariablesOptions {
+public class InputVariablesOptionsFE {
 
     @Parameter
-    public BatchVariableWithTypeEnterpriseDto.TypeEnum type;
+    public VariableTypeFE type;
 
     @Parameter
     public String codeName;
@@ -35,11 +34,11 @@ public class InputVariablesOptions {
         this.codeName = codeName;
     }
 
-    public BatchVariableWithTypeEnterpriseDto.TypeEnum getType() {
+    public VariableTypeFE getType() {
         return type;
     }
 
-    public void setType(BatchVariableWithTypeEnterpriseDto.TypeEnum type) {
+    public void setType(VariableTypeFE type) {
         this.type = type;
     }
 
