@@ -19,7 +19,6 @@ import org.mule.runtime.http.api.domain.message.response.HttpResponse;
 import static org.mule.runtime.api.message.Message.of;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -79,15 +78,9 @@ public final class Connection {
         parts.add(new HttpPart("command", "command.json", bodyBytes, "application/json", bodyBytes.length));
         for (MultipartAttachmentFE attachment : attachments) {
             DataType dataType = attachment.getMultipartData().getDataType();
-            byte[] byteArray;
-            try {
-                InputStream value = attachment.getMultipartData().getValue();
-                byteArray = readAllBytes(value);
-            } catch (IOException e) {
-                throw new UnknownErrorException(e);
-            }
+            InputStream value = attachment.getMultipartData().getValue();
+            byte[] byteArray = getPayloadAsBytes(value, transformationService);
             parts.add(new HttpPart(attachment.getName(), attachment.getName(), byteArray, dataType.getMediaType().toRfcString(), byteArray.length));
-
         }
         HttpRequestBuilder requestBuilder = HttpRequest.builder()
                 .uri(companyHostname + endpoint)
@@ -107,34 +100,7 @@ public final class Connection {
         return response.getEntity().getContent();
     }
 
-    byte[] readAllBytes(InputStream inputStream) throws IOException {
-        final int bufLen = 4 * 0x400; // 4KB
-        byte[] buf = new byte[bufLen];
-        int readLen;
-        IOException exception = null;
-
-        try {
-            try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-                while ((readLen = inputStream.read(buf, 0, bufLen)) != -1)
-                    outputStream.write(buf, 0, readLen);
-
-                return outputStream.toByteArray();
-            }
-        } catch (IOException e) {
-            exception = e;
-            throw e;
-        } finally {
-            if (exception == null) inputStream.close();
-            else try {
-                inputStream.close();
-            } catch (IOException e) {
-                exception.addSuppressed(e);
-            }
-        }
-    }
-
     public InputStream sendPOSTRequest(String endpoint, TypedValue<Object> body, Map<String, String> headers) {
-
         Object payload = body.getValue();
         byte[] payloadAsBytes = getPayloadAsBytes(payload, transformationService);
         InputStreamHttpEntity entity = new InputStreamHttpEntity(new ByteArrayInputStream(payloadAsBytes), payloadAsBytes.length);
