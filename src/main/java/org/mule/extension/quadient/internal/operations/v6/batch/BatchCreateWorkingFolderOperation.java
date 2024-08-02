@@ -24,16 +24,7 @@ public class BatchCreateWorkingFolderOperation {
     @MediaType(MediaType.TEXT_PLAIN)
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Creates a working folder for your batch job and returns working folder id.\n" +
-            "Response example:\n" +
-            "{\n" +
-            "    \"workingFolderId\": \"string\",\n" +
-            "    \"eventId\": 0,\n" +
-            "    \"time\": \"2019-08-24T14:15:22Z\",\n" +
-            "    \"warnings\": [{\n" +
-            "            \"errorMessage\": \"string\"\n" +
-            "        }\n" +
-            "    ]\n" +
-            "}")
+            "Output contains working folder id.")
     @DisplayName("Batch - Create working folder")
     public String batchCreateWorkingFolder(
             @Config Configuration configuration,
