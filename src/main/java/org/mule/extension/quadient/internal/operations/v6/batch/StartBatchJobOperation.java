@@ -7,6 +7,7 @@ import org.mule.extension.quadient.internal.Connection;
 import org.mule.extension.quadient.internal.ObjectConverter;
 import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
 import org.mule.extension.quadient.internal.errors.exception.InvalidInputParameterException;
+import org.mule.extension.quadient.internal.operations.HttpResponseAttributes;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
 import org.mule.extension.quadient.internal.operations.v6.fe.InputVariablesOptionsFE;
 import org.mule.extension.quadient.internal.operations.v6.fe.MultipartAttachmentFE;
@@ -19,6 +20,7 @@ import org.mule.runtime.http.api.HttpConstants;
 import org.mule.sdk.api.annotation.error.Throws;
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
+import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -43,7 +45,7 @@ public class StartBatchJobOperation {
             "    ]\n" +
             "}")
     @DisplayName("Batch - Start batch job")
-    public InputStream batchStartBatchJob(
+    public Result<InputStream, HttpResponseAttributes> batchStartBatchJob(
             @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
 

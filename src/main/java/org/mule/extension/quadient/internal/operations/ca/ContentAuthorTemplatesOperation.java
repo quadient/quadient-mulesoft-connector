@@ -8,16 +8,18 @@ import org.mule.extension.quadient.internal.Connection;
 import org.mule.extension.quadient.internal.ObjectConverter;
 import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
 import org.mule.extension.quadient.internal.errors.exception.InvalidInputParameterException;
+import org.mule.extension.quadient.internal.operations.HttpResponseAttributes;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
 import org.mule.extension.quadient.internal.operations.ca.fe.*;
 import org.mule.runtime.extension.api.annotation.param.Config;
-import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.sdk.api.annotation.error.Throws;
+import org.mule.sdk.api.annotation.param.MediaType;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Example;
+import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -30,7 +32,7 @@ public class ContentAuthorTemplatesOperation {
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Lists templates.")
     @DisplayName("Content Author - Get Templates")
-    public InputStream contentAuthorGetTemplates(
+    public Result<InputStream, HttpResponseAttributes> contentAuthorGetTemplates(
             @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
 
@@ -87,44 +89,17 @@ public class ContentAuthorTemplatesOperation {
         return connection.sendRequest(HttpConstants.Method.GET, endpoint, null, uriParams);
     }
 
-    private Condition.OperatorEnum convertLogicalOperatorDto(LogicalOperatorFE operator) {
-        for (Condition.OperatorEnum en : Condition.OperatorEnum.values()) {
-            if (en.getValue().toLowerCase().equals(operator.name().toLowerCase())) {
-                return en;
-            }
-        }
-        return null;
-    }
-
-    private MetadataCondition.OperatorEnum convertOperatorEnumDtoToMetadataEnum(OperatorEnumFE operator) {
-        for (MetadataCondition.OperatorEnum en : MetadataCondition.OperatorEnum.values()) {
-            if (en.getValue().toLowerCase().equals(operator.name().toLowerCase())) {
-                return en;
-            }
-        }
-        return null;
-    }
-
-    private CategorizationCondition.OperatorEnum convertOperatorEnumDtoToCategorizationEnum(OperatorEnumFE operator) {
-        for (CategorizationCondition.OperatorEnum en : CategorizationCondition.OperatorEnum.values()) {
-            if (en.getValue().toLowerCase().equals(operator.name().toLowerCase())) {
-                return en;
-            }
-        }
-        return null;
-    }
-
     private Condition convertCondition(ConditionFE condition) {
         Condition resultCondition = new Condition();
         resultCondition.setNegation(condition.isNegation());
-        resultCondition.setOperator(convertLogicalOperatorDto(condition.getOperator()));
+        resultCondition.setOperator(Condition.OperatorEnum.fromValue(condition.getOperator().getValue()));
 
         if (condition.getMetadata() != null) {
             for (MetadataConditionFE metadataConditionFE : condition.getMetadata()) {
                 MetadataCondition metadataCondition = new MetadataCondition();
                 metadataCondition.setName(metadataConditionFE.getName());
                 metadataCondition.setNegation(metadataConditionFE.isNegation());
-                metadataCondition.setOperator(convertOperatorEnumDtoToMetadataEnum(metadataConditionFE.getOperator()));
+                metadataCondition.setOperator(MetadataCondition.OperatorEnum.fromValue(metadataConditionFE.getOperator().getValue()));
                 metadataCondition.setValue(metadataConditionFE.getValue());
                 resultCondition.addMetadataItem(metadataCondition);
             }
@@ -136,11 +111,10 @@ public class ContentAuthorTemplatesOperation {
                 categorizationCondition.setFieldName(categorizationConditionFE.getFieldName());
                 categorizationCondition.setName(categorizationConditionFE.getName());
                 categorizationCondition.setNegation(categorizationConditionFE.isNegation());
-                categorizationCondition.setOperator(convertOperatorEnumDtoToCategorizationEnum(categorizationConditionFE.getOperator()));
+                categorizationCondition.setOperator(CategorizationCondition.OperatorEnum.fromValue(categorizationConditionFE.getOperator().getValue()));
                 categorizationCondition.setValue(categorizationConditionFE.getValue());
                 resultCondition.addCategorizationsItem(categorizationCondition);
             }
-
         }
         if (condition.getConditions() != null) {
             for (String conditionJSON : condition.getConditions()) {

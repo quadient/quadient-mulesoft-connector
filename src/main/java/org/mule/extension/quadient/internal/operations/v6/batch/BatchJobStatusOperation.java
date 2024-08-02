@@ -6,12 +6,14 @@ import org.mule.extension.quadient.internal.Configuration;
 import org.mule.extension.quadient.internal.Connection;
 import org.mule.extension.quadient.internal.ObjectConverter;
 import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
+import org.mule.extension.quadient.internal.operations.HttpResponseAttributes;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
 import org.mule.runtime.extension.api.annotation.param.Config;
-import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.sdk.api.annotation.error.Throws;
+import org.mule.sdk.api.annotation.param.MediaType;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
+import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;
 
@@ -36,7 +38,7 @@ public class BatchJobStatusOperation {
             "'PartiallyFinished',\n" +
             "'Running'")
     @DisplayName("Batch - Batch Job Status")
-    public String batchBatchJobStatus(
+    public Result<String, HttpResponseAttributes> batchBatchJobStatus(
             @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
 
@@ -44,8 +46,12 @@ public class BatchJobStatusOperation {
             String batchJobId
     ) {
         QueryBatchJobStatus queryBatchJobStatus = new QueryBatchJobStatus().batchJobId(batchJobId);
-        InputStream content = connection.sendPOSTRequest(endpoint, new ObjectConverter().convertToJson(queryBatchJobStatus));
-        BatchStatusJobResponse responseObj = new ObjectConverter().readValue(content, BatchStatusJobResponse.class);
-        return responseObj.getBatchJob().getState().getValue();
+        Result<InputStream, HttpResponseAttributes> result = connection.sendPOSTRequest(endpoint, new ObjectConverter().convertToJson(queryBatchJobStatus));
+        BatchStatusJobResponse responseObj = new ObjectConverter().readValue(result.getOutput(), BatchStatusJobResponse.class);
+        return Result.<String, HttpResponseAttributes>builder()
+                .output(responseObj.getBatchJob().getState().getValue())
+                .attributes(result.getAttributes().get())
+                .mediaType(org.mule.runtime.api.metadata.MediaType.TEXT)
+                .build();
     }
 }

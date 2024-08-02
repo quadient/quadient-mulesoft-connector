@@ -5,6 +5,7 @@ import org.mule.extension.quadient.internal.Configuration;
 import org.mule.extension.quadient.internal.Connection;
 import org.mule.extension.quadient.internal.ObjectConverter;
 import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
+import org.mule.extension.quadient.internal.operations.HttpResponseAttributes;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
 import org.mule.extension.quadient.internal.operations.fo.fe.*;
 import org.mule.runtime.extension.api.annotation.param.Config;
@@ -17,6 +18,7 @@ import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Example;
 import org.mule.sdk.api.annotation.param.display.Placement;
+import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;
 import java.util.List;
@@ -29,7 +31,7 @@ public class FrontOfficeCreateTicketOperation {
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Creates a ticket.")
     @DisplayName("Front Office - Create ticket")
-    public InputStream frontOfficeCreateTicket(
+    public Result<InputStream, HttpResponseAttributes> frontOfficeCreateTicket(
             @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
 

@@ -1,29 +1,49 @@
 package org.mule.extension.quadient.internal.operations.ca.fe;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum OperatorEnumFE {
-    EQUAL,
+    EQUAL("equal"),
 
-    LESS,
+    LESS("less"),
 
-    LESSOREQUAL,
+    LESS_OR_EQUAL("lessOrEqual"),
 
-    MORE,
+    MORE("more"),
 
-    MOREOREQUAL,
+    MORE_OR_EQUAL("moreOrEqual"),
 
-    BEGINWITH,
+    BEGIN_WITH("beginWith"),
 
-    BEGINWITHCASEINSENSITIVE,
+    BEGIN_WITH_CASE_INSENSITIVE("beginWithCaseInsensitive"),
 
-    ENDWITH,
+    END_WITH("endWith"),
 
-    ENDWITHCASEINSENSITIVE,
+    END_WITH_CASE_INSENSITIVE("endWithCaseInsensitive"),
 
-    CONTAINS,
+    CONTAINS("contains"),
 
-    CONTAINSCASEINSENSITIVE,
+    CONTAINS_CASE_INSENSITIVE("containsCaseInsensitive"),
 
-    ISVALID,
+    IS_VALID("isValid"),
 
-    EMPTY
+    EXISTS("exists"),
+
+    EMPTY("empty");
+
+    private String value;
+
+    OperatorEnumFE(String value) {
+        this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
 }

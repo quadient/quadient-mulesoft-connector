@@ -2,8 +2,10 @@ package org.mule.extension.quadient.internal;
 
 
 import org.mule.extension.quadient.internal.errors.exception.*;
+import org.mule.extension.quadient.internal.operations.HttpResponseAttributes;
 import org.mule.extension.quadient.internal.operations.v6.fe.MultipartAttachmentFE;
 import org.mule.runtime.api.metadata.DataType;
+import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.transformation.TransformationService;
 import org.mule.runtime.http.api.HttpConstants;
@@ -15,6 +17,7 @@ import org.mule.runtime.http.api.domain.entity.multipart.MultipartHttpEntity;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
 import org.mule.runtime.http.api.domain.message.request.HttpRequestBuilder;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
+import org.mule.sdk.api.runtime.operation.Result;
 
 import static org.mule.runtime.api.message.Message.of;
 
@@ -42,11 +45,11 @@ public final class Connection {
         this.transformationService = transformationService;
     }
 
-    public InputStream sendPOSTRequest(String endpoint, String body) {
+    public Result<InputStream, HttpResponseAttributes> sendPOSTRequest(String endpoint, String body) {
         return sendRequest(HttpConstants.Method.POST, endpoint, body, null);
     }
 
-    public InputStream sendRequest(HttpConstants.Method method, String endpoint, String body, Map<String, String> uriParams) {
+    public Result<InputStream, HttpResponseAttributes> sendRequest(HttpConstants.Method method, String endpoint, String body, Map<String, String> uriParams) {
         HttpRequestBuilder requestBuilder = HttpRequest.builder()
                 .uri(companyHostname + endpoint)
                 .method(method)
@@ -69,10 +72,10 @@ public final class Connection {
         }
 
         ErrorHandling(response);
-        return response.getEntity().getContent();
+        return createResult(response);
     }
 
-    public InputStream sendRequestMultiPart(HttpConstants.Method method, String endpoint, String body, List<MultipartAttachmentFE> attachments) {
+    public Result<InputStream, HttpResponseAttributes> sendRequestMultiPart(HttpConstants.Method method, String endpoint, String body, List<MultipartAttachmentFE> attachments) {
         List<HttpPart> parts = new ArrayList<>();
         byte[] bodyBytes = body.getBytes();
         parts.add(new HttpPart("command", "command.json", bodyBytes, "application/json", bodyBytes.length));
@@ -97,10 +100,10 @@ public final class Connection {
         }
 
         ErrorHandling(response);
-        return response.getEntity().getContent();
+        return createResult(response);
     }
 
-    public InputStream sendPOSTRequest(String endpoint, TypedValue<Object> body, Map<String, String> headers) {
+    public Result<InputStream, HttpResponseAttributes> sendPOSTRequest(String endpoint, TypedValue<Object> body, Map<String, String> headers) {
         Object payload = body.getValue();
         byte[] payloadAsBytes = getPayloadAsBytes(payload, transformationService);
         InputStreamHttpEntity entity = new InputStreamHttpEntity(new ByteArrayInputStream(payloadAsBytes), payloadAsBytes.length);
@@ -122,7 +125,7 @@ public final class Connection {
         }
 
         ErrorHandling(response);
-        return response.getEntity().getContent();
+        return createResult(response);
     }
 
     private byte[] getPayloadAsBytes(Object payload, TransformationService transformationService) {
@@ -150,5 +153,18 @@ public final class Connection {
         } catch (IOException e) {
             throw new UnknownErrorException(e);
         }
+    }
+
+    private Result<InputStream, HttpResponseAttributes> createResult(HttpResponse response) {
+        MediaType mediaType = response.getHeaderValue("Content-Type") != null ? MediaType.parse(response.getHeaderValue("Content-Type")) : MediaType.ANY;
+        return Result.<InputStream, HttpResponseAttributes>builder()
+                .output(response.getEntity().getContent())
+                .attributes(createAttributes(response))
+                .mediaType(mediaType)
+                .build();
+    }
+
+    private HttpResponseAttributes createAttributes(HttpResponse response) {
+        return new HttpResponseAttributes(response.getStatusCode(), response.getReasonPhrase(), response.getHeaders());
     }
 }

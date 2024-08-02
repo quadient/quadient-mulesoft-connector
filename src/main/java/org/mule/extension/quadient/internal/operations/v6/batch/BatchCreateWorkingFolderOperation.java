@@ -7,13 +7,15 @@ import org.mule.extension.quadient.internal.Connection;
 import org.mule.extension.quadient.internal.ObjectConverter;
 import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
 import org.mule.extension.quadient.internal.errors.exception.InvalidInputParameterException;
+import org.mule.extension.quadient.internal.operations.HttpResponseAttributes;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
 import org.mule.runtime.extension.api.annotation.param.Config;
-import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.sdk.api.annotation.error.Throws;
+import org.mule.sdk.api.annotation.param.MediaType;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
+import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;
 
@@ -26,7 +28,7 @@ public class BatchCreateWorkingFolderOperation {
     @Summary("Creates a working folder for your batch job and returns working folder id.\n" +
             "Output contains working folder id.")
     @DisplayName("Batch - Create working folder")
-    public String batchCreateWorkingFolder(
+    public Result<String, HttpResponseAttributes> batchCreateWorkingFolder(
             @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
 
@@ -46,8 +48,13 @@ public class BatchCreateWorkingFolderOperation {
         }
         ObjectConverter objectConverter = new ObjectConverter();
         CreateWorkingFolderRequest request = new CreateWorkingFolderRequest().name(name).expiration(expiration).isJobDedicated(isJobDedicated);
-        InputStream content = connection.sendPOSTRequest(endpoint, objectConverter.convertToJson(request));
-        CreateWorkingFolderResponse responseObj = objectConverter.readValue(content, CreateWorkingFolderResponse.class);
-        return responseObj.getWorkingFolderId();
+        Result<InputStream, HttpResponseAttributes> result = connection.sendPOSTRequest(endpoint, objectConverter.convertToJson(request));
+        CreateWorkingFolderResponse responseObj = objectConverter.readValue(result.getOutput(), CreateWorkingFolderResponse.class);
+
+        return Result.<String, HttpResponseAttributes>builder()
+                .output(responseObj.getWorkingFolderId())
+                .attributes(result.getAttributes().get())
+                .mediaType(org.mule.runtime.api.metadata.MediaType.TEXT)
+                .build();  
     }
 }

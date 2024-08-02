@@ -4,6 +4,7 @@ import org.mule.extension.quadient.internal.Configuration;
 import org.mule.extension.quadient.internal.Connection;
 import org.mule.extension.quadient.internal.errors.ExecuteErrorsProvider;
 import org.mule.extension.quadient.internal.errors.exception.InvalidInputParameterException;
+import org.mule.extension.quadient.internal.operations.HttpResponseAttributes;
 import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.util.MultiMap;
@@ -15,6 +16,7 @@ import org.mule.sdk.api.annotation.error.Throws;
 import org.mule.sdk.api.annotation.param.Content;
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.Optional;
+import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -37,7 +39,7 @@ public class OnDemandCustomDataOperation {
             "  ]\n" +
             "}")
     @DisplayName("OnDemand - OnDemand Custom Data")
-    public InputStream OnDemandOnDemandCustomData(
+    public Result<InputStream, HttpResponseAttributes> OnDemandOnDemandCustomData(
             @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
 
