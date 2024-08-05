@@ -133,7 +133,9 @@ public final class Connection {
     }
 
     private void ErrorHandling(HttpResponse response) {
-        if (response.getStatusCode() == HttpConstants.HttpStatus.OK.getStatusCode()) {
+        if (response.getStatusCode() == HttpConstants.HttpStatus.OK.getStatusCode() ||
+                response.getStatusCode() == HttpConstants.HttpStatus.CREATED.getStatusCode() ||
+                response.getStatusCode() == HttpConstants.HttpStatus.ACCEPTED.getStatusCode()) {
             return;
         }
         try {
