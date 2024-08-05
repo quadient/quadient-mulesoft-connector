@@ -77,15 +77,11 @@ public class OnDemandOnDemandOperation {
         request.setUseDraftResources(useDraftResources);
 
         variables.forEach(v -> {
-            List<String> options = new ArrayList<>();
-            if (v.getOptions() != null){
-                options.addAll(Arrays.asList(v.getOptions()));
-            }
             request.addVariablesItem(new BatchVariableWithTypeEnterpriseDto()
                     .type(BatchVariableWithTypeEnterpriseDto.TypeEnum.fromValue(v.getType().toString()))
                     .codeName(v.getCodeName())
                     .value(v.getValue())
-                    .options(options));
+                    .options(v.getOptions()));
         });
         
         if (attachments != null && !attachments.isEmpty()) {

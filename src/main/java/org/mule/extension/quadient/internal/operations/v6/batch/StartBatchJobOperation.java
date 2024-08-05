@@ -23,7 +23,6 @@ import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -109,12 +108,11 @@ public class StartBatchJobOperation {
         request.setUseDraftResources(useDraftResources);
 
         variables.forEach(v -> {
-            List<String> options = Arrays.asList(v.getOptions());
             request.addVariablesItem(new BatchVariableWithTypeEnterpriseDto()
                     .type( BatchVariableWithTypeEnterpriseDto.TypeEnum.fromValue(v.getType().getValue()))
                     .codeName(v.getCodeName())
                     .value(v.getValue())
-                    .options(options));
+                    .options(v.getOptions()));
         });
 
         if (attachments != null && !attachments.isEmpty()) {
