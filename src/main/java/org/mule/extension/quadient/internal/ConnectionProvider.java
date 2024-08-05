@@ -113,13 +113,13 @@ public class ConnectionProvider implements
         switch (applicationType) {
             case GENERATE_ON_DEMAND: {
                 endpoint = ServiceEndpoint.GENERATE_APP_HEALTH;
-                body = new ObjectConverter().convertToJson(new QueryAppHealth().application(QueryAppHealth.ApplicationEnum.GENERATE_ON_DEMAND));
+                body = new ObjectConverter().convertToJson(new QueryAppHealth().application(QueryAppHealth.ApplicationEnum.GENERATEONDEMAND));
                 method = HttpConstants.Method.POST;
                 break;
             }
             case GENERATE_BATCH: {
                 endpoint = ServiceEndpoint.GENERATE_APP_HEALTH;
-                body = new ObjectConverter().convertToJson(new QueryAppHealth().application(QueryAppHealth.ApplicationEnum.GENERATE_BATCH));
+                body = new ObjectConverter().convertToJson(new QueryAppHealth().application(QueryAppHealth.ApplicationEnum.GENERATEBATCH));
                 method = HttpConstants.Method.POST;
                 break;
             }
