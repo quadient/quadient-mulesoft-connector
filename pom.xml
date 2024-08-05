@@ -8,7 +8,7 @@
     <artifactId>quadient-connector</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-extension</packaging>
-    <name>Quadient Extension</name>
+    <name>Quadient Evolve Connector - Mule 4</name>
     <!--todo  LICENSE.md -->
     <!--todo  README.md -->
     <parent>
