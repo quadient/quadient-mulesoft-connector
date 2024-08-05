@@ -22,8 +22,6 @@ import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class OnDemandOnDemandOperation {

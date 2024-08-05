@@ -14,6 +14,7 @@ import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.sdk.api.annotation.error.Throws;
+import org.mule.sdk.api.annotation.metadata.fixed.OutputJsonType;
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Example;
@@ -27,7 +28,7 @@ public class FrontOfficeCreateTicketOperation {
     final String endpoint = ServiceEndpoint.FO_TICKETS;
     final HttpConstants.Method method = HttpConstants.Method.POST;
 
-    @MediaType(MediaType.APPLICATION_JSON)
+    @OutputJsonType(schema = "jsonSchema/fo-frontOfficeCreateTicketOperation.json")
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Creates a ticket.")
     @DisplayName("Front Office - Create ticket")

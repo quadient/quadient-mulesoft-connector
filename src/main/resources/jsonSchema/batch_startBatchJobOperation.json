@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Batch - Start Batch Job Operation",
+  "type": "object",
+  "properties": {
+    "workingFolderId": {
+      "type": "string"
+    },
+    "batchJobId": {
+      "type": "string"
+    },
+    "eventId": {
+      "type": "number"
+    },
+    "time": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "workingFolderId",
+    "batchJobId",
+    "eventId",
+    "time"
+  ]
+}

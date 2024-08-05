@@ -12,12 +12,12 @@ import org.mule.extension.quadient.internal.operations.ServiceEndpoint;
 import org.mule.extension.quadient.internal.operations.v6.fe.InputVariablesOptionsFE;
 import org.mule.extension.quadient.internal.operations.v6.fe.MultipartAttachmentFE;
 import org.mule.runtime.extension.api.annotation.param.Config;
-import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.sdk.api.annotation.error.Throws;
+import org.mule.sdk.api.annotation.metadata.fixed.OutputJsonType;
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.runtime.operation.Result;
@@ -29,20 +29,9 @@ import java.util.List;
 public class StartBatchJobOperation {
     final String endpoint = ServiceEndpoint.BATCH_START_BATCH_JOB;
 
-    @MediaType(MediaType.APPLICATION_JSON)
+    @OutputJsonType(schema = "jsonSchema/batch_startBatchJobOperation.json")
     @Throws(ExecuteErrorsProvider.class)
-    @Summary("Starts a batch job using a defined processing pipeline.\n" +
-            "Response example:\n" +
-            "{\n" +
-            "    \"workingFolderId\": \"string\",\n" +
-            "    \"batchJobId\": \"string\",\n" +
-            "    \"eventId\": 0,\n" +
-            "    \"time\": \"2019-08-24T14:15:22Z\",\n" +
-            "    \"warnings\": [{\n" +
-            "            \"errorMessage\": \"string\"\n" +
-            "        }\n" +
-            "    ]\n" +
-            "}")
+    @Summary("Starts a batch job using a defined processing pipeline")
     @DisplayName("Batch - Start batch job")
     public Result<InputStream, HttpResponseAttributes> batchStartBatchJob(
             @Config Configuration configuration,

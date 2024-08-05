@@ -16,7 +16,7 @@ import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.sdk.api.annotation.error.Throws;
-import org.mule.sdk.api.annotation.param.MediaType;
+import org.mule.sdk.api.annotation.metadata.fixed.OutputJsonType;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Example;
 import org.mule.sdk.api.runtime.operation.Result;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class ContentAuthorTemplatesOperation {
     final String endpoint = ServiceEndpoint.CA_TEMPLATES;
 
-    @MediaType(MediaType.APPLICATION_JSON)
+    @OutputJsonType(schema = "jsonSchema/ca_contentAuthorTemplatesOperation.json")    
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Lists templates.")
     @DisplayName("Content Author - Get Templates")
