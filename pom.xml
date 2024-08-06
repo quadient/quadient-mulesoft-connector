@@ -106,14 +106,18 @@
                                 <java8>true</java8>
                                 <encoding>UTF-8</encoding>
                                 <supportUrlQuery>false</supportUrlQuery>
+                                <library>jersey2</library>
+                                <generatorName>java</generatorName>
                             </configOptions>
-
                             <generateApis>false</generateApis>
                             <generateModels>true</generateModels>
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateModelTests>false</generateModelTests>
-                            <library>native</library>
-                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <library>jersey2</library>
+                            <generateSupportingFiles>true</generateSupportingFiles>
+                            <supportingFilesToGenerate>
+                                JSON.java,RFC3339DateFormat.java
+                            </supportingFilesToGenerate>
                             <modelsToGenerate>
                                 StartBatchJobRequest,BatchVariableWithTypeEnterpriseDto,QueryAppHealth,QueryBatchJobStatus,BatchStatusJobResponse,Error,BatchJobDto,StepStatusDto,BatchWorkingFolderEnterpriseDto,BatchJobDataSizeDto,CreateWorkingFolderRequest,CreateWorkingFolderResponse
                             </modelsToGenerate>
@@ -136,14 +140,18 @@
                                 <java8>true</java8>
                                 <encoding>UTF-8</encoding>
                                 <supportUrlQuery>false</supportUrlQuery>
+                                <library>jersey2</library>
+                                <generatorName>java</generatorName>
                             </configOptions>
                             <generateApis>false</generateApis>
                             <generateModels>true</generateModels>
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateModelTests>false</generateModelTests>
-                            <library>native</library>
-
-                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <library>jersey2</library>
+                            <generateSupportingFiles>true</generateSupportingFiles>
+                            <supportingFilesToGenerate>
+                                JSON.java,RFC3339DateFormat.java
+                            </supportingFilesToGenerate>
                             <modelsToGenerate>
                                 OnDemandPipelineRequest,BatchVariableWithTypeEnterpriseDto
                             </modelsToGenerate>
@@ -166,14 +174,18 @@
                                 <java8>true</java8>
                                 <encoding>UTF-8</encoding>
                                 <supportUrlQuery>false</supportUrlQuery>
+                                <library>jersey2</library>
+                                <generatorName>java</generatorName>
                             </configOptions>
                             <generateApis>false</generateApis>
                             <generateModels>true</generateModels>
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateModelTests>false</generateModelTests>
-                            <library>native</library>
-
-                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <library>jersey2</library>
+                            <generateSupportingFiles>true</generateSupportingFiles>
+                            <supportingFilesToGenerate>
+                                JSON.java,RFC3339DateFormat.java
+                            </supportingFilesToGenerate>
                             <modelsToGenerate>
                                 Condition,CategorizationCondition,MetadataCondition
                             </modelsToGenerate>
@@ -196,13 +208,13 @@
                                 <java8>true</java8>
                                 <encoding>UTF-8</encoding>
                                 <supportUrlQuery>false</supportUrlQuery>
+                                <library>jersey2</library>
                                 <generatorName>java</generatorName>
                             </configOptions>
                             <generateApis>false</generateApis>
                             <generateModels>true</generateModels>
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateModelTests>false</generateModelTests>
-                            <!-- must be here, native is not working here-->
                             <library>jersey2</library>
 
                             <generateSupportingFiles>true</generateSupportingFiles>
