@@ -1,7 +1,5 @@
 package org.mule.extension.quadient.internal.operations.fo.fe;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum DataDefinitionTypeFE {
 
     ICM_LOCATION("icmLocation"),
@@ -18,7 +16,6 @@ public enum DataDefinitionTypeFE {
         this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
         return value;
     }

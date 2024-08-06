@@ -1,7 +1,5 @@
 package org.mule.extension.quadient.internal.operations.ca.fe;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum OperatorEnumFE {
     EQUAL("equal"),
 
@@ -37,7 +35,6 @@ public enum OperatorEnumFE {
         this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
         return value;
     }

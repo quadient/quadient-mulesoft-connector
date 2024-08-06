@@ -1,7 +1,5 @@
 package org.mule.extension.quadient.internal.operations.v6.fe;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum VariableTypeFE {
 
     PIPELINE("Pipeline"),
@@ -20,7 +18,6 @@ public enum VariableTypeFE {
         this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
         return value;
     }

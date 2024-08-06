@@ -131,7 +131,7 @@ public class FrontOfficeCreateTicketOperation {
     ) {
         CreateTicket createTicket = new CreateTicket();
         createTicket.stateId = stateId;
-        createTicket.holder = new Holder().holder(holderValue).type(Holder.TypeEnum.fromValue(crateTicketHolderType.toString()));
+        createTicket.holder = new Holder().holder(holderValue).type(Holder.TypeEnum.fromValue(crateTicketHolderType.getValue()));
         createTicket.addAttachmentFromGlobalStorageEnabled = addAttachmentFromGlobalStorageEnabled;
         createTicket.asynchronousProcessing = asynchronousProcessing;
         createTicket.multipleRecord = multipleRecord;
