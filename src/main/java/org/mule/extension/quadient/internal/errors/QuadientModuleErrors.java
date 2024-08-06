@@ -13,8 +13,7 @@ public enum QuadientModuleErrors implements ErrorTypeDefinition<QuadientModuleEr
     BAD_REQUEST(MuleErrors.ANY),
     TOO_MANY_REQUESTS(MuleErrors.CONNECTIVITY),
     REQUEST_SERIALIZATION_ERROR(MuleErrors.CONNECTIVITY),
-    INVALID_INPUT_PARAMETER(MuleErrors.VALIDATION),
-    UNKNOWN_ERROR(MuleErrors.ANY);
+    INVALID_INPUT_PARAMETER(MuleErrors.VALIDATION);
 
     private QuadientModuleErrors() {
     }

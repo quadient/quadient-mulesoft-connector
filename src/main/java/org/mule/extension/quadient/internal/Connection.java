@@ -68,7 +68,7 @@ public final class Connection {
         try {
             response = client.send(requestBuilder.build());
         } catch (Exception e) {
-            throw new UnknownErrorException(e);
+            throw new ConnectionErrorException(e);
         }
 
         ErrorHandling(response);
@@ -96,7 +96,7 @@ public final class Connection {
         try {
             response = client.send(requestBuilder.build());
         } catch (Exception e) {
-            throw new UnknownErrorException(e);
+            throw new ConnectionErrorException(e);
         }
 
         ErrorHandling(response);
@@ -121,7 +121,7 @@ public final class Connection {
         try {
             response = client.send(requestBuilder.build());
         } catch (Exception e) {
-            throw new UnknownErrorException(e);
+            throw new ConnectionErrorException(e);
         }
 
         ErrorHandling(response);
@@ -138,23 +138,26 @@ public final class Connection {
                 response.getStatusCode() == HttpConstants.HttpStatus.ACCEPTED.getStatusCode()) {
             return;
         }
-        try {
-            if (response.getStatusCode() == HttpConstants.HttpStatus.UNAUTHORIZED.getStatusCode()) {
-                throw new UnauthorizedException(new Exception(new String(response.getEntity().getBytes())));
-            }
-            if (response.getStatusCode() == HttpConstants.HttpStatus.BAD_REQUEST.getStatusCode()) {
-                throw new BadRequestException(new Exception(new String(response.getEntity().getBytes())));
-            }
-            if (response.getStatusCode() == HttpConstants.HttpStatus.NOT_FOUND.getStatusCode()) {
-                throw new NotFoundException(new Exception("Service endpoint not found"));
-            }
-            if (response.getStatusCode() == HttpConstants.HttpStatus.TOO_MANY_REQUESTS.getStatusCode()) {
-                throw new TooManyRequestsException(new Exception(new String(response.getEntity().getBytes())));
-            }
-            throw new UnknownErrorException(new Exception(new String(response.getEntity().getBytes())));
-        } catch (IOException e) {
-            throw new UnknownErrorException(e);
+        if (response.getStatusCode() == HttpConstants.HttpStatus.NOT_FOUND.getStatusCode()) {
+            throw new NotFoundException(new Exception("Service endpoint not found"));
         }
+        String errorMessage;
+        try {
+            errorMessage = new String(response.getEntity().getBytes());
+        } catch (IOException e) {
+            errorMessage = "Error message not available. " + e.getMessage();
+        }
+
+        if (response.getStatusCode() == HttpConstants.HttpStatus.UNAUTHORIZED.getStatusCode()) {
+            throw new UnauthorizedException(new Exception(errorMessage));
+        }
+        if (response.getStatusCode() == HttpConstants.HttpStatus.BAD_REQUEST.getStatusCode()) {
+            throw new BadRequestException(new Exception(errorMessage));
+        }
+        if (response.getStatusCode() == HttpConstants.HttpStatus.TOO_MANY_REQUESTS.getStatusCode()) {
+            throw new TooManyRequestsException(new Exception(errorMessage));
+        }
+        throw new ConnectionErrorException(new Exception(errorMessage));
     }
 
     private Result<InputStream, HttpResponseAttributes> createResult(HttpResponse response) {
