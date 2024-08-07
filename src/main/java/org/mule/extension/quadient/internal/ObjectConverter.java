@@ -3,7 +3,7 @@ package org.mule.extension.quadient.internal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import org.mule.extension.quadient.internal.errors.exception.RequestSerializationException;
+import org.mule.extension.quadient.internal.error.exception.RequestSerializationException;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 import org.springframework.stereotype.Component;
 
