@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.quadient.mule</groupId>
     <artifactId>quadient-connector</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>mule-extension</packaging>
     <name>Quadient Evolve Connector - Mule 4</name>
     <!--todo  LICENSE.md -->
@@ -44,11 +44,13 @@
             <artifactId>mule-sdk-api</artifactId>
             <version>${mule.sdk.api.version}</version>
         </dependency>
+        
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
