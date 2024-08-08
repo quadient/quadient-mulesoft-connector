@@ -44,13 +44,13 @@
             <artifactId>mule-sdk-api</artifactId>
             <version>${mule.sdk.api.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
@@ -184,7 +184,7 @@
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateModelTests>false</generateModelTests>
                             <library>jersey2</library>
-                            <generateSupportingFiles>true</generateSupportingFiles>
+                            <generateSupportingFiles>false</generateSupportingFiles>
                             <supportingFilesToGenerate>
                                 JSON.java,RFC3339DateFormat.java
                             </supportingFilesToGenerate>
@@ -218,13 +218,12 @@
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateModelTests>false</generateModelTests>
                             <library>jersey2</library>
-
                             <generateSupportingFiles>true</generateSupportingFiles>
                             <supportingFilesToGenerate>
-                                JSON.java,AbstractOpenApiSchema.java,ApiException.java,RFC3339DateFormat.java
+                                JSON.java,RFC3339DateFormat.java
                             </supportingFilesToGenerate>
                             <modelsToGenerate>
-                                TicketBase,ApprovalProcessPath,Contract,Holder,MailMergeTicket,MultiDocumentTicket,Properties,RenewalTicket,SelectTemplateDocumentData,SelectTemplateTicket,SharedData,MailMergeDocumentData,Ticket,Command,Context,DataDefinition,MailMergeDataDefinition,TemplateDocumentData,RenewalDocumentData,Condition,CategorizationCondition,MetadataCondition
+                                ApprovalProcessPath,Contract,Holder,Properties,Command,Context,DataDefinition,TemplateDocumentData,CategorizationCondition,MetadataCondition
                             </modelsToGenerate>
                             <typeMappings>
                                 OffsetDateTime=String,Integer=Long,int=long
