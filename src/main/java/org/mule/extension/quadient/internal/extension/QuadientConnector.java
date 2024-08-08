@@ -12,7 +12,9 @@ import org.mule.sdk.api.annotation.JavaVersionSupport;
 import org.mule.sdk.api.annotation.SubTypeMapping;
 import org.mule.sdk.api.annotation.error.ErrorTypes;
 
-import static org.mule.sdk.api.meta.JavaVersion.*;
+import static org.mule.sdk.api.meta.JavaVersion.JAVA_11;
+import static org.mule.sdk.api.meta.JavaVersion.JAVA_17;
+import static org.mule.sdk.api.meta.JavaVersion.JAVA_8;
 
 
 /**

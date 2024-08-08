@@ -1,7 +1,11 @@
 package org.mule.extension.quadient.internal.connection;
 
 
-import org.mule.extension.quadient.internal.error.exception.*;
+import org.mule.extension.quadient.internal.error.exception.BadRequestException;
+import org.mule.extension.quadient.internal.error.exception.ConnectionErrorException;
+import org.mule.extension.quadient.internal.error.exception.NotFoundException;
+import org.mule.extension.quadient.internal.error.exception.TooManyRequestsException;
+import org.mule.extension.quadient.internal.error.exception.UnauthorizedException;
 import org.mule.extension.quadient.internal.operation.HttpResponseAttributes;
 import org.mule.extension.quadient.api.generate.MultipartAttachmentFE;
 import org.mule.runtime.api.metadata.DataType;

@@ -1,7 +1,19 @@
 package org.mule.extension.quadient.internal.operation.frontoffice;
 
-import com.quadient.mule.model.fo.*;
-import org.mule.extension.quadient.api.frontoffice.*;
+import com.quadient.mule.model.fo.ApprovalProcessPath;
+import com.quadient.mule.model.fo.Command;
+import com.quadient.mule.model.fo.Context;
+import com.quadient.mule.model.fo.Contract;
+import com.quadient.mule.model.fo.DataDefinition;
+import com.quadient.mule.model.fo.Holder;
+import com.quadient.mule.model.fo.Properties;
+import org.mule.extension.quadient.api.frontoffice.ApprovalProcessPathFE;
+import org.mule.extension.quadient.api.frontoffice.CommandFE;
+import org.mule.extension.quadient.api.frontoffice.ContextFE;
+import org.mule.extension.quadient.api.frontoffice.ContractFE;
+import org.mule.extension.quadient.api.frontoffice.DataDefinitionFE;
+import org.mule.extension.quadient.api.frontoffice.HolderTypeFE;
+import org.mule.extension.quadient.api.frontoffice.PropertiesFE;
 import org.mule.extension.quadient.internal.config.Configuration;
 import org.mule.extension.quadient.internal.connection.Connection;
 import org.mule.extension.quadient.internal.ObjectConverter;
