@@ -1,11 +1,11 @@
-package org.mule.extension.quadient.internal.operation.contentAuthor;
+package org.mule.extension.quadient.internal.operation.contentauthor;
 
 import com.quadient.mule.model.ca.CategorizationCondition;
 import com.quadient.mule.model.ca.Condition;
 import com.quadient.mule.model.ca.MetadataCondition;
-import org.mule.extension.quadient.api.contentAuthor.CategorizationConditionFE;
-import org.mule.extension.quadient.api.contentAuthor.ConditionFE;
-import org.mule.extension.quadient.api.contentAuthor.MetadataConditionFE;
+import org.mule.extension.quadient.api.contentauthor.CategorizationConditionFE;
+import org.mule.extension.quadient.api.contentauthor.ConditionFE;
+import org.mule.extension.quadient.api.contentauthor.MetadataConditionFE;
 import org.mule.extension.quadient.internal.config.Configuration;
 import org.mule.extension.quadient.internal.connection.Connection;
 import org.mule.extension.quadient.internal.ObjectConverter;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 
 
 public class ContentAuthorTemplatesOperation {
-    final String endpoint = ServiceEndpoint.CA_TEMPLATES;
+    static final String ENDPOINT = ServiceEndpoint.CA_TEMPLATES;
 
     @OutputJsonType(schema = "jsonSchema/ca_contentAuthorTemplatesOperation.json")    
     @Throws(ExecuteErrorsProvider.class)
@@ -88,7 +88,7 @@ public class ContentAuthorTemplatesOperation {
             uriParams.put("condition", new ObjectConverter().convertToJson(convertCondition(condition)));
         }
 
-        return connection.sendRequest(HttpConstants.Method.GET, endpoint, null, uriParams);
+        return connection.sendRequest(HttpConstants.Method.GET, ENDPOINT, null, uriParams);
     }
 
     private Condition convertCondition(ConditionFE condition) {

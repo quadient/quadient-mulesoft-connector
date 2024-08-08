@@ -1,4 +1,4 @@
-package org.mule.extension.quadient.api.contentAuthor;
+package org.mule.extension.quadient.api.contentauthor;
 
 public enum LogicalOperatorFE {
     AND("and"),

@@ -1,4 +1,4 @@
-package org.mule.extension.quadient.internal.operation.generateV6.ondemand;
+package org.mule.extension.quadient.internal.operation.generate_v6.ondemand;
 
 import org.mule.extension.quadient.internal.config.Configuration;
 import org.mule.extension.quadient.internal.connection.Connection;
@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 public class OnDemandCustomDataOperation {
 
-    final String endpoint = ServiceEndpoint.ON_DEMAND_ON_DEMAND_CUSTOM_DATA;
+    static final String ENDPOINT = ServiceEndpoint.ON_DEMAND_ON_DEMAND_CUSTOM_DATA;
 
     @MediaType(MediaType.ANY)
     @Throws(ExecuteErrorsProvider.class)
@@ -39,7 +39,7 @@ public class OnDemandCustomDataOperation {
             "  ]\n" +
             "}")
     @DisplayName("OnDemand - OnDemand Custom Data")
-    public Result<InputStream, HttpResponseAttributes> OnDemandOnDemandCustomData(
+    public Result<InputStream, HttpResponseAttributes> onDemandOnDemandCustomData(
             @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
 
@@ -77,17 +77,19 @@ public class OnDemandCustomDataOperation {
         }
 
         HashMap<String, String> headers = new HashMap<>();
-        if (fileName!= null){
+        if (fileName != null) {
             headers.put("filename", fileName);
         }
-        if (folder!= null){
+        if (folder != null) {
             headers.put("folder", folder);
         }
-        
+
         headers.put("useDraftPipeline", Boolean.toString(useDraftPipeline));
         headers.put("useDraftResources", Boolean.toString(useDraftResources));
-        pipelineVariables.forEach((key, value) -> headers.put("c-variable-" + key, value));
+        if (pipelineVariables != null) {
+            pipelineVariables.forEach((key, value) -> headers.put("c-variable-" + key, value));
+        }
         
-        return connection.sendPOSTRequest(endpoint + "/" + pipelineName, customData, headers);
+        return connection.sendPOSTRequest(ENDPOINT + "/" + pipelineName, customData, headers);
     }
 }

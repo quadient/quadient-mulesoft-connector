@@ -1,4 +1,4 @@
-package org.mule.extension.quadient.api.frontOffice;
+package org.mule.extension.quadient.api.frontoffice;
 
 public enum HolderTypeFE {
     USER_NAME("userName"),

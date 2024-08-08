@@ -32,6 +32,10 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.mule.runtime.api.metadata.DataType.BYTE_ARRAY;
 
 public final class Connection {
+    static final String HEADER_AUTHORIZATION_KEY = "Authorization";
+    static final String HEADER_CONTENT_TYPE_KEY = "Content-Type";
+    static final String HEADER_CONTENT_TYPE_VALUE_JSON = "application/json";
+    static final String HEADER_CONTENT_TYPE_VALUE_MULTIPART = "multipart/form-data";
     private final String companyHostname;
     private final String apiToken;
     private final HttpClient client;
@@ -53,8 +57,8 @@ public final class Connection {
         HttpRequestBuilder requestBuilder = HttpRequest.builder()
                 .uri(companyHostname + endpoint)
                 .method(method)
-                .addHeader("Authorization", "Bearer " + apiToken)
-                .addHeader("Content-Type", "application/json");
+                .addHeader(HEADER_AUTHORIZATION_KEY, createAuthorizationHeaderValue())
+                .addHeader(HEADER_CONTENT_TYPE_KEY, HEADER_CONTENT_TYPE_VALUE_JSON);
 
         if (body != null) {
             requestBuilder.entity(new InputStreamHttpEntity(new ByteArrayInputStream(body.getBytes(UTF_8))));
@@ -71,14 +75,14 @@ public final class Connection {
             throw new ConnectionErrorException(e);
         }
 
-        ErrorHandling(response);
+        errorHandling(response);
         return createResult(response);
     }
 
     public Result<InputStream, HttpResponseAttributes> sendRequestMultiPart(HttpConstants.Method method, String endpoint, String body, List<MultipartAttachmentFE> attachments) {
         List<HttpPart> parts = new ArrayList<>();
         byte[] bodyBytes = body.getBytes();
-        parts.add(new HttpPart("command", "command.json", bodyBytes, "application/json", bodyBytes.length));
+        parts.add(new HttpPart("command", "command.json", bodyBytes, HEADER_CONTENT_TYPE_VALUE_JSON, bodyBytes.length));
         for (MultipartAttachmentFE attachment : attachments) {
             DataType dataType = attachment.getMultipartData().getDataType();
             InputStream value = attachment.getMultipartData().getValue();
@@ -88,8 +92,8 @@ public final class Connection {
         HttpRequestBuilder requestBuilder = HttpRequest.builder()
                 .uri(companyHostname + endpoint)
                 .method(method)
-                .addHeader("Authorization", "Bearer " + apiToken)
-                .addHeader("Content-Type", "multipart/form-data");
+                .addHeader(HEADER_AUTHORIZATION_KEY, createAuthorizationHeaderValue())
+                .addHeader(HEADER_CONTENT_TYPE_KEY, HEADER_CONTENT_TYPE_VALUE_MULTIPART);
 
         requestBuilder.entity(new MultipartHttpEntity(parts));
         HttpResponse response;
@@ -99,7 +103,7 @@ public final class Connection {
             throw new ConnectionErrorException(e);
         }
 
-        ErrorHandling(response);
+        errorHandling(response);
         return createResult(response);
     }
 
@@ -111,8 +115,8 @@ public final class Connection {
         HttpRequestBuilder requestBuilder = HttpRequest.builder()
                 .uri(companyHostname + endpoint)
                 .method(HttpConstants.Method.POST)
-                .addHeader("Authorization", "Bearer " + apiToken)
-                .addHeader("Content-Type", "application/json")
+                .addHeader(HEADER_AUTHORIZATION_KEY, createAuthorizationHeaderValue())
+                .addHeader(HEADER_CONTENT_TYPE_KEY, HEADER_CONTENT_TYPE_VALUE_JSON)
                 .entity(entity);
 
         headers.forEach(requestBuilder::addHeader);
@@ -124,7 +128,7 @@ public final class Connection {
             throw new ConnectionErrorException(e);
         }
 
-        ErrorHandling(response);
+        errorHandling(response);
         return createResult(response);
     }
 
@@ -132,7 +136,7 @@ public final class Connection {
         return (byte[]) transformationService.transform(of(payload), BYTE_ARRAY).getPayload().getValue();
     }
 
-    private void ErrorHandling(HttpResponse response) {
+    private void errorHandling(HttpResponse response) {
         if (response.getStatusCode() == HttpConstants.HttpStatus.OK.getStatusCode() ||
                 response.getStatusCode() == HttpConstants.HttpStatus.CREATED.getStatusCode() ||
                 response.getStatusCode() == HttpConstants.HttpStatus.ACCEPTED.getStatusCode()) {
@@ -161,7 +165,7 @@ public final class Connection {
     }
 
     private Result<InputStream, HttpResponseAttributes> createResult(HttpResponse response) {
-        MediaType mediaType = response.getHeaderValue("Content-Type") != null ? MediaType.parse(response.getHeaderValue("Content-Type")) : MediaType.ANY;
+        MediaType mediaType = response.getHeaderValue(HEADER_CONTENT_TYPE_KEY) != null ? MediaType.parse(response.getHeaderValue(HEADER_CONTENT_TYPE_KEY)) : MediaType.ANY;
         return Result.<InputStream, HttpResponseAttributes>builder()
                 .output(response.getEntity().getContent())
                 .attributes(createAttributes(response))
@@ -171,5 +175,9 @@ public final class Connection {
 
     private HttpResponseAttributes createAttributes(HttpResponse response) {
         return new HttpResponseAttributes(response.getStatusCode(), response.getReasonPhrase(), response.getHeaders());
+    }
+    
+    private String createAuthorizationHeaderValue(){
+        return "Bearer " + apiToken;
     }
 }

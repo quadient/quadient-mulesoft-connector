@@ -1,4 +1,4 @@
-package org.mule.extension.quadient.internal.operation.generateV6.batch;
+package org.mule.extension.quadient.internal.operation.generate_v6.batch;
 
 import com.quadient.mule.model.v6.batch.CreateWorkingFolderRequest;
 import com.quadient.mule.model.v6.batch.CreateWorkingFolderResponse;
@@ -21,7 +21,7 @@ import java.io.InputStream;
 
 
 public class BatchCreateWorkingFolderOperation {
-    final String endpoint = ServiceEndpoint.BATCH_CREATE_WORKING_FOLDER;
+    static final String ENDPOINT = ServiceEndpoint.BATCH_CREATE_WORKING_FOLDER;
 
     @MediaType(MediaType.TEXT_PLAIN)
     @Throws(ExecuteErrorsProvider.class)
@@ -48,12 +48,12 @@ public class BatchCreateWorkingFolderOperation {
         }
         ObjectConverter objectConverter = new ObjectConverter();
         CreateWorkingFolderRequest request = new CreateWorkingFolderRequest().name(name).expiration(expiration).isJobDedicated(isJobDedicated);
-        Result<InputStream, HttpResponseAttributes> result = connection.sendPOSTRequest(endpoint, objectConverter.convertToJson(request));
+        Result<InputStream, HttpResponseAttributes> result = connection.sendPOSTRequest(ENDPOINT, objectConverter.convertToJson(request));
         CreateWorkingFolderResponse responseObj = objectConverter.readValue(result.getOutput(), CreateWorkingFolderResponse.class);
 
         return Result.<String, HttpResponseAttributes>builder()
                 .output(responseObj.getWorkingFolderId())
-                .attributes(result.getAttributes().get())
+                .attributes(result.getAttributes().orElse(null))
                 .mediaType(org.mule.runtime.api.metadata.MediaType.TEXT)
                 .build();  
     }

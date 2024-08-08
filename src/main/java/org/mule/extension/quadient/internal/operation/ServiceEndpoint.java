@@ -8,10 +8,13 @@ public class ServiceEndpoint {
     public static final String BATCH_START_BATCH_JOB = "/production/v6/startBatchJob";
     public static final String BATCH_BATCH_JOB_STATUS = "/production/v6/batchJobStatus";
     public static final String BATCH_CREATE_WORKING_FOLDER = "/production/v6/createWorkingFolder";
-    
-    
+
+
     public static final String CA_TEMPLATES = "/authoring/api/system/v1/templates";
     public static final String CA_HEALTH = "/server/health";
-    
+
     public static final String FO_TICKETS = "/frontoffice/api/system/v2/tickets";
+
+    private ServiceEndpoint() {
+    }
 }

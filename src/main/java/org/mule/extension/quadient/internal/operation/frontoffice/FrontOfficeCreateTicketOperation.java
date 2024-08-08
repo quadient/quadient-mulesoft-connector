@@ -1,7 +1,7 @@
-package org.mule.extension.quadient.internal.operation.frontOffice;
+package org.mule.extension.quadient.internal.operation.frontoffice;
 
 import com.quadient.mule.model.fo.*;
-import org.mule.extension.quadient.api.frontOffice.*;
+import org.mule.extension.quadient.api.frontoffice.*;
 import org.mule.extension.quadient.internal.config.Configuration;
 import org.mule.extension.quadient.internal.connection.Connection;
 import org.mule.extension.quadient.internal.ObjectConverter;
@@ -24,8 +24,8 @@ import java.io.InputStream;
 import java.util.List;
 
 public class FrontOfficeCreateTicketOperation {
-    final String endpoint = ServiceEndpoint.FO_TICKETS;
-    final HttpConstants.Method method = HttpConstants.Method.POST;
+    static final String ENDPOINT = ServiceEndpoint.FO_TICKETS;
+    static final HttpConstants.Method METHOD = HttpConstants.Method.POST;
 
     @OutputJsonType(schema = "jsonSchema/fo-frontOfficeCreateTicketOperation.json")
     @Throws(ExecuteErrorsProvider.class)
@@ -129,54 +129,48 @@ public class FrontOfficeCreateTicketOperation {
             boolean pageDocument
     ) {
         CreateTicket createTicket = new CreateTicket();
-        createTicket.stateId = stateId;
-        createTicket.holder = new Holder().holder(holderValue).type(Holder.TypeEnum.fromValue(crateTicketHolderType.getValue()));
-        createTicket.addAttachmentFromGlobalStorageEnabled = addAttachmentFromGlobalStorageEnabled;
-        createTicket.asynchronousProcessing = asynchronousProcessing;
-        createTicket.multipleRecord = multipleRecord;
-        createTicket.uploadAttachmentFromLocalDriveEnabled = uploadAttachmentFromLocalDriveEnabled;
-        createTicket.productionActions = productionActions;
+        createTicket.setStateId(stateId);
+        createTicket.setHolder(new Holder().holder(holderValue).type(Holder.TypeEnum.fromValue(crateTicketHolderType.getValue())));
+        createTicket.setAddAttachmentFromGlobalStorageEnabled(addAttachmentFromGlobalStorageEnabled);
+        createTicket.setAsynchronousProcessing(asynchronousProcessing);
+        createTicket.setMultipleRecord(multipleRecord);
+        createTicket.setUploadAttachmentFromLocalDriveEnabled(uploadAttachmentFromLocalDriveEnabled);
+        createTicket.setProductionActions(productionActions);
         if (createTicketApprovalProcessPath != null) {
-            createTicket.approvalProcessPath = new ApprovalProcessPath().resolveDepartment(createTicketApprovalProcessPath.isResolveDepartment()).value(createTicketApprovalProcessPath.getValue());
+            createTicket.setApprovalProcessPath(new ApprovalProcessPath().resolveDepartment(createTicketApprovalProcessPath.isResolveDepartment()).value(createTicketApprovalProcessPath.getValue()));
         }
-        createTicket.attachments = attachments;
+        createTicket.setAttachments(attachments);
         if (createTicketContract != null) {
-            createTicket.contract = new Contract().contractId(createTicketContract.getContractId()).contractName(createTicketContract.getContractName());
+            createTicket.setContract(new Contract().contractId(createTicketContract.getContractId()).contractName(createTicketContract.getContractName()));
         }
         if (createTicketProperties != null) {
-            createTicket.properties = new Properties().properties(createTicketProperties.getCreateTicketPropertiesMap()).overrideAlsoNotEmptyProperties(createTicketProperties.isOverrideAlsoNotEmptyProperties());
+            createTicket.setProperties(new Properties().properties(createTicketProperties.getCreateTicketPropertiesMap()).overrideAlsoNotEmptyProperties(createTicketProperties.isOverrideAlsoNotEmptyProperties()));
         }
 
-        createTicket.documentData.brand(brand);
+        createTicket.getDocumentData().brand(brand);
 
         if (!commands.isEmpty()) {
-            commands.forEach(command -> {
-                createTicket.documentData.addCommandsItem(new Command().name(command.name).value(command.value));
-            });
+            commands.forEach(command -> createTicket.getDocumentData().addCommandsItem(new Command().name(command.name).value(command.value)));
 
         }
         if (createTicketContexts != null) {
-            createTicketContexts.forEach(context -> {
-                createTicket.documentData.addContextItem(new Context().path(context.path).value(context.value));
-            });
+            createTicketContexts.forEach(context -> createTicket.getDocumentData().addContextItem(new Context().path(context.path).value(context.value)));
         }
         if (createTicketCopyOf != null) {
-            createTicket.documentData.copyOf(createTicketCopyOf.longValue());
+            createTicket.getDocumentData().copyOf(createTicketCopyOf.longValue());
         }
 
         if (dataDefinitions != null) {
-            dataDefinitions.forEach(dataDefinition -> {
-                createTicket.documentData.addDataDefinitionsItem(
-                        new DataDefinition()
-                                .moduleName(dataDefinition.moduleName)
-                                .type(DataDefinition.TypeEnum.fromValue(dataDefinition.type.getValue()))
-                                .value(dataDefinition.value));
-            });
+            dataDefinitions.forEach(dataDefinition -> createTicket.getDocumentData().addDataDefinitionsItem(
+                    new DataDefinition()
+                            .moduleName(dataDefinition.moduleName)
+                            .type(DataDefinition.TypeEnum.fromValue(dataDefinition.type.getValue()))
+                            .value(dataDefinition.value)));
         }
-        createTicket.documentData.description(description);
-        createTicket.documentData.pageDocument(pageDocument);
-        createTicket.documentData.templateName(templateName);
+        createTicket.getDocumentData().description(description);
+        createTicket.getDocumentData().pageDocument(pageDocument);
+        createTicket.getDocumentData().templateName(templateName);
 
-        return connection.sendRequest(method, endpoint, new ObjectConverter().convertToJson(createTicket), null);
+        return connection.sendRequest(METHOD, ENDPOINT, new ObjectConverter().convertToJson(createTicket), null);
     }
 }

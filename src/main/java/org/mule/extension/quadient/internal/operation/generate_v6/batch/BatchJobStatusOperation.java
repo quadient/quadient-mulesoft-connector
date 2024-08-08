@@ -1,4 +1,4 @@
-package org.mule.extension.quadient.internal.operation.generateV6.batch;
+package org.mule.extension.quadient.internal.operation.generate_v6.batch;
 
 import com.quadient.mule.model.v6.batch.BatchStatusJobResponse;
 import com.quadient.mule.model.v6.batch.QueryBatchJobStatus;
@@ -19,7 +19,7 @@ import java.io.InputStream;
 
 
 public class BatchJobStatusOperation {
-    final String endpoint = ServiceEndpoint.BATCH_BATCH_JOB_STATUS;
+    static final String ENDPOINT = ServiceEndpoint.BATCH_BATCH_JOB_STATUS;
 
     @MediaType(MediaType.TEXT_PLAIN)
     @Throws(ExecuteErrorsProvider.class)
@@ -46,11 +46,11 @@ public class BatchJobStatusOperation {
             String batchJobId
     ) {
         QueryBatchJobStatus queryBatchJobStatus = new QueryBatchJobStatus().batchJobId(batchJobId);
-        Result<InputStream, HttpResponseAttributes> result = connection.sendPOSTRequest(endpoint, new ObjectConverter().convertToJson(queryBatchJobStatus));
+        Result<InputStream, HttpResponseAttributes> result = connection.sendPOSTRequest(ENDPOINT, new ObjectConverter().convertToJson(queryBatchJobStatus));
         BatchStatusJobResponse responseObj = new ObjectConverter().readValue(result.getOutput(), BatchStatusJobResponse.class);
         return Result.<String, HttpResponseAttributes>builder()
                 .output(responseObj.getBatchJob().getState().getValue())
-                .attributes(result.getAttributes().get())
+                .attributes(result.getAttributes().orElse(null))
                 .mediaType(org.mule.runtime.api.metadata.MediaType.TEXT)
                 .build();
     }

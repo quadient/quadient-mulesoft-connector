@@ -1,4 +1,4 @@
-package org.mule.extension.quadient.api.contentAuthor;
+package org.mule.extension.quadient.api.contentauthor;
 
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.Optional;

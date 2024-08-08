@@ -22,7 +22,7 @@ import static org.mule.sdk.api.meta.JavaVersion.*;
 @Extension(name = "Quadient Evolve")
 @ErrorTypes(QuadientModuleErrorType.class)
 @Configurations(Configuration.class)
-@JavaVersionSupport({JAVA_17})
+@JavaVersionSupport({JAVA_8, JAVA_11, JAVA_17})
 @SubTypeMapping(baseType = ProxyConfig.class, subTypes = {DefaultProxyConfig.class})
 public class QuadientExtension {
 

@@ -1,4 +1,4 @@
-package org.mule.extension.quadient.api.frontOffice;
+package org.mule.extension.quadient.api.frontoffice;
 
 import org.mule.sdk.api.annotation.param.Parameter;
 import org.mule.sdk.api.annotation.param.display.Summary;
