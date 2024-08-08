@@ -1,8 +1,9 @@
-package org.mule.extension.quadient;
+package org.mule.extension.quadient.internal.extension;
 
 import org.mule.extension.quadient.internal.config.Configuration;
 import org.mule.extension.quadient.internal.error.QuadientModuleErrorType;
 import org.mule.extension.quadient.api.proxy.DefaultProxyConfig;
+import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.extension.api.annotation.Extension;
 import org.mule.runtime.extension.api.annotation.Configurations;
 import org.mule.runtime.extension.api.annotation.dsl.xml.Xml;
@@ -19,11 +20,11 @@ import static org.mule.sdk.api.meta.JavaVersion.*;
  * and sources are going to be declared.
  */
 @Xml(prefix = "quadient")
-@Extension(name = "Quadient Evolve")
+@Extension(name = "Quadient Evolve", category = Category.CERTIFIED)
 @ErrorTypes(QuadientModuleErrorType.class)
 @Configurations(Configuration.class)
 @JavaVersionSupport({JAVA_8, JAVA_11, JAVA_17})
 @SubTypeMapping(baseType = ProxyConfig.class, subTypes = {DefaultProxyConfig.class})
-public class QuadientExtension {
+public class QuadientConnector {
 
 }
