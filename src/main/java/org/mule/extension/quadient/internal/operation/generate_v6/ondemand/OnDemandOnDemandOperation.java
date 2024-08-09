@@ -29,17 +29,7 @@ public class OnDemandOnDemandOperation {
 
     @MediaType(MediaType.ANY)
     @Throws(ExecuteErrorsProvider.class)
-    @Summary("Starts and processes an on-demand job using a defined processing pipeline. \n" +
-            "Response example:\n" +
-            "{\n" +
-            "  \"id\": \"0f8fad5b-d9cb-469f-a165-70867728950e\",\n" +
-            "  \"status\": \"Success\",\n" +
-            "  \"warnings\": [\n" +
-            "    {\n" +
-            "      \"errorMessage\": \"string\"\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}")
+    @Summary("Starts and processes an on-demand job using a defined processing pipeline.")
     @DisplayName("OnDemand - OnDemand")
     public Result<InputStream, HttpResponseAttributes> onDemandOnDemand(
             @Config Configuration configuration,
