@@ -6,12 +6,13 @@
  */
 package org.mule.extension.quadient.api.proxy;
 
-import org.mule.runtime.extension.api.annotation.Alias;
-import org.mule.runtime.extension.api.annotation.dsl.xml.TypeDsl;
-import org.mule.runtime.extension.api.annotation.param.Optional;
-import org.mule.runtime.extension.api.annotation.param.Parameter;
-import org.mule.runtime.extension.api.annotation.param.display.Password;
 import org.mule.runtime.http.api.client.proxy.ProxyConfig;
+import org.mule.sdk.api.annotation.Alias;
+import org.mule.sdk.api.annotation.dsl.xml.TypeDsl;
+import org.mule.sdk.api.annotation.param.Optional;
+import org.mule.sdk.api.annotation.param.Parameter;
+import org.mule.sdk.api.annotation.param.display.Placement;
+import org.mule.sdk.api.annotation.semantics.security.Password;
 
 import java.util.Objects;
 

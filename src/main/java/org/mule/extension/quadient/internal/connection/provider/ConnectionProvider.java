@@ -4,31 +4,33 @@ import com.quadient.mule.model.v6.batch.QueryAppHealth;
 import org.mule.extension.quadient.internal.ObjectConverter;
 import org.mule.extension.quadient.internal.connection.Connection;
 import org.mule.extension.quadient.internal.operation.ServiceEndpoint;
-import org.mule.runtime.api.connection.CachedConnectionProvider;
-import org.mule.runtime.api.connection.ConnectionValidationResult;
 import org.mule.runtime.api.lifecycle.InitialisationException;
 import org.mule.runtime.api.lifecycle.Startable;
 import org.mule.runtime.api.lifecycle.Stoppable;
 import org.mule.runtime.api.tls.TlsContextFactory;
 import org.mule.runtime.api.transformation.TransformationService;
-import org.mule.runtime.extension.api.annotation.param.Optional;
-import org.mule.runtime.extension.api.annotation.param.Parameter;
-import org.mule.runtime.extension.api.annotation.param.RefName;
-import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
-import org.mule.runtime.extension.api.annotation.param.display.Example;
-import org.mule.runtime.extension.api.annotation.param.display.Placement;
-import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.HttpService;
 import org.mule.runtime.http.api.client.HttpClient;
 import org.mule.runtime.http.api.client.HttpClientConfiguration;
 import org.mule.runtime.http.api.client.proxy.ProxyConfig;
+import org.mule.sdk.api.annotation.Expression;
+import org.mule.sdk.api.annotation.param.Optional;
+import org.mule.sdk.api.annotation.param.Parameter;
+import org.mule.sdk.api.annotation.param.RefName;
+import org.mule.sdk.api.annotation.param.display.DisplayName;
+import org.mule.sdk.api.annotation.param.display.Example;
+import org.mule.sdk.api.annotation.param.display.Placement;
+import org.mule.sdk.api.annotation.param.display.Summary;
+import org.mule.sdk.api.connectivity.CachedConnectionProvider;
+import org.mule.sdk.api.connectivity.ConnectionValidationResult;
 import org.mule.sdk.api.exception.ModuleException;
 
 import javax.inject.Inject;
 
 import static org.mule.runtime.core.api.lifecycle.LifecycleUtils.initialiseIfNeeded;
 import static org.mule.runtime.extension.api.annotation.param.display.Placement.SECURITY_TAB;
+import static org.mule.sdk.api.meta.ExpressionSupport.NOT_SUPPORTED;
 
 public class ConnectionProvider implements
         CachedConnectionProvider<Connection>, Startable, Stoppable {
@@ -63,6 +65,7 @@ public class ConnectionProvider implements
      */
     @Parameter
     @Optional
+    @Expression(NOT_SUPPORTED)
     @DisplayName("TLS Configuration")
     @Placement(tab = SECURITY_TAB)
     private TlsContextFactory tlsContext;

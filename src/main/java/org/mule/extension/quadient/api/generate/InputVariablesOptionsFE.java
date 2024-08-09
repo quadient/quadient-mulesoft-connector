@@ -1,7 +1,7 @@
 package org.mule.extension.quadient.api.generate;
 
-import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.NullSafe;
+import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
 
 import java.util.List;

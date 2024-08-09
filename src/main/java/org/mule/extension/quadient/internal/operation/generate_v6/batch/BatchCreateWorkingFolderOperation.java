@@ -9,12 +9,12 @@ import org.mule.extension.quadient.internal.error.provider.ExecuteErrorsProvider
 import org.mule.extension.quadient.internal.error.exception.InvalidInputParameterException;
 import org.mule.extension.quadient.internal.operation.HttpResponseAttributes;
 import org.mule.extension.quadient.internal.operation.ServiceEndpoint;
-import org.mule.runtime.extension.api.annotation.param.Config;
-import org.mule.runtime.extension.api.annotation.param.Optional;
-import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.sdk.api.annotation.error.Throws;
+import org.mule.sdk.api.annotation.param.Config;
 import org.mule.sdk.api.annotation.param.MediaType;
+import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
+import org.mule.sdk.api.annotation.param.display.Summary;
 import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;

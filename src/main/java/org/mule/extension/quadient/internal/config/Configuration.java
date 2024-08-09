@@ -8,9 +8,9 @@ import org.mule.extension.quadient.internal.operation.contentauthor.ContentAutho
 import org.mule.extension.quadient.internal.operation.frontoffice.FrontOfficeCreateTicketOperation;
 import org.mule.extension.quadient.internal.operation.generate_v6.ondemand.OnDemandCustomDataOperation;
 import org.mule.extension.quadient.internal.operation.generate_v6.ondemand.OnDemandOnDemandOperation;
-import org.mule.runtime.extension.api.annotation.Operations;
-import org.mule.runtime.extension.api.annotation.connectivity.ConnectionProviders;
-import org.mule.runtime.extension.api.annotation.param.RefName;
+import org.mule.sdk.api.annotation.Operations;
+import org.mule.sdk.api.annotation.connectivity.ConnectionProviders;
+import org.mule.sdk.api.annotation.param.RefName;
 
 /**
  * This class represents an extension configuration, values set in this class are commonly used across multiple
