@@ -22,6 +22,8 @@ import org.mule.runtime.http.api.domain.message.request.HttpRequest;
 import org.mule.runtime.http.api.domain.message.request.HttpRequestBuilder;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
 import org.mule.sdk.api.runtime.operation.Result;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.mule.runtime.api.message.Message.of;
 
@@ -40,6 +42,9 @@ public final class Connection {
     static final String HEADER_CONTENT_TYPE_KEY = "Content-Type";
     static final String HEADER_CONTENT_TYPE_VALUE_JSON = "application/json";
     static final String HEADER_CONTENT_TYPE_VALUE_MULTIPART = "multipart/form-data";
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Connection.class);
+    
     private final String companyHostname;
     private final String apiToken;
     private final HttpClient client;
@@ -72,12 +77,7 @@ public final class Connection {
         if (uriParams != null) {
             uriParams.forEach(requestBuilder::addQueryParam);
         }
-        HttpResponse response;
-        try {
-            response = client.send(requestBuilder.build());
-        } catch (Exception e) {
-            throw new ConnectionErrorException(e);
-        }
+        HttpResponse response = sendRequest(requestBuilder.build());
 
         errorHandling(response);
         return createResult(response);
@@ -100,13 +100,7 @@ public final class Connection {
                 .addHeader(HEADER_CONTENT_TYPE_KEY, HEADER_CONTENT_TYPE_VALUE_MULTIPART);
 
         requestBuilder.entity(new MultipartHttpEntity(parts));
-        HttpResponse response;
-        try {
-            response = client.send(requestBuilder.build());
-        } catch (Exception e) {
-            throw new ConnectionErrorException(e);
-        }
-
+        HttpResponse response = sendRequest(requestBuilder.build());
         errorHandling(response);
         return createResult(response);
     }
@@ -125,15 +119,22 @@ public final class Connection {
 
         headers.forEach(requestBuilder::addHeader);
 
-        HttpResponse response;
-        try {
-            response = client.send(requestBuilder.build());
-        } catch (Exception e) {
-            throw new ConnectionErrorException(e);
-        }
+        HttpResponse response = sendRequest(requestBuilder.build());
 
         errorHandling(response);
         return createResult(response);
+    }
+    
+    private HttpResponse sendRequest(HttpRequest request) {
+        HttpResponse response;
+        try {
+            LOGGER.debug("Sending request to: {}", request.getUri());
+            response = client.send(request);
+            LOGGER.info("Response received from: {}, status code {}.", request.getUri(), response.getStatusCode());
+        } catch (Exception e) {
+            throw new ConnectionErrorException(e);
+        }
+        return response;
     }
 
     private byte[] getPayloadAsBytes(Object payload, TransformationService transformationService) {
