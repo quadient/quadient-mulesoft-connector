@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.quadient.mule</groupId> <!--todo -->
-    <artifactId>quadient-connector</artifactId>
-    <version>1.0.0</version>
+    <groupId>com.quadient.connectors</groupId>
+    <artifactId>mule-quadient-evolve-connector</artifactId>
+    <version>1.0.122-SNAPSHOT</version>
     <packaging>mule-extension</packaging>
     <name>Quadient Evolve Connector - Mule 4</name>
     <description>Quadient Evolve Connector for Mule 4</description>
@@ -20,6 +20,7 @@
     </parent>
 
     <properties>
+        <organization.id>quadient</organization.id>
         <openapitools.version>0.2.6</openapitools.version>
         <spotbugs.version>4.8.6</spotbugs.version>
         <openapi.generator.version>6.6.0</openapi.generator.version>
@@ -128,7 +129,7 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/OpenApiBatch2406.json</inputSpec>
                             <generatorName>java</generatorName>
-                            <modelPackage>com.quadient.mule.model.v6.batch</modelPackage>
+                            <modelPackage>com.quadient.connectors.generated.model.v6.batch</modelPackage>
                             <configOptions>
                                 <sourceFolder>src/gen/java/main</sourceFolder>
                                 <java8>true</java8>
@@ -162,7 +163,7 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/OpenApiOnDemand2406.json</inputSpec>
                             <generatorName>java</generatorName>
-                            <modelPackage>com.quadient.mule.model.v6.ondemand</modelPackage>
+                            <modelPackage>com.quadient.connectors.generated.model.v6.ondemand</modelPackage>
                             <configOptions>
                                 <sourceFolder>src/gen/java/main</sourceFolder>
                                 <java8>true</java8>
@@ -196,7 +197,7 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/OpenApiContentAuthor2406.yaml</inputSpec>
                             <generatorName>java</generatorName>
-                            <modelPackage>com.quadient.mule.model.ca</modelPackage>
+                            <modelPackage>com.quadient.connectors.generated.model.ca</modelPackage>
                             <configOptions>
                                 <sourceFolder>src/gen/java/main</sourceFolder>
                                 <java8>true</java8>
@@ -230,7 +231,7 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/OpenApiFrontOffice2406.yaml</inputSpec>
                             <generatorName>java</generatorName>
-                            <modelPackage>com.quadient.mule.model.fo</modelPackage>
+                            <modelPackage>com.quadient.connectors.generated.model.fo</modelPackage>
                             <configOptions>
                                 <sourceFolder>src/gen/java/main</sourceFolder>
                                 <java8>true</java8>
@@ -280,7 +281,7 @@
         <repository>
             <id>Repository</id>
             <name>Corporate Repository</name>
-            <url>https://maven.eu1.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+            <url>https://maven.eu1.anypoint.mulesoft.com/api/v3/organizations/${organization.id}/maven</url>
             <layout>default</layout>
         </repository>
     </distributionManagement>
