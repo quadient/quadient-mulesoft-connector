@@ -12,8 +12,10 @@ import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.transformation.TransformationService;
+import org.mule.runtime.extension.api.annotation.param.ConfigOverride;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.client.HttpClient;
+import org.mule.runtime.http.api.client.HttpRequestOptions;
 import org.mule.runtime.http.api.domain.entity.EmptyHttpEntity;
 import org.mule.runtime.http.api.domain.entity.InputStreamHttpEntity;
 import org.mule.runtime.http.api.domain.entity.multipart.HttpPart;
@@ -33,6 +35,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.mule.runtime.api.metadata.DataType.BYTE_ARRAY;
@@ -44,18 +47,22 @@ public final class Connection {
     static final String HEADER_CONTENT_TYPE_VALUE_MULTIPART = "multipart/form-data";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Connection.class);
-    
+
     private final String companyHostname;
     private final String apiToken;
     private final HttpClient client;
     private final TransformationService transformationService;
 
-    public Connection(HttpClient httpClient, String companyHostname, String apiToken, TransformationService transformationService) {
+    private final HttpRequestOptions httpRequestOptions;
+
+    public Connection(HttpClient httpClient, String companyHostname, String apiToken, TransformationService transformationService, @ConfigOverride int connectionTimeout, @ConfigOverride TimeUnit connectionTimeoutUnit) {
         String hostname = companyHostname.trim();
         this.companyHostname = hostname.endsWith("/") ? hostname.substring(0, hostname.length() - 1) : hostname;
         this.apiToken = apiToken;
         client = httpClient;
         this.transformationService = transformationService;
+        int timeoutAsMilliseconds = (int) TimeUnit.MILLISECONDS.convert(connectionTimeout, connectionTimeoutUnit);
+        this.httpRequestOptions = HttpRequestOptions.builder().responseTimeout(timeoutAsMilliseconds).build();
     }
 
     public Result<InputStream, HttpResponseAttributes> sendPOSTRequest(String endpoint, String body) {
@@ -124,12 +131,12 @@ public final class Connection {
         errorHandling(response);
         return createResult(response);
     }
-    
+
     private HttpResponse sendRequest(HttpRequest request) {
         HttpResponse response;
         try {
             LOGGER.debug("Sending request to: {}", request.getUri());
-            response = client.send(request);
+            response = client.send(request, httpRequestOptions);
             LOGGER.info("Response received from: {}, status code {}.", request.getUri(), response.getStatusCode());
         } catch (Exception e) {
             throw new ConnectionErrorException(e);
@@ -181,8 +188,8 @@ public final class Connection {
     private HttpResponseAttributes createAttributes(HttpResponse response) {
         return new HttpResponseAttributes(response.getStatusCode(), response.getReasonPhrase(), response.getHeaders());
     }
-    
-    private String createAuthorizationHeaderValue(){
+
+    private String createAuthorizationHeaderValue() {
         return "Bearer " + apiToken;
     }
 }

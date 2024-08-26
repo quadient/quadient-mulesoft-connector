@@ -28,6 +28,8 @@ import org.mule.sdk.api.exception.ModuleException;
 
 import javax.inject.Inject;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.mule.runtime.core.api.lifecycle.LifecycleUtils.initialiseIfNeeded;
 import static org.mule.runtime.extension.api.annotation.param.display.Placement.SECURITY_TAB;
 import static org.mule.sdk.api.meta.ExpressionSupport.NOT_SUPPORTED;
@@ -50,6 +52,18 @@ public class ConnectionProvider implements
     @Parameter
     @Summary("Type of the API key. It will be used for validation of connection.")
     private ApplicationType applicationType;
+
+    @Parameter
+    @Optional(defaultValue = "5")
+    @Placement(tab = Placement.ADVANCED_TAB, order = 1)
+    @DisplayName("Timeout")
+    private int connectionTimeout;
+
+    @Parameter
+    @Optional(defaultValue = "SECONDS")
+    @DisplayName("Timeout unit")
+    @Placement(tab = Placement.ADVANCED_TAB, order = 2)
+    private TimeUnit connectionTimeoutUnit;
 
     @Inject
     private HttpService httpService;
@@ -99,7 +113,7 @@ public class ConnectionProvider implements
 
     @Override
     public Connection connect() {
-        return new Connection(httpClient, companyHostname, apiToken, transformationService);
+        return new Connection(httpClient, companyHostname, apiToken, transformationService, connectionTimeout, connectionTimeoutUnit);
     }
 
     @Override
