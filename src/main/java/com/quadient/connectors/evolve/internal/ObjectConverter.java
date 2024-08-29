@@ -1,6 +1,7 @@
 package com.quadient.connectors.evolve.internal;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.quadient.connectors.evolve.internal.error.exception.RequestSerializationException;
@@ -12,7 +13,9 @@ import java.io.InputStream;
 
 @Component
 public class ObjectConverter {
-    ObjectMapper mapper = new ObjectMapper().registerModule(new JsonNullableModule());
+    ObjectMapper mapper = new ObjectMapper()
+            .registerModule(new JsonNullableModule())
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     
     public String convertToJson(Object object) {
         ObjectWriter ow = mapper.writer();

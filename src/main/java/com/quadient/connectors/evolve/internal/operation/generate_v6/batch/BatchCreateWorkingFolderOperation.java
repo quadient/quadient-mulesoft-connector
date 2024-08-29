@@ -14,6 +14,7 @@ import org.mule.sdk.api.annotation.param.Config;
 import org.mule.sdk.api.annotation.param.MediaType;
 import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
+import org.mule.sdk.api.annotation.param.display.Example;
 import org.mule.sdk.api.annotation.param.display.Summary;
 import org.mule.sdk.api.runtime.operation.Result;
 
@@ -36,6 +37,7 @@ public class BatchCreateWorkingFolderOperation {
             String name,
 
             @Optional
+            @Example("2024-12-31T23:59:59Z")
             @Summary("Date and time the folder will expire and be deleted (date/time format according to the ISO 8601 standard).\n The behavior of the parameter changes based on the isJobDedicated settings, i.e. if isJobDedicated is true or undefined, expiration cannot be set to more than 90 days and leaving expiration undefined sets the expiration to 90 days; if isJobDedicated is false, expiration can be set to an arbitrary date and leaving expiration undefined causes the folder to never expire.")
             String expiration,
 
