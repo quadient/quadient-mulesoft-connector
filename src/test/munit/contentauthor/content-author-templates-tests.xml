@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:quadient="http://www.mulesoft.org/schema/mule/quadient"
+      xmlns:mtf="http://www.mulesoft.org/schema/mule/mtf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
+http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
+    <munit:config name="content-author-templates-tests.xml"/>
+    <configuration-properties file="application.properties"/>
+
+    <munit:test name="get templates">
+        <munit:execution>
+            <quadient:content-author-get-templates
+                    doc:name="Content Author - Get Templates"
+                    config-ref="Config_Success"/>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-that doc:name="Assert that"
+                                     expression="#[payload.totalCount]" is="#[MunitTools::greaterThan(0)]"/>
+        </munit:validation>
+    </munit:test>
+
+    <munit:test name="get templates with wrong folder">
+        <munit:execution>
+            <quadient:content-author-get-templates
+                    doc:name="Content Author - Get Templates"
+                    folder="wrongFolder"
+                    config-ref="Config_Success"/>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-that doc:name="Assert that"
+                                     expression="#[payload.totalCount]" is="#[MunitTools::equalTo(0)]"/>
+        </munit:validation>
+    </munit:test>
+</mule>

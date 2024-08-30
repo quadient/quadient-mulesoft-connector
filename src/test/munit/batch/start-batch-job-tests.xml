@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:quadient="http://www.mulesoft.org/schema/mule/quadient"
+      xmlns:mtf="http://www.mulesoft.org/schema/mule/mtf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
+http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
+    <munit:config name="start-batch-job-tests.xml"/>
+    <configuration-properties file="application.properties"/>
+
+    <munit:test name="start-batch-success" doc:id="9a7aa1fa-362d-4a31-8f07-89a0cfd0ad90">
+        <munit:execution>
+            <quadient:batch-start-batch-job
+                    doc:name="Batch - Start batch job"
+                    doc:id="15f5b030-b8e9-4f57-8bb3-ee76cb510a39"
+                    pipelineName="${quadient.evolve.batch.pipeline.name}"
+                    workingFolderId="${quadient.evolve.batch.workingfolder.id}"
+                    description="description"
+                    config-ref="Config_Success"/>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-equals doc:name="Assert equals" doc:id="9a66d2e6-bf57-4906-8df9-7b6c76528cfd"
+                                       actual="#[payload.workingFolderId]"
+                                       expected="${quadient.evolve.batch.workingfolder.id}"/>
+            <munit-tools:assert-that doc:name="Assert that" doc:id="a6e71142-86d2-424b-bc6f-15324326ef33"
+                                     expression="#[payload.batchJobId]" is="#[MunitTools::notNullValue()]"/>
+            <munit-tools:assert-that doc:name="Assert that" doc:id="a6e71142-86d2-424b-bc6f-15324326ef33"
+                                     expression="#[payload.eventId]" is="#[MunitTools::notNullValue()]"/>
+            <munit-tools:assert-that doc:name="Assert that" doc:id="a6e71142-86d2-424b-bc6f-15324326ef33"
+                                     expression="#[payload.time]" is="#[MunitTools::notNullValue()]"/>
+        </munit:validation>
+    </munit:test>
+
+    <munit:test name="start-batch-fail" doc:id="9a7aa1fa-362d-4a31-8f07-89a0cfd0ad90"
+                expectedErrorType="QUADIENT:BAD_REQUEST">
+        <munit:execution>
+            <quadient:batch-start-batch-job
+                    doc:name="Batch - Start batch job"
+                    doc:id="15f5b030-b8e9-4f57-8bb3-ee76cb510a39"
+                    pipelineName="wrongName"
+                    workingFolderId="${quadient.evolve.batch.workingfolder.id}"
+                    description="description"
+                    config-ref="Config_Success"/>
+        </munit:execution>
+    </munit:test>
+</mule>

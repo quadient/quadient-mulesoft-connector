@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:quadient="http://www.mulesoft.org/schema/mule/quadient"
+      xmlns:mtf="http://www.mulesoft.org/schema/mule/mtf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
+http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
+    <munit:config name="batch-job-status-tests.xml"/>
+    <configuration-properties file="application.properties"/>
+
+    <munit:test name="job-status" doc:id="e877c923-c0f1-4a1a-9baa-14834173d15f"
+                description="start and check job status">
+        <munit:execution>
+            <quadient:batch-start-batch-job doc:name="Batch - Start batch job"
+                                            doc:id="25879b67-06b9-4457-9ebc-9e045c7ca3d7" config-ref="Config_Success"
+                                            pipelineName="${quadient.evolve.batch.pipeline.name}"
+                                            workingFolderId="${quadient.evolve.batch.workingfolder.id}"
+                                            description="description"/>
+            <quadient:batch-batch-job-status doc:name="Batch - Batch Job Status"
+                                             doc:id="037c4c25-59ab-4538-86a5-883af67b371b" config-ref="Config_Success"
+                                             batchJobId="#[payload.batchJobId]"/>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-that doc:name="Assert that" doc:id="b4b21b75-224c-4f72-81e8-67743426c48c"
+                                     is="#[MunitTools::anyOf([MunitTools::equalTo('Finished'), MunitTools::equalTo('WaitingForProcessing'), MunitTools::equalTo('Processing')])]"
+                                     expression="#[payload]"/>
+        </munit:validation>
+    </munit:test>
+
+</mule>

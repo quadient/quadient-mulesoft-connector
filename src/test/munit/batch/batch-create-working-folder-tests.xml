@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:quadient="http://www.mulesoft.org/schema/mule/quadient"
+      xmlns:mtf="http://www.mulesoft.org/schema/mule/mtf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
+http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
+    <munit:config name="batch-create-working-folder-tests.xml"/>
+    <configuration-properties file="application.properties"/>
+
+    <munit:test name="create-working-folder-success">
+        <munit:execution>
+            <quadient:batch-create-working-folder
+                    doc:name="Batch - Create working folder"
+                    name="mulesoftTest"
+                    config-ref="Config_Success"/>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-that doc:name="Assert that"
+                                     expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+        </munit:validation>
+    </munit:test>
+
+    <munit:test name="create-working-folder-fail" expectedErrorType="QUADIENT:BAD_REQUEST">
+        <munit:execution>
+            <quadient:batch-create-working-folder
+                    doc:name="Batch - Create working folder"
+                    name="mulesoftTest"
+                    expiration="2055-12-31T00:00:00Z"
+                    config-ref="Config_Success"/>
+        </munit:execution>
+    </munit:test>
+</mule>

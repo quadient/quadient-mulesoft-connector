@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:quadient="http://www.mulesoft.org/schema/mule/quadient"
+      xmlns:mtf="http://www.mulesoft.org/schema/mule/mtf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
+http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
+    <munit:config name="front-office-create-ticket-tests.xml"/>
+    <configuration-properties file="application.properties"/>
+
+    <munit:test name="create ticket" doc:id="9a7aa1fa-362d-4a31-8f07-89a0cfd0ad90">
+        <munit:execution>
+            <quadient:front-office-create-ticket
+                    crateTicketHolderType="USER_NAME"
+                    doc:name="Front Office - Create ticket"
+                    config-ref="Config_Success"
+                    holderValue="${quadient.evolve.fo.holder}"
+                    templateName="companyRoot:S:Production://Templates/Email Simple.jld"
+                    stateId="S_simple_scenario_writer_assigned"/>
+
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-that doc:name="Assert that" doc:id="a6e71142-86d2-424b-bc6f-15324326ef33"
+                                     expression="#[payload.guid]" is="#[MunitTools::notNullValue()]"/>
+        </munit:validation>
+    </munit:test>
+
+    <munit:test name="create ticket wrong name" expectedErrorType="QUADIENT:BAD_REQUEST">
+        <munit:execution>
+            <quadient:front-office-create-ticket
+                    crateTicketHolderType="USER_NAME"
+                    doc:name="Front Office - Create ticket"
+                    config-ref="Config_Success"
+                    holderValue="wrong@email.com"
+                    templateName="companyRoot:S:Production://Templates/Email Simple.jld"
+                    stateId="S_simple_scenario_writer_assigned"/>
+        </munit:execution>
+    </munit:test>
+</mule>

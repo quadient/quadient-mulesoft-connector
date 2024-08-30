@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:quadient="http://www.mulesoft.org/schema/mule/quadient"
+      xmlns:mtf="http://www.mulesoft.org/schema/mule/mtf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
+http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
+    <munit:config name="connection-tests.xml"/>
+    <configuration-properties file="application.properties"/>
+    <quadient:config name="Config_Success" doc:name="Quadient Evolve Config"
+                     doc:id="bdb197ce-9104-4931-8e45-e846dc4a142f">
+        <quadient:connection companyHostname="${quadient.evolve.host}" apiToken="${quadient.evolve.api_key}"
+                             applicationType="GENERATE_BATCH"/>
+    </quadient:config>
+
+    <quadient:config name="Config_fail" doc:name="Quadient Evolve Config" doc:id="bdb197ce-9104-4931-8e45-e846dc4a142f">
+        <quadient:connection companyHostname="${quadient.evolve.host}" apiToken="abc" applicationType="GENERATE_BATCH"/>
+    </quadient:config>
+
+    <munit:test name="test-valid-connection" doc:id="29614501-5515-4d47-b4b2-997e65749115">
+        <munit:validation>
+            <mtf:test-connectivity config-ref="Config_Success" doc:name="Test connectivity"
+                                   doc:id="919a000a-51b7-45a2-ad0d-93bb376e6dd8"/>
+        </munit:validation>
+    </munit:test>
+    <munit:test name="test-invalid-connection" doc:id="aec70a5e-a322-4c6f-a2f9-09c46ed7fb2d"
+                expectedErrorType="QUADIENT:UNAUTHORIZED">
+        <munit:validation>
+            <mtf:test-connectivity config-ref="Config_fail" doc:name="Test connectivity"
+                                   doc:id="0182eda2-331b-4abb-847b-106a6897ce55"/>
+        </munit:validation>
+    </munit:test>
+
+</mule>
