@@ -7,14 +7,12 @@ import com.quadient.connectors.generated.model.v6.batch.QueryAppHealth;
 import org.mule.runtime.api.lifecycle.InitialisationException;
 import org.mule.runtime.api.lifecycle.Startable;
 import org.mule.runtime.api.lifecycle.Stoppable;
-import org.mule.runtime.api.tls.TlsContextFactory;
 import org.mule.runtime.api.transformation.TransformationService;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.HttpService;
 import org.mule.runtime.http.api.client.HttpClient;
 import org.mule.runtime.http.api.client.HttpClientConfiguration;
 import org.mule.runtime.http.api.client.proxy.ProxyConfig;
-import org.mule.sdk.api.annotation.Expression;
 import org.mule.sdk.api.annotation.param.ConfigOverride;
 import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
@@ -30,10 +28,6 @@ import org.mule.sdk.api.exception.ModuleException;
 import javax.inject.Inject;
 
 import java.util.concurrent.TimeUnit;
-
-import static org.mule.runtime.core.api.lifecycle.LifecycleUtils.initialiseIfNeeded;
-import static org.mule.runtime.extension.api.annotation.param.display.Placement.SECURITY_TAB;
-import static org.mule.sdk.api.meta.ExpressionSupport.NOT_SUPPORTED;
 
 public class ConnectionProvider implements
         CachedConnectionProvider<Connection>, Startable, Stoppable {
@@ -56,7 +50,7 @@ public class ConnectionProvider implements
 
     @ConfigOverride
     @Parameter
-    @Optional(defaultValue = "5")
+    @Optional(defaultValue = "30")
     @Placement(tab = Placement.ADVANCED_TAB, order = 1)
     @DisplayName("Timeout")
     private int connectionTimeout;
