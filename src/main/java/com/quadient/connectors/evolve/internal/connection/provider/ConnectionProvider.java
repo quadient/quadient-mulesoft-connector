@@ -15,6 +15,7 @@ import org.mule.runtime.http.api.client.HttpClient;
 import org.mule.runtime.http.api.client.HttpClientConfiguration;
 import org.mule.runtime.http.api.client.proxy.ProxyConfig;
 import org.mule.sdk.api.annotation.Expression;
+import org.mule.sdk.api.annotation.param.ConfigOverride;
 import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
 import org.mule.sdk.api.annotation.param.RefName;
@@ -53,12 +54,14 @@ public class ConnectionProvider implements
     @Summary("Type of the API key. It will be used for validation of connection.")
     private ApplicationType applicationType;
 
+    @ConfigOverride
     @Parameter
     @Optional(defaultValue = "5")
     @Placement(tab = Placement.ADVANCED_TAB, order = 1)
     @DisplayName("Timeout")
     private int connectionTimeout;
 
+    @ConfigOverride
     @Parameter
     @Optional(defaultValue = "SECONDS")
     @DisplayName("Timeout unit")
@@ -74,16 +77,6 @@ public class ConnectionProvider implements
     @RefName
     private String configName;
 
-    /**
-     * Reference to a TLS config element. This will enable HTTPS for this config.
-     */
-    @Parameter
-    @Optional
-    @Expression(NOT_SUPPORTED)
-    @DisplayName("TLS Configuration")
-    @Placement(tab = SECURITY_TAB)
-    private TlsContextFactory tlsContext;
-
     @Parameter
     @Optional
     @Summary("Reusable configuration element for outbound connections through a proxy")
@@ -94,12 +87,10 @@ public class ConnectionProvider implements
 
     @Override
     public void start() throws InitialisationException {
-        initialiseIfNeeded(tlsContext);
         httpClient = httpService.getClientFactory().
                 create(new HttpClientConfiguration.Builder()
                         .setName(configName)
                         .setProxyConfig(proxyConfig)
-                        .setTlsContextFactory(tlsContext)
                         .build());
         httpClient.start();
     }
