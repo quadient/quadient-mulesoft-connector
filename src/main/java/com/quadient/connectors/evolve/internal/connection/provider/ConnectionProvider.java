@@ -8,12 +8,12 @@ import org.mule.runtime.api.lifecycle.InitialisationException;
 import org.mule.runtime.api.lifecycle.Startable;
 import org.mule.runtime.api.lifecycle.Stoppable;
 import org.mule.runtime.api.transformation.TransformationService;
+import org.mule.runtime.extension.api.annotation.param.ConfigOverride;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.HttpService;
 import org.mule.runtime.http.api.client.HttpClient;
 import org.mule.runtime.http.api.client.HttpClientConfiguration;
 import org.mule.runtime.http.api.client.proxy.ProxyConfig;
-import org.mule.sdk.api.annotation.param.ConfigOverride;
 import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
 import org.mule.sdk.api.annotation.param.RefName;
@@ -47,16 +47,16 @@ public class ConnectionProvider implements
     @Parameter
     @Summary("Type of the API key. It will be used for validation of connection.")
     private ApplicationType applicationType;
-
-    @ConfigOverride
+    
     @Parameter
+    @ConfigOverride
     @Optional(defaultValue = "30")
     @Placement(tab = Placement.ADVANCED_TAB, order = 1)
     @DisplayName("Timeout")
     private int connectionTimeout;
 
-    @ConfigOverride
     @Parameter
+    @ConfigOverride
     @Optional(defaultValue = "SECONDS")
     @DisplayName("Timeout unit")
     @Placement(tab = Placement.ADVANCED_TAB, order = 2)

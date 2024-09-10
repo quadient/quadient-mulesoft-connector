@@ -62,7 +62,6 @@ public class DefaultProxyConfig implements ProxyConfig {
         return host;
     }
 
-
     public int getPort() {
         return port;
     }

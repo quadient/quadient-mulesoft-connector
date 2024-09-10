@@ -21,24 +21,12 @@ public class DataDefinitionFE {
         return moduleName;
     }
 
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
-    }
-
     public DataDefinitionTypeFE getType() {
         return type;
     }
 
-    public void setType(DataDefinitionTypeFE type) {
-        this.type = type;
-    }
-
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }
 

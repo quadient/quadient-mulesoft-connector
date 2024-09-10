@@ -49,55 +49,27 @@ public class OnDemandCustomDataInputFE {
         return pipelineName;
     }
 
-    public void setPipelineName(String pipelineName) {
-        this.pipelineName = pipelineName;
-    }
-
     public String getFileName() {
         return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 
     public String getFolder() {
         return folder;
     }
 
-    public void setFolder(String folder) {
-        this.folder = folder;
-    }
-
     public MultiMap<String, String> getPipelineVariables() {
         return pipelineVariables;
-    }
-
-    public void setPipelineVariables(MultiMap<String, String> pipelineVariables) {
-        this.pipelineVariables = pipelineVariables;
     }
 
     public boolean isUseDraftPipeline() {
         return useDraftPipeline;
     }
 
-    public void setUseDraftPipeline(boolean useDraftPipeline) {
-        this.useDraftPipeline = useDraftPipeline;
-    }
-
     public boolean isUseDraftResources() {
         return useDraftResources;
     }
 
-    public void setUseDraftResources(boolean useDraftResources) {
-        this.useDraftResources = useDraftResources;
-    }
-
     public TypedValue<Object> getCustomData() {
         return customData;
-    }
-
-    public void setCustomData(TypedValue<Object> customData) {
-        this.customData = customData;
     }
 }

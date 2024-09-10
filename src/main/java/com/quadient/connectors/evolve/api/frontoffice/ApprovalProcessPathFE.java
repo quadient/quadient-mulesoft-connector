@@ -20,15 +20,7 @@ public class ApprovalProcessPathFE {
         return resolveDepartment;
     }
 
-    public void setResolveDepartment(boolean resolveDepartment) {
-        this.resolveDepartment = resolveDepartment;
-    }
-
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }

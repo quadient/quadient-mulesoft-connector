@@ -46,55 +46,27 @@ public class ContentAuthorTemplatesInputFE {
         return folder;
     }
 
-    public void setFolder(String folder) {
-        this.folder = folder;
-    }
-
     public int getOffset() {
         return offset;
-    }
-
-    public void setOffset(int offset) {
-        this.offset = offset;
     }
 
     public int getLimit() {
         return limit;
     }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
-
     public boolean isIncludeMetadata() {
         return includeMetadata;
-    }
-
-    public void setIncludeMetadata(boolean includeMetadata) {
-        this.includeMetadata = includeMetadata;
     }
 
     public String getHolder() {
         return holder;
     }
 
-    public void setHolder(String holder) {
-        this.holder = holder;
-    }
-
     public String getApprovalStates() {
         return approvalStates;
     }
 
-    public void setApprovalStates(String approvalStates) {
-        this.approvalStates = approvalStates;
-    }
-
     public ConditionFE getCondition() {
         return condition;
-    }
-
-    public void setCondition(ConditionFE condition) {
-        this.condition = condition;
     }
 }

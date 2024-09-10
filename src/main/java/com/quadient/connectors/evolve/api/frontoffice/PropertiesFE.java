@@ -19,15 +19,7 @@ public class PropertiesFE {
         return overrideAlsoNotEmptyProperties;
     }
 
-    public void setOverrideAlsoNotEmptyProperties(boolean overrideAlsoNotEmptyProperties) {
-        this.overrideAlsoNotEmptyProperties = overrideAlsoNotEmptyProperties;
-    }
-
     public MultiMap<String, String> getCreateTicketPropertiesMap() {
         return createTicketPropertiesMap;
-    }
-
-    public void setCreateTicketPropertiesMap(MultiMap<String, String> createTicketPropertiesMap) {
-        this.createTicketPropertiesMap = createTicketPropertiesMap;
     }
 }

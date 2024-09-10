@@ -22,35 +22,19 @@ public class InputVariablesOptionsFE {
     @NullSafe
     public List<String> options;
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public VariableTypeFE getType() {
+        return type;
     }
 
     public String getCodeName() {
         return codeName;
     }
 
-    public void setCodeName(String codeName) {
-        this.codeName = codeName;
-    }
-
-    public VariableTypeFE getType() {
-        return type;
-    }
-
-    public void setType(VariableTypeFE type) {
-        this.type = type;
+    public String getValue() {
+        return value;
     }
 
     public List<String> getOptions() {
         return options;
-    }
-
-    public void setOptions(List<String> options) {
-        this.options = options;
     }
 }

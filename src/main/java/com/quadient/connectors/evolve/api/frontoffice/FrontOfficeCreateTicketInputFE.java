@@ -128,159 +128,79 @@ public class FrontOfficeCreateTicketInputFE {
         return stateId;
     }
 
-    public void setStateId(String stateId) {
-        this.stateId = stateId;
-    }
-
     public String getHolderValue() {
         return holderValue;
-    }
-
-    public void setHolderValue(String holderValue) {
-        this.holderValue = holderValue;
     }
 
     public HolderTypeFE getCreateTicketHolderType() {
         return createTicketHolderType;
     }
 
-    public void setCreateTicketHolderType(HolderTypeFE createTicketHolderType) {
-        this.createTicketHolderType = createTicketHolderType;
-    }
-
     public boolean isAddAttachmentFromGlobalStorageEnabled() {
         return addAttachmentFromGlobalStorageEnabled;
-    }
-
-    public void setAddAttachmentFromGlobalStorageEnabled(boolean addAttachmentFromGlobalStorageEnabled) {
-        this.addAttachmentFromGlobalStorageEnabled = addAttachmentFromGlobalStorageEnabled;
     }
 
     public boolean isAsynchronousProcessing() {
         return asynchronousProcessing;
     }
 
-    public void setAsynchronousProcessing(boolean asynchronousProcessing) {
-        this.asynchronousProcessing = asynchronousProcessing;
-    }
-
     public boolean isMultipleRecord() {
         return multipleRecord;
-    }
-
-    public void setMultipleRecord(boolean multipleRecord) {
-        this.multipleRecord = multipleRecord;
     }
 
     public boolean isUploadAttachmentFromLocalDriveEnabled() {
         return uploadAttachmentFromLocalDriveEnabled;
     }
 
-    public void setUploadAttachmentFromLocalDriveEnabled(boolean uploadAttachmentFromLocalDriveEnabled) {
-        this.uploadAttachmentFromLocalDriveEnabled = uploadAttachmentFromLocalDriveEnabled;
-    }
-
     public List<String> getProductionActions() {
         return productionActions;
-    }
-
-    public void setProductionActions(List<String> productionActions) {
-        this.productionActions = productionActions;
     }
 
     public ApprovalProcessPathFE getCreateTicketApprovalProcessPath() {
         return createTicketApprovalProcessPath;
     }
 
-    public void setCreateTicketApprovalProcessPath(ApprovalProcessPathFE createTicketApprovalProcessPath) {
-        this.createTicketApprovalProcessPath = createTicketApprovalProcessPath;
-    }
-
     public List<String> getAttachments() {
         return attachments;
-    }
-
-    public void setAttachments(List<String> attachments) {
-        this.attachments = attachments;
     }
 
     public ContractFE getCreateTicketContract() {
         return createTicketContract;
     }
 
-    public void setCreateTicketContract(ContractFE createTicketContract) {
-        this.createTicketContract = createTicketContract;
-    }
-
     public PropertiesFE getCreateTicketProperties() {
         return createTicketProperties;
-    }
-
-    public void setCreateTicketProperties(PropertiesFE createTicketProperties) {
-        this.createTicketProperties = createTicketProperties;
     }
 
     public String getTemplateName() {
         return templateName;
     }
 
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
-    }
-
     public String getBrand() {
         return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public List<CommandFE> getCommands() {
         return commands;
     }
 
-    public void setCommands(List<CommandFE> commands) {
-        this.commands = commands;
-    }
-
     public List<ContextFE> getCreateTicketContexts() {
         return createTicketContexts;
-    }
-
-    public void setCreateTicketContexts(List<ContextFE> createTicketContexts) {
-        this.createTicketContexts = createTicketContexts;
     }
 
     public Integer getCreateTicketCopyOf() {
         return createTicketCopyOf;
     }
 
-    public void setCreateTicketCopyOf(Integer createTicketCopyOf) {
-        this.createTicketCopyOf = createTicketCopyOf;
-    }
-
     public List<DataDefinitionFE> getDataDefinitions() {
         return dataDefinitions;
-    }
-
-    public void setDataDefinitions(List<DataDefinitionFE> dataDefinitions) {
-        this.dataDefinitions = dataDefinitions;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public boolean isPageDocument() {
         return pageDocument;
-    }
-
-    public void setPageDocument(boolean pageDocument) {
-        this.pageDocument = pageDocument;
     }
 }

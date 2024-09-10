@@ -11,8 +11,4 @@ public class BatchJobStatusInputFE {
     public String getBatchJobId() {
         return batchJobId;
     }
-
-    public void setBatchJobId(String batchJobId) {
-        this.batchJobId = batchJobId;
-    }
 }

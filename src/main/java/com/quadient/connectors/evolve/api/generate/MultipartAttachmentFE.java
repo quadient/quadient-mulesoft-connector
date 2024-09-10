@@ -23,15 +23,7 @@ public class MultipartAttachmentFE {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public TypedValue<InputStream> getMultipartData() {
         return multipartData;
-    }
-
-    public void setMultipartData(TypedValue<InputStream> multipartData) {
-        this.multipartData = multipartData;
     }
 }

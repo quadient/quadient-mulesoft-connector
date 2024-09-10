@@ -38,39 +38,19 @@ public class ConditionFE {
         return categorizations;
     }
 
-    public void setCategorizations(List<CategorizationConditionFE> categorizations) {
-        this.categorizations = categorizations;
-    }
-
     public List<String> getConditions() {
         return conditions;
-    }
-
-    public void setConditions(List<String> conditions) {
-        this.conditions = conditions;
     }
 
     public List<MetadataConditionFE> getMetadata() {
         return metadata;
     }
 
-    public void setMetadata(List<MetadataConditionFE> metadata) {
-        this.metadata = metadata;
-    }
-
     public boolean isNegation() {
         return negation;
     }
 
-    public void setNegation(boolean negation) {
-        this.negation = negation;
-    }
-
     public LogicalOperatorFE getOperator() {
         return operator;
-    }
-
-    public void setOperator(LogicalOperatorFE operator) {
-        this.operator = operator;
     }
 }

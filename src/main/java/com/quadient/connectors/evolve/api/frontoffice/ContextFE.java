@@ -15,15 +15,7 @@ public class ContextFE {
         return path;
     }
 
-    public void setPath(List<String> path) {
-        this.path = path;
-    }
-
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }

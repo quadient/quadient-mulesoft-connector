@@ -39,39 +39,19 @@ public class OndemandOnDemandInputFE {
         return pipelineName;
     }
 
-    public void setPipelineName(String pipelineName) {
-        this.pipelineName = pipelineName;
-    }
-
     public List<InputVariablesOptionsFE> getVariables() {
         return variables;
-    }
-
-    public void setVariables(List<InputVariablesOptionsFE> variables) {
-        this.variables = variables;
     }
 
     public boolean isUseDraftPipeline() {
         return useDraftPipeline;
     }
 
-    public void setUseDraftPipeline(boolean useDraftPipeline) {
-        this.useDraftPipeline = useDraftPipeline;
-    }
-
     public boolean isUseDraftResources() {
         return useDraftResources;
     }
 
-    public void setUseDraftResources(boolean useDraftResources) {
-        this.useDraftResources = useDraftResources;
-    }
-
     public List<MultipartAttachmentFE> getAttachments() {
         return attachments;
-    }
-
-    public void setAttachments(List<MultipartAttachmentFE> attachments) {
-        this.attachments = attachments;
     }
 }

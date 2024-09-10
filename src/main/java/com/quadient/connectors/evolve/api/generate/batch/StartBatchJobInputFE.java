@@ -61,71 +61,35 @@ public class StartBatchJobInputFE {
         return pipelineName;
     }
 
-    public void setPipelineName(String pipelineName) {
-        this.pipelineName = pipelineName;
-    }
-
     public String getWorkingFolderId() {
         return workingFolderId;
-    }
-
-    public void setWorkingFolderId(String workingFolderId) {
-        this.workingFolderId = workingFolderId;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public List<InputVariablesOptionsFE> getVariables() {
         return variables;
-    }
-
-    public void setVariables(List<InputVariablesOptionsFE> variables) {
-        this.variables = variables;
     }
 
     public Long getPriority() {
         return priority;
     }
 
-    public void setPriority(Long priority) {
-        this.priority = priority;
-    }
-
     public String getExpiration() {
         return expiration;
-    }
-
-    public void setExpiration(String expiration) {
-        this.expiration = expiration;
     }
 
     public boolean isUseDraftPipeline() {
         return useDraftPipeline;
     }
 
-    public void setUseDraftPipeline(boolean useDraftPipeline) {
-        this.useDraftPipeline = useDraftPipeline;
-    }
-
     public boolean isUseDraftResources() {
         return useDraftResources;
     }
 
-    public void setUseDraftResources(boolean useDraftResources) {
-        this.useDraftResources = useDraftResources;
-    }
-
     public List<MultipartAttachmentFE> getAttachments() {
         return attachments;
-    }
-
-    public void setAttachments(List<MultipartAttachmentFE> attachments) {
-        this.attachments = attachments;
     }
 }

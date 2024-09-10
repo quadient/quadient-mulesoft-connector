@@ -22,35 +22,19 @@ public class MetadataConditionFE {
     @Summary("Metadata field value.")
     String value;
 
-    public boolean isNegation() {
-        return negation;
-    }
-
-    public void setNegation(boolean negation) {
-        this.negation = negation;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public boolean isNegation() {
+        return negation;
     }
 
     public OperatorEnumFE getOperator() {
         return operator;
     }
 
-    public void setOperator(OperatorEnumFE operator) {
-        this.operator = operator;
-    }
-
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }

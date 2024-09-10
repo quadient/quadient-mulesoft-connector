@@ -21,15 +21,7 @@ public class ContractFE {
         return contractId;
     }
 
-    public void setContractId(String contractId) {
-        this.contractId = contractId;
-    }
-
     public String getContractName() {
         return contractName;
-    }
-
-    public void setContractName(String contractName) {
-        this.contractName = contractName;
     }
 }
