@@ -1,6 +1,6 @@
 package com.quadient.connectors.evolve.internal.operation.generate_v6.batch;
 
-import com.quadient.connectors.evolve.internal.config.Configuration;
+import com.quadient.connectors.evolve.api.generate.batch.BatchCreateWorkingFolderInputFE;
 import com.quadient.connectors.evolve.internal.connection.Connection;
 import com.quadient.connectors.evolve.internal.ObjectConverter;
 import com.quadient.connectors.evolve.internal.error.provider.ExecuteErrorsProvider;
@@ -10,11 +10,9 @@ import com.quadient.connectors.evolve.internal.operation.ServiceEndpoint;
 import com.quadient.connectors.generated.model.v6.batch.CreateWorkingFolderRequest;
 import com.quadient.connectors.generated.model.v6.batch.CreateWorkingFolderResponse;
 import org.mule.sdk.api.annotation.error.Throws;
-import org.mule.sdk.api.annotation.param.Config;
 import org.mule.sdk.api.annotation.param.MediaType;
-import org.mule.sdk.api.annotation.param.Optional;
+import org.mule.sdk.api.annotation.param.ParameterGroup;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
-import org.mule.sdk.api.annotation.param.display.Example;
 import org.mule.sdk.api.annotation.param.display.Summary;
 import org.mule.sdk.api.runtime.operation.Result;
 
@@ -30,26 +28,14 @@ public class BatchCreateWorkingFolderOperation {
             "Output contains working folder id.")
     @DisplayName("Batch - Create working folder")
     public Result<String, HttpResponseAttributes> batchCreateWorkingFolder(
-            @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-
-            @Summary("Name of the job working folder. It will be visible in GUI and will be a part of the folder's ID.")
-            String name,
-
-            @Optional
-            @Example("2024-12-31T23:59:59Z")
-            @Summary("Date and time the folder will expire and be deleted (date/time format according to the ISO 8601 standard).\n The behavior of the parameter changes based on the isJobDedicated settings, i.e. if isJobDedicated is true or undefined, expiration cannot be set to more than 90 days and leaving expiration undefined sets the expiration to 90 days; if isJobDedicated is false, expiration can be set to an arbitrary date and leaving expiration undefined causes the folder to never expire.")
-            String expiration,
-
-            @Optional(defaultValue = "true")
-            @Summary("If true, the working folder will behave as an automatically created working folder while allowing you to prepare input data in advance.")
-            boolean isJobDedicated
+            @ParameterGroup(name = "Create working folder") BatchCreateWorkingFolderInputFE input
     ) {
-        if (name.isEmpty() || name.length() > 20) {
+        if (input.getName().isEmpty() || input.getName().length() > 20) {
             throw new InvalidInputParameterException(new Exception("Name must be between 1 and 20 characters."));
         }
         ObjectConverter objectConverter = new ObjectConverter();
-        CreateWorkingFolderRequest request = new CreateWorkingFolderRequest().name(name).expiration(expiration).isJobDedicated(isJobDedicated);
+        CreateWorkingFolderRequest request = new CreateWorkingFolderRequest().name(input.getName()).expiration(input.getExpiration()).isJobDedicated(input.isJobDedicated());
         Result<InputStream, HttpResponseAttributes> result = connection.sendPOSTRequest(ENDPOINT, objectConverter.convertToJson(request));
         CreateWorkingFolderResponse responseObj = objectConverter.readValue(result.getOutput(), CreateWorkingFolderResponse.class);
 
@@ -57,6 +43,6 @@ public class BatchCreateWorkingFolderOperation {
                 .output(responseObj.getWorkingFolderId())
                 .attributes(result.getAttributes().orElse(null))
                 .mediaType(org.mule.runtime.api.metadata.MediaType.TEXT)
-                .build();  
+                .build();
     }
 }

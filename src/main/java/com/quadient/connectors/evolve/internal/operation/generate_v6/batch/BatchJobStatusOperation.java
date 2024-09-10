@@ -1,6 +1,6 @@
 package com.quadient.connectors.evolve.internal.operation.generate_v6.batch;
 
-import com.quadient.connectors.evolve.internal.config.Configuration;
+import com.quadient.connectors.evolve.api.generate.batch.BatchJobStatusInputFE;
 import com.quadient.connectors.evolve.internal.connection.Connection;
 import com.quadient.connectors.evolve.internal.ObjectConverter;
 import com.quadient.connectors.evolve.internal.error.provider.ExecuteErrorsProvider;
@@ -9,8 +9,8 @@ import com.quadient.connectors.evolve.internal.operation.ServiceEndpoint;
 import com.quadient.connectors.generated.model.v6.batch.BatchStatusJobResponse;
 import com.quadient.connectors.generated.model.v6.batch.QueryBatchJobStatus;
 import org.mule.sdk.api.annotation.error.Throws;
-import org.mule.sdk.api.annotation.param.Config;
 import org.mule.sdk.api.annotation.param.MediaType;
+import org.mule.sdk.api.annotation.param.ParameterGroup;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Summary;
 import org.mule.sdk.api.runtime.operation.Result;
@@ -39,13 +39,10 @@ public class BatchJobStatusOperation {
             "'Running'")
     @DisplayName("Batch - Batch Job Status")
     public Result<String, HttpResponseAttributes> batchBatchJobStatus(
-            @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-
-            @Summary("Unique identifier of the batch job.")
-            String batchJobId
+            @ParameterGroup(name = "Batch Job Status") BatchJobStatusInputFE input
     ) {
-        QueryBatchJobStatus queryBatchJobStatus = new QueryBatchJobStatus().batchJobId(batchJobId);
+        QueryBatchJobStatus queryBatchJobStatus = new QueryBatchJobStatus().batchJobId(input.getBatchJobId());
         Result<InputStream, HttpResponseAttributes> result = connection.sendPOSTRequest(ENDPOINT, new ObjectConverter().convertToJson(queryBatchJobStatus));
         BatchStatusJobResponse responseObj = new ObjectConverter().readValue(result.getOutput(), BatchStatusJobResponse.class);
         return Result.<String, HttpResponseAttributes>builder()

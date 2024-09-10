@@ -25,7 +25,6 @@ public class ConditionFE {
     @NullSafe
     List<MetadataConditionFE> metadata;
 
-
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("Metadata condition negation.")
@@ -75,4 +74,3 @@ public class ConditionFE {
         this.operator = operator;
     }
 }
-

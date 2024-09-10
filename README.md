@@ -6,6 +6,10 @@ Add description ...
 ...
 
 
+| Application/Service | Version      |
+|---------------------|--------------|
+| Mule Runtime        | 4.6 or later |
+| Java                | 1.8, 11, 17  |
 ...
 
 

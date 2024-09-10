@@ -2,8 +2,8 @@ package com.quadient.connectors.evolve.internal.operation.contentauthor;
 
 import com.quadient.connectors.evolve.api.contentauthor.CategorizationConditionFE;
 import com.quadient.connectors.evolve.api.contentauthor.ConditionFE;
+import com.quadient.connectors.evolve.api.contentauthor.ContentAuthorTemplatesInputFE;
 import com.quadient.connectors.evolve.api.contentauthor.MetadataConditionFE;
-import com.quadient.connectors.evolve.internal.config.Configuration;
 import com.quadient.connectors.evolve.internal.connection.Connection;
 import com.quadient.connectors.evolve.internal.ObjectConverter;
 import com.quadient.connectors.evolve.internal.error.provider.ExecuteErrorsProvider;
@@ -17,15 +17,13 @@ import org.mule.runtime.http.api.HttpConstants;
 import org.mule.sdk.api.annotation.error.Throws;
 import org.mule.sdk.api.annotation.metadata.fixed.OutputJsonType;
 import org.mule.sdk.api.annotation.param.Config;
-import org.mule.sdk.api.annotation.param.Optional;
+import org.mule.sdk.api.annotation.param.ParameterGroup;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
-import org.mule.sdk.api.annotation.param.display.Example;
 import org.mule.sdk.api.annotation.param.display.Summary;
 import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.InputStream;
 import java.util.HashMap;
-
 
 public class ContentAuthorTemplatesOperation {
     static final String ENDPOINT = ServiceEndpoint.CA_TEMPLATES;
@@ -35,57 +33,28 @@ public class ContentAuthorTemplatesOperation {
     @Summary("Lists templates.")
     @DisplayName("Content Author - Get Templates")
     public Result<InputStream, HttpResponseAttributes> contentAuthorGetTemplates(
-            @Config Configuration configuration,
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-
-            @Optional
-            @Summary("Name of folder whose content will be listed.")
-            String folder,
-
-            @Optional
-            @Summary("Number of items to skip before starting to collect the resulting.")
-            int offset,
-
-            @Optional(defaultValue = "20")
-            @Summary("Number of items to return (max. 100).")
-            int limit,
-
-            @Optional(defaultValue = "false")
-            @Summary("Determines whether to include metadata in the response.")
-            boolean includeMetadata,
-
-            @Optional
-            @Summary("List templates that the specified user can see.")
-            String holder,
-
-            @Optional
-            @Example("Production:Testing")
-            @Summary("List templates that have the specified approval states, separated by a colon.")
-            String approvalStates,
-
-            @Optional
-            @Summary("Conditions can be nested and can contain the same elements as the main condition.")
-            ConditionFE condition
+            @ParameterGroup(name = "Get Templates") ContentAuthorTemplatesInputFE input
     ) {
-        if (limit > 100) {
+        if (input.getLimit() > 100) {
             throw new InvalidInputParameterException(new Exception("The number of items to return cannot exceed 100."));
         }
 
         HashMap<String, String> uriParams = new HashMap<>();
-        if (folder != null && !folder.isEmpty()) {
-            uriParams.put("folder", folder);
+        if (input.getFolder() != null && !input.getFolder().isEmpty()) {
+            uriParams.put("folder", input.getFolder());
         }
-        uriParams.put("offset", String.valueOf(offset));
-        uriParams.put("limit", String.valueOf(limit));
-        uriParams.put("includeMetadata", String.valueOf(includeMetadata));
-        if (holder != null && !holder.isEmpty()) {
-            uriParams.put("holder", holder);
+        uriParams.put("offset", String.valueOf(input.getOffset()));
+        uriParams.put("limit", String.valueOf(input.getLimit()));
+        uriParams.put("includeMetadata", String.valueOf(input.isIncludeMetadata()));
+        if (input.getHolder() != null && !input.getHolder().isEmpty()) {
+            uriParams.put("holder", input.getHolder());
         }
-        if (approvalStates != null && !approvalStates.isEmpty()) {
-            uriParams.put("approvalStates", approvalStates);
+        if (input.getApprovalStates() != null && !input.getApprovalStates().isEmpty()) {
+            uriParams.put("approvalStates", input.getApprovalStates());
         }
-        if (condition != null) {
-            uriParams.put("condition", new ObjectConverter().convertToJson(convertCondition(condition)));
+        if (input.getCondition() != null) {
+            uriParams.put("condition", new ObjectConverter().convertToJson(convertCondition(input.getCondition())));
         }
 
         return connection.sendRequest(HttpConstants.Method.GET, ENDPOINT, null, uriParams);
