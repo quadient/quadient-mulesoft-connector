@@ -12,7 +12,7 @@
 http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
 http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
     <munit:config name="content-author-templates-tests.xml"/>
-    <configuration-properties file="application.properties"/>
+    <configuration-properties file="automation-credentials.properties"/>
 
     <munit:test name="get templates">
         <munit:execution>

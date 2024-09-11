@@ -12,7 +12,7 @@
 http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
 http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
     <munit:config name="batch-job-status-tests.xml"/>
-    <configuration-properties file="application.properties"/>
+    <configuration-properties file="automation-credentials.properties"/>
 
     <munit:test name="job-status" doc:id="e877c923-c0f1-4a1a-9baa-14834173d15f"
                 description="start and check job status">

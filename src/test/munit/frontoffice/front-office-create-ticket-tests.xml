@@ -12,7 +12,7 @@
 http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
 http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
     <munit:config name="front-office-create-ticket-tests.xml"/>
-    <configuration-properties file="application.properties"/>
+    <configuration-properties file="automation-credentials.properties"/>
 
     <munit:test name="create ticket" doc:id="9a7aa1fa-362d-4a31-8f07-89a0cfd0ad90">
         <munit:execution>

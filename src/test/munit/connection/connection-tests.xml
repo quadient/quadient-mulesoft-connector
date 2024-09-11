@@ -12,7 +12,7 @@
 http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
 http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
     <munit:config name="connection-tests.xml"/>
-    <configuration-properties file="application.properties"/>
+    <configuration-properties file="automation-credentials.properties"/>
     <quadient:config name="Config_Success" doc:name="Quadient Evolve Config"
                      doc:id="bdb197ce-9104-4931-8e45-e846dc4a142f">
         <quadient:connection companyHostname="${quadient.evolve.host}" apiToken="${quadient.evolve.api_key}"
