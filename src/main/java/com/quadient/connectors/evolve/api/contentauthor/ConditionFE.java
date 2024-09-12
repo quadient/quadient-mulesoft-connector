@@ -31,7 +31,7 @@ public class ConditionFE {
     boolean negation;
 
     @Parameter
-    @Summary("Logical operator (and, or).")
+    @Summary("Operator (and, or).")
     LogicalOperatorFE operator;
 
     public List<CategorizationConditionFE> getCategorizations() {
