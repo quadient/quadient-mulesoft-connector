@@ -13,49 +13,49 @@ import java.util.List;
 public class StartBatchJobInputFE {
     @Parameter
     @Summary("Unique name of the processing pipeline. If the pipeline is inside a folder, this parameter must contain the whole path, e.g. PipelineName:'Folder/NestedFolder/pipelineName'.")
-    String pipelineName;
+    public String pipelineName;
 
     @Parameter
     @Summary("Unique identifier of an existing job working folder. If a different working folder is set in the pipeline, the folder specified here takes priority.")
-    String workingFolderId;
+    public String workingFolderId;
 
     @Parameter
     @Summary("Custom description of the job.")
-    String description;
+    public String description;
 
     @Parameter
     @Optional
     @NullSafe
     @Summary("List of processing pipeline variables. It can be used to override values of existing variables in the given processing pipeline. E.g. when a variable is used in the pipeline&#39;s output path, by defining a different value for the same codeName, you can easily change the output path as you start the pipeline without having to re-configure the pipeline itself.")
-    List<InputVariablesOptionsFE> variables;
+    public List<InputVariablesOptionsFE> variables;
 
     @Parameter
     @Optional
     @Summary("Specifies the job priority. Jobs with higher priority are run first. The  value set here overwrites any priority set when designing the pipeline.\n" +
             "   * minimum: 1\n" +
             "   * maximum: 100")
-    Long priority;
+    public Long priority;
 
     @Parameter
     @Optional
     @Summary("Date and time  the batch expires (date/time format according to the ISO 8601 standard). Once expired, the job is deleted. If undefined, the job will expire in 90 days.")
     @Example("2024-07-10T10:15:30+01:00")
-    String expiration;
+    public String expiration;
 
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("If true, the job will be run using a draft version of the processing pipeline.")
-    boolean useDraftPipeline;
+    public boolean useDraftPipeline;
 
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("If true, the job will be run using a draft version of the relevant resources (scripts, connectors).")
-    boolean useDraftResources;
+    public boolean useDraftResources;
 
     @Parameter
     @Optional
     @NullSafe
-    List<MultipartAttachmentFE> attachments;
+    public List<MultipartAttachmentFE> attachments;
 
     public String getPipelineName() {
         return pipelineName;

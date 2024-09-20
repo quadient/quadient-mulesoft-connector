@@ -1,31 +1,31 @@
 package com.quadient.connectors.evolve.api.contentauthor;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum OperatorEnumFE {
     EQUAL("equal"),
 
     LESS("less"),
 
-    LESS_OR_EQUAL("lessOrEqual"),
+    LESSOREQUAL("lessOrEqual"),
 
     MORE("more"),
 
-    MORE_OR_EQUAL("moreOrEqual"),
+    MOREOREQUAL("moreOrEqual"),
 
-    BEGIN_WITH("beginWith"),
+    BEGINWITH("beginWith"),
 
-    BEGIN_WITH_CASE_INSENSITIVE("beginWithCaseInsensitive"),
+    BEGINWITHCASEINSENSITIVE("beginWithCaseInsensitive"),
 
-    END_WITH("endWith"),
+    ENDWITH("endWith"),
 
-    END_WITH_CASE_INSENSITIVE("endWithCaseInsensitive"),
+    ENDWITHCASEINSENSITIVE("endWithCaseInsensitive"),
 
     CONTAINS("contains"),
 
-    CONTAINS_CASE_INSENSITIVE("containsCaseInsensitive"),
+    CONTAINSCASEINSENSITIVE("containsCaseInsensitive"),
 
-    IS_VALID("isValid"),
-
-    EXISTS("exists"),
+    ISVALID("isValid"),
 
     EMPTY("empty");
 
@@ -35,6 +35,7 @@ public enum OperatorEnumFE {
         this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
         return value;
     }

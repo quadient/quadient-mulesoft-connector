@@ -12,27 +12,27 @@ public class ConditionFE {
     @Parameter
     @Optional
     @NullSafe
-    List<CategorizationConditionFE> categorizations;
+    public List<CategorizationConditionFE> categorizations;
 
     @Parameter
     @Summary("List of conditions is JSON format.")
     @Optional
     @NullSafe
-    List<String> conditions;
+    public List<String> conditions;
 
     @Parameter
     @Optional
     @NullSafe
-    List<MetadataConditionFE> metadata;
+    public List<MetadataConditionFE> metadata;
 
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("Metadata condition negation.")
-    boolean negation;
+    public boolean negation;
 
     @Parameter
     @Summary("Operator (and, or).")
-    LogicalOperatorFE operator;
+    public LogicalOperatorFE operator;
 
     public List<CategorizationConditionFE> getCategorizations() {
         return categorizations;

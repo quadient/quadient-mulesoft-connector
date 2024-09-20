@@ -16,7 +16,6 @@ import com.quadient.connectors.generated.model.ca.MetadataCondition;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.sdk.api.annotation.error.Throws;
 import org.mule.sdk.api.annotation.metadata.fixed.OutputJsonType;
-import org.mule.sdk.api.annotation.param.Config;
 import org.mule.sdk.api.annotation.param.ParameterGroup;
 import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Summary;
@@ -56,7 +55,6 @@ public class ContentAuthorTemplatesOperation {
         if (input.getCondition() != null) {
             uriParams.put("condition", new ObjectConverter().convertToJson(convertCondition(input.getCondition())));
         }
-
         return connection.sendRequest(HttpConstants.Method.GET, ENDPOINT, null, uriParams);
     }
 

@@ -1,5 +1,7 @@
 package com.quadient.connectors.evolve.api.generate;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum VariableTypeFE {
 
     PIPELINE("Pipeline"),
@@ -18,6 +20,7 @@ public enum VariableTypeFE {
         this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
         return value;
     }

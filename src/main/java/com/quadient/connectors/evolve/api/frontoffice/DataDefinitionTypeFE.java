@@ -1,5 +1,7 @@
 package com.quadient.connectors.evolve.api.frontoffice;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum DataDefinitionTypeFE {
 
     ICM_LOCATION("icmLocation"),
@@ -16,6 +18,7 @@ public enum DataDefinitionTypeFE {
         this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
         return value;
     }

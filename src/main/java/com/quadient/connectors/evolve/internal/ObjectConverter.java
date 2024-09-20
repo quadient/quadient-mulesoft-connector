@@ -1,5 +1,6 @@
 package com.quadient.connectors.evolve.internal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +16,8 @@ import java.io.InputStream;
 public class ObjectConverter {
     ObjectMapper mapper = new ObjectMapper()
             .registerModule(new JsonNullableModule())
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     
     public String convertToJson(Object object) {
         ObjectWriter ow = mapper.writer();

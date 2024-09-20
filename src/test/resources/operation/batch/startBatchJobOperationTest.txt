@@ -1,0 +1,1 @@
+{"pipelineName":"pipelineName","workingFolderId":"workingFolderId","description":"description","expiration":"2024-07-10T10:15:30+01:00","priority":1,"variables":[{"type":"Pipeline","codeName":"codeName1","value":"value1","options":["option1","option2"]},{"type":"Step","codeName":"codeName2","value":"value2","options":["option1"]}],"useDraftPipeline":true,"useDraftResources":true}

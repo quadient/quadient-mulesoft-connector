@@ -12,12 +12,12 @@ public class MultipartAttachmentFE {
 
     @Parameter
     @Summary("Name of the attachment")
-    String name;
+    public String name;
 
     @Parameter
     @Content
     @DisplayName("Data")
-    TypedValue<InputStream> multipartData;
+    public TypedValue<InputStream> multipartData;
 
     public String getName() {
         return name;

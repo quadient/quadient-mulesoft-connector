@@ -6,7 +6,7 @@ import org.mule.sdk.api.annotation.param.display.Summary;
 public class BatchJobStatusInputFE {
     @Parameter
     @Summary("Unique identifier of the batch job.")
-    String batchJobId;
+    public String batchJobId;
 
     public String getBatchJobId() {
         return batchJobId;

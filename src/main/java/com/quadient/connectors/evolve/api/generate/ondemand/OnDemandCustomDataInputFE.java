@@ -12,38 +12,38 @@ import org.mule.sdk.api.annotation.param.display.Summary;
 public class OnDemandCustomDataInputFE {
     @Parameter
     @Summary("Unique name of the processing pipeline. If the pipeline is inside a folder, this parameter must contain the whole path, e.g. PipelineName:\"Folder/NestedFolder/pipelineName\".")
-    String pipelineName;
+    public String pipelineName;
 
     @Parameter
     @Optional
     @Summary("Gives a custom name to the data file.")
-    String fileName;
+    public String fileName;
 
     @Parameter
     @Optional
     @Summary("Data file is saved to the specified folder in the working folder | input directory.")
-    String folder;
+    public String folder;
 
     @Parameter
     @Optional
     @NullSafe
     @DisplayName("Variables")
     @Summary("List of pipeline variables used for the job. The maximum number of these variables is 50.")
-    MultiMap<String, String> pipelineVariables;
+    public MultiMap<String, String> pipelineVariables;
 
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("If true, the job will be run using a draft version of the processing pipeline.")
-    boolean useDraftPipeline;
+    public boolean useDraftPipeline;
 
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("If true, the job will be run using a draft version of the relevant resources (scripts, connectors).")
-    boolean useDraftResources;
+    public boolean useDraftResources;
 
     @Parameter
     @Content(primary = true)
-    TypedValue<Object> customData;
+    public TypedValue<Object> customData;
 
     public String getPipelineName() {
         return pipelineName;

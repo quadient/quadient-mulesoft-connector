@@ -7,24 +7,24 @@ import org.mule.sdk.api.annotation.param.display.Summary;
 public class CategorizationConditionFE {
     @Parameter
     @Summary("Condition field name.")
-    String fieldName;
+    public String fieldName;
 
     @Parameter
     @Summary("Condition name.")
-    String name;
+    public String name;
 
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("Condition negation.")
-    boolean negation;
+    public boolean negation;
     
     @Parameter
     @Summary("Occurrence operator.")
-    OperatorEnumFE operator;
+    public OperatorEnumFE operator;
     
     @Parameter
     @Summary("Condition value.")
-    String value;
+    public String value;
 
     public String getFieldName() {
         return fieldName;

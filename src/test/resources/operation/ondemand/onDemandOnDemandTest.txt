@@ -1,0 +1,1 @@
+{"pipelineName":"pipelineName","variables":[{"type":"Pipeline","codeName":"codeName1","value":"value1","options":["option1","option2"]},{"type":"Step","codeName":"codeName2","value":"value2","options":["option1"]}],"useDraftPipeline":true,"useDraftResources":true}

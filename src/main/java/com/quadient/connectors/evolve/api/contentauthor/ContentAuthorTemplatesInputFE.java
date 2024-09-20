@@ -9,38 +9,38 @@ public class ContentAuthorTemplatesInputFE {
     @Parameter
     @Optional
     @Summary("Name of folder whose content will be listed.")
-    String folder;
+    public String folder;
 
     @Parameter
     @Optional
     @Summary("Number of items to skip before starting to collect the resulting.")
-    int offset;
+    public int offset;
 
     @Parameter
     @Optional(defaultValue = "20")
     @Summary("Number of items to return (max. 100).")
-    int limit;
+    public int limit;
 
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("Determines whether to include metadata in the response.")
-    boolean includeMetadata;
+    public boolean includeMetadata;
 
     @Parameter
     @Optional
     @Summary("List templates that the specified user can see.")
-    String holder;
+    public String holder;
 
     @Parameter
     @Optional
     @Example("Production:Testing")
     @Summary("List templates that have the specified approval states, separated by a colon.")
-    String approvalStates;
+    public String approvalStates;
 
     @Parameter
     @Optional
     @Summary("Conditions can be nested and can contain the same elements as the main condition.")
-    ConditionFE condition;
+    public ConditionFE condition;
 
     public String getFolder() {
         return folder;

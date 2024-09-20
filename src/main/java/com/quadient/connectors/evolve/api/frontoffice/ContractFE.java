@@ -9,13 +9,13 @@ public class ContractFE {
     @Summary("Dedicated field that is displayed in default ticket dashboards.\n" +
             "It usually represents customer identifier sent from external system.")
     @Example("L81054")
-    String contractId;
+    public String contractId;
 
     @Parameter
     @Example("Robert Miles")
     @Summary("Dedicated field that is displayed in default ticket dashboards.\n" +
             "Typically used for showing customer name.")
-    String contractName;
+    public String contractName;
 
     public String getContractId() {
         return contractId;

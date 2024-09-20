@@ -7,20 +7,20 @@ import org.mule.sdk.api.annotation.param.display.Summary;
 public class MetadataConditionFE {
     @Parameter
     @Summary("Metadata field name.")
-    String name;
+    public String name;
     
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("Metadata condition negation.")
-    boolean negation;
+    public boolean negation;
 
     @Parameter
     @Summary("Occurrence operator.")
-    OperatorEnumFE operator;
+    public OperatorEnumFE operator;
 
     @Parameter
     @Summary("Metadata field value.")
-    String value;
+    public String value;
 
     public String getName() {
         return name;

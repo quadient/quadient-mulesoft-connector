@@ -12,28 +12,28 @@ import java.util.List;
 public class OndemandOnDemandInputFE {
     @Parameter
     @Summary("Unique name of the processing pipeline. If the pipeline is inside a folder, this parameter must contain the whole path, e.g. PipelineName:'Folder/NestedFolder/pipelineName'.")
-    String pipelineName;
+    public String pipelineName;
 
     @Parameter
     @Optional
     @NullSafe
     @Summary("List of processing pipeline variables. It can be used to override values of existing variables in the given processing pipeline. E.g. when a variable is used in the pipeline&#39;s output path, by defining a different value for the same codeName, you can easily change the output path as you start the pipeline without having to re-configure the pipeline itself.")
-    List<InputVariablesOptionsFE> variables;
+    public List<InputVariablesOptionsFE> variables;
 
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("If true, the job will be run using a draft version of the processing pipeline.")
-    boolean useDraftPipeline;
+    public boolean useDraftPipeline;
 
     @Parameter
     @Optional(defaultValue = "false")
     @Summary("If true, the job will be run using a draft version of the relevant resources (scripts, connectors).")
-    boolean useDraftResources;
+    public boolean useDraftResources;
 
     @Parameter
     @Optional
     @NullSafe
-    List<MultipartAttachmentFE> attachments;
+    public List<MultipartAttachmentFE> attachments;
 
     public String getPipelineName() {
         return pipelineName;

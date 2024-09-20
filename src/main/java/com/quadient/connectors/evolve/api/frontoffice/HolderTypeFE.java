@@ -1,5 +1,7 @@
 package com.quadient.connectors.evolve.api.frontoffice;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum HolderTypeFE {
     USER_NAME("userName"),
     USER_GROUP("userGroup");
@@ -9,6 +11,7 @@ public enum HolderTypeFE {
         this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
         return value;
     }

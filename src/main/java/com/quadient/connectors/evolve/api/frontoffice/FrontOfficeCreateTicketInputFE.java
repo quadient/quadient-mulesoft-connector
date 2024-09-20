@@ -14,115 +14,115 @@ public class FrontOfficeCreateTicketInputFE {
     @Parameter
     @Summary("Initial state of the ticket, the state must be in the approval process.")
     @Example("S_simple_scenario_writer_assigned")
-    String stateId;
+    public String stateId;
 
     @Parameter
     @Summary("Define the holder of the ticket.")
     @Example("lee@vital.com")
-    String holderValue;
+    public String holderValue;
 
     @Parameter
     @Summary("Define the holder of the ticket.")
     @DisplayName("Holder Type")
-    HolderTypeFE createTicketHolderType;
+    public HolderTypeFE createTicketHolderType;
 
     @Parameter
     @Summary("Name of the processing pipeline to be run.")
     @Optional
-    boolean addAttachmentFromGlobalStorageEnabled;
+    public boolean addAttachmentFromGlobalStorageEnabled;
 
     @Parameter
     @Summary("Determines whether the ticket will be created asynchronously.")
     @Optional
-    boolean asynchronousProcessing;
+    public boolean asynchronousProcessing;
 
     @Parameter
     @Summary("Determines whether the ticket will be handled as a multipleRecord ticket (for multiple recipients).")
     @Optional
-    boolean multipleRecord;
+    public boolean multipleRecord;
 
     @Parameter
     @Summary("Determines whether a user can add attachments from a local drive.")
     @Optional
-    boolean uploadAttachmentFromLocalDriveEnabled;
+    public boolean uploadAttachmentFromLocalDriveEnabled;
 
     @Parameter
     @Example("SMS, EMAIL, EMAIL_WITH_ATTACHMENT, PRINT")
     @Summary("Determines which production actions will be available in the ticket.")
     @Optional
     @NullSafe
-    List<String> productionActions;
+    public List<String> productionActions;
 
     @Parameter
     @Summary("This parameter overrides the default selection of the ticket approval process.")
     @DisplayName("Approval Process Path")
     @Optional
-    ApprovalProcessPathFE createTicketApprovalProcessPath;
+    public ApprovalProcessPathFE createTicketApprovalProcessPath;
 
     @Parameter
     @Example("'Gift Voucher - GPK Adventure - Africa.jpg', 'Gift Voucher - Froodeco - Bouquet.pdf'")
     @Summary("Attachments to be added to the ticket.")
     @Optional
     @NullSafe
-    List<String> attachments;
+    public List<String> attachments;
 
     @Parameter
     @Summary("Define the contract details.")
     @DisplayName("Contract")
     @Optional
-    ContractFE createTicketContract;
+    public ContractFE createTicketContract;
 
     @Parameter
     @Summary("Define the required ticket properties.")
     @DisplayName("Properties")
     @Optional
-    PropertiesFE createTicketProperties;
+    public PropertiesFE createTicketProperties;
 
     //End of CreateTicketBaseDto
 
     @Parameter
     @Summary("Path to an existing template the ticket will be created from.")
     @Placement(order = 1)
-    String templateName;
+    public String templateName;
 
     @Parameter
     @Summary("Define the brand for the document.")
     @Optional
-    String brand;
+    public String brand;
 
     @Parameter
     @Summary("A command related to the way of processing a JLD file.")
     @Optional
     @NullSafe
-    List<CommandFE> commands;
+    public List<CommandFE> commands;
 
     @Parameter
     @Summary("Sets document's data context.")
     @DisplayName("Context")
     @NullSafe
     @Optional
-    List<ContextFE> createTicketContexts;
+    public List<ContextFE> createTicketContexts;
 
     @Parameter
     @Summary("Create clone of another document specified in create ticket request (index).")
     @DisplayName("Copy Of")
     @Optional
-    Integer createTicketCopyOf;
+    public Integer createTicketCopyOf;
 
     @Parameter
     @Optional
     @NullSafe
-    List<DataDefinitionFE> dataDefinitions;
+    public List<DataDefinitionFE> dataDefinitions;
 
     @Parameter
     @Summary("Define the brand for the document.")
     @Optional
-    String description;
+    public String description;
 
     @Parameter
     @Summary("If true, the ticket is created as a form document ticket.")
     @Optional
-    boolean pageDocument;
+    public boolean pageDocument;
 
     public String getStateId() {
         return stateId;
