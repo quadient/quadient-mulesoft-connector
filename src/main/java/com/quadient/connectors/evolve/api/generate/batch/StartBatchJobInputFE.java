@@ -32,7 +32,7 @@ public class StartBatchJobInputFE {
     public List<InputVariablesOptionsFE> variables;
 
     @Parameter
-    @Optional
+    @Optional(defaultValue = "")
     @Summary("Specifies the job priority. Jobs with higher priority are run first. The  value set here overwrites any priority set when designing the pipeline.\n" +
             "   * minimum: 1\n" +
             "   * maximum: 100")
