@@ -40,7 +40,11 @@ public class StartBatchJobOperation {
 
         StartBatchJobRequest request = new StartBatchJobRequest();
         request.setPipelineName(input.getPipelineName());
-        request.setWorkingFolderId(input.getWorkingFolderId());
+
+        if (input.getWorkingFolderId() != null && !input.getWorkingFolderId().isEmpty()) {
+            request.setWorkingFolderId(input.getWorkingFolderId());
+        }
+
         if (input.getDescription() != null && !input.getDescription().isEmpty()) {
             request.setDescription(input.getDescription());
         }

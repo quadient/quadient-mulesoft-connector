@@ -16,10 +16,12 @@ public class StartBatchJobInputFE {
     public String pipelineName;
 
     @Parameter
+    @Optional
     @Summary("Unique identifier of an existing job working folder. If a different working folder is set in the pipeline, the folder specified here takes priority.")
     public String workingFolderId;
 
     @Parameter
+    @Optional
     @Summary("Custom description of the job.")
     public String description;
 

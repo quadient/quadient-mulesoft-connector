@@ -37,6 +37,25 @@ http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule
         </munit:validation>
     </munit:test>
 
+    <munit:test name="start-batch-success-2">
+        <munit:execution>
+            <quadient:batch-start-batch-job
+                    doc:name="Batch - Start batch job"
+                    pipelineName="${quadient.evolve.batch.pipeline.name}"
+                    config-ref="Config_Success"/>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-that doc:name="Assert that"
+                                     expression="#[payload.workingFolderId]" is="#[MunitTools::notNullValue()]"/>
+            <munit-tools:assert-that doc:name="Assert that"
+                                     expression="#[payload.batchJobId]" is="#[MunitTools::notNullValue()]"/>
+            <munit-tools:assert-that doc:name="Assert that"
+                                     expression="#[payload.eventId]" is="#[MunitTools::notNullValue()]"/>
+            <munit-tools:assert-that doc:name="Assert that"
+                                     expression="#[payload.time]" is="#[MunitTools::notNullValue()]"/>
+        </munit:validation>
+    </munit:test>
+
     <munit:test name="start-batch-fail" doc:id="9a7aa1fa-362d-4a31-8f07-89a0cfd0ad90"
                 expectedErrorType="QUADIENT:BAD_REQUEST">
         <munit:execution>
