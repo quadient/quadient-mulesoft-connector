@@ -6,6 +6,7 @@ import com.quadient.connectors.evolve.api.generate.VariableTypeFE;
 import com.quadient.connectors.evolve.api.generate.batch.StartBatchJobInputFE;
 import com.quadient.connectors.evolve.internal.connection.Connection;
 import com.quadient.connectors.evolve.internal.error.exception.InvalidInputParameterException;
+import com.quadient.connectors.evolve.internal.operation.generatev6.batch.StartBatchJobOperation;
 import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;

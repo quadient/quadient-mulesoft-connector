@@ -4,6 +4,7 @@ import com.quadient.connectors.evolve.internal.error.exception.RequestSerializat
 import com.quadient.connectors.generated.model.v6.batch.QueryBatchJobStatus;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -32,9 +33,12 @@ public class ObjectConverterTest extends TestCase {
     @Test
     public void testReadValueInputStreamException() {
         InputStream inputStream = IOUtils.toInputStream("{", "UTF-8");
-        assertThrows(RequestSerializationException.class, () -> {
+        try {
             new ObjectConverter().readValue(inputStream, QueryBatchJobStatus.class);
-        });
+        } catch (RequestSerializationException e) {
+            return;
+        }
+        Assert.fail("Expected RequestSerializationException");
     }
 
     @Test
@@ -45,8 +49,11 @@ public class ObjectConverterTest extends TestCase {
 
     @Test
     public void testReadValueException() {
-        assertThrows(RequestSerializationException.class, () -> {
+        try {
             new ObjectConverter().readValue("{", QueryBatchJobStatus.class);
-        });
+        } catch (RequestSerializationException e) {
+            return;
+        }
+        Assert.fail("Expected RequestSerializationException");
     }
 }

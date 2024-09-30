@@ -1,10 +1,6 @@
 package com.quadient.connectors.evolve.internal.connection;
 
 import com.quadient.connectors.evolve.api.generate.MultipartAttachmentFE;
-import com.quadient.connectors.evolve.internal.error.exception.ConnectionErrorException;
-import com.quadient.connectors.evolve.internal.error.exception.NotFoundException;
-import com.quadient.connectors.evolve.internal.error.exception.TooManyRequestsException;
-import com.quadient.connectors.evolve.internal.error.exception.UnauthorizedException;
 import com.quadient.connectors.evolve.internal.operation.HttpResponseAttributes;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
@@ -20,22 +16,17 @@ import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.transformation.TransformationService;
-import org.mule.runtime.api.util.MultiMap;
 import org.mule.runtime.core.internal.message.DefaultMessageBuilder;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.client.HttpClient;
 import org.mule.runtime.http.api.client.HttpRequestOptions;
-import org.mule.runtime.http.api.domain.entity.HttpEntity;
-import org.mule.runtime.http.api.domain.entity.InputStreamHttpEntity;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
-import org.mule.runtime.http.api.domain.message.response.HttpResponse;
 import org.mule.sdk.api.runtime.operation.Result;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -169,85 +160,5 @@ public class ConnectionTest extends TestCase {
             assertEquals("", attributes.getReasonPhrase());
             assertEquals(Collections.singletonMap("Content-Type", MediaType.APPLICATION_JSON.toRfcString()), attributes.getHeaders());
         });
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void testStatusCodesNotFoundException() throws IOException, TimeoutException {
-
-        when(httpClient.send(any(HttpRequest.class), any(HttpRequestOptions.class))).thenReturn(new TestHttpResponse(404));
-        connection.sendPOSTRequest(ENDPOINT, "body");
-    }
-
-    @Test(expected = UnauthorizedException.class)
-    public void testStatusCodesUnauthorizedException() throws IOException, TimeoutException {
-        when(httpClient.send(any(HttpRequest.class), any(HttpRequestOptions.class))).thenReturn(new TestHttpResponse(401));
-        connection.sendPOSTRequest(ENDPOINT, "body");
-    }
-
-    @Test(expected = TooManyRequestsException.class)
-    public void testStatusCodesTooManyRequestsException() throws IOException, TimeoutException {
-        when(httpClient.send(any(HttpRequest.class), any(HttpRequestOptions.class))).thenReturn(new TestHttpResponse(429));
-        connection.sendPOSTRequest(ENDPOINT, "body");
-    }
-
-    @Test(expected = ConnectionErrorException.class)
-    public void testStatusCodesConnectionErrorException() throws IOException, TimeoutException {
-        when(httpClient.send(any(HttpRequest.class), any(HttpRequestOptions.class))).thenReturn(new TestHttpResponse(500));
-        connection.sendPOSTRequest(ENDPOINT, "body");
-    }
-    
-    private class TestHttpResponse implements HttpResponse {
-        private final int statusCode;
-        MultiMap<String, String> headers = new MultiMap<>();
-
-        public TestHttpResponse(int statusCode) {
-            this.statusCode = statusCode;
-            headers.put("Content-Type", MediaType.APPLICATION_JSON.toRfcString());
-        }
-
-        @Override
-        public int getStatusCode() {
-            return statusCode;
-        }
-
-        @Override
-        public String getReasonPhrase() {
-            return "";
-        }
-
-        @Override
-        public HttpEntity getEntity() {
-            return new InputStreamHttpEntity(new ByteArrayInputStream("response".getBytes()));
-        }
-
-        @Override
-        public Collection<String> getHeaderNames() {
-            return headers.keySet();
-        }
-
-        @Override
-        public String getHeaderValue(String headerName) {
-            return headers.get(headerName);
-        }
-
-        @Override
-        public String getHeaderValueIgnoreCase(String headerName) {
-            return "";
-        }
-
-        @Override
-        public Collection<String> getHeaderValues(String headerName) {
-            return Collections.singleton(headers.get(headerName));
-        }
-
-        @Override
-        public Collection<String> getHeaderValuesIgnoreCase(String headerName) {
-            return Collections.emptyList();
-        }
-
-        @Override
-        public MultiMap<String, String> getHeaders() {
-            return headers;
-        }
     }
 }

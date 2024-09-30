@@ -1,4 +1,4 @@
-package com.quadient.connectors.evolve.internal.operation.generate_v6.ondemand;
+package com.quadient.connectors.evolve.internal.operation.generatev6.ondemand;
 
 import com.quadient.connectors.evolve.api.generate.ondemand.OndemandOnDemandInputFE;
 import com.quadient.connectors.evolve.internal.connection.Connection;

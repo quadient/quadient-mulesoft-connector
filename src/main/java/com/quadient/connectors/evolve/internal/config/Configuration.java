@@ -1,13 +1,13 @@
 package com.quadient.connectors.evolve.internal.config;
 
 import com.quadient.connectors.evolve.internal.connection.provider.ConnectionProvider;
-import com.quadient.connectors.evolve.internal.operation.generate_v6.batch.BatchJobStatusOperation;
-import com.quadient.connectors.evolve.internal.operation.generate_v6.batch.BatchCreateWorkingFolderOperation;
-import com.quadient.connectors.evolve.internal.operation.generate_v6.batch.StartBatchJobOperation;
+import com.quadient.connectors.evolve.internal.operation.generatev6.batch.BatchJobStatusOperation;
+import com.quadient.connectors.evolve.internal.operation.generatev6.batch.BatchCreateWorkingFolderOperation;
+import com.quadient.connectors.evolve.internal.operation.generatev6.batch.StartBatchJobOperation;
 import com.quadient.connectors.evolve.internal.operation.contentauthor.ContentAuthorTemplatesOperation;
 import com.quadient.connectors.evolve.internal.operation.frontoffice.FrontOfficeCreateTicketOperation;
-import com.quadient.connectors.evolve.internal.operation.generate_v6.ondemand.OnDemandCustomDataOperation;
-import com.quadient.connectors.evolve.internal.operation.generate_v6.ondemand.OnDemandOnDemandOperation;
+import com.quadient.connectors.evolve.internal.operation.generatev6.ondemand.OnDemandCustomDataOperation;
+import com.quadient.connectors.evolve.internal.operation.generatev6.ondemand.OnDemandOnDemandOperation;
 import org.mule.sdk.api.annotation.Operations;
 import org.mule.sdk.api.annotation.connectivity.ConnectionProviders;
 import org.mule.sdk.api.annotation.param.RefName;

@@ -5,6 +5,7 @@ import com.quadient.connectors.evolve.internal.ObjectConverter;
 import com.quadient.connectors.evolve.internal.connection.Connection;
 import com.quadient.connectors.evolve.internal.error.exception.InvalidInputParameterException;
 import com.quadient.connectors.evolve.internal.operation.HttpResponseAttributes;
+import com.quadient.connectors.evolve.internal.operation.generatev6.batch.BatchCreateWorkingFolderOperation;
 import com.quadient.connectors.generated.model.v6.batch.CreateWorkingFolderResponse;
 import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;

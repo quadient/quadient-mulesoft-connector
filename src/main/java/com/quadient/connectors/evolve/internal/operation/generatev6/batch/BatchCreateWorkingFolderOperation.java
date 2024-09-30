@@ -1,4 +1,4 @@
-package com.quadient.connectors.evolve.internal.operation.generate_v6.batch;
+package com.quadient.connectors.evolve.internal.operation.generatev6.batch;
 
 import com.quadient.connectors.evolve.api.generate.batch.BatchCreateWorkingFolderInputFE;
 import com.quadient.connectors.evolve.internal.connection.Connection;

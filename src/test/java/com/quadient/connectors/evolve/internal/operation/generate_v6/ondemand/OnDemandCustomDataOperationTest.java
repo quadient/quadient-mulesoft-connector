@@ -4,6 +4,7 @@ import com.quadient.connectors.evolve.api.generate.ondemand.OnDemandCustomDataIn
 import com.quadient.connectors.evolve.internal.connection.Connection;
 import com.quadient.connectors.evolve.internal.error.exception.InvalidInputParameterException;
 import com.quadient.connectors.evolve.internal.operation.ServiceEndpoint;
+import com.quadient.connectors.evolve.internal.operation.generatev6.ondemand.OnDemandCustomDataOperation;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -4,6 +4,7 @@ import com.quadient.connectors.evolve.api.generate.batch.BatchJobStatusInputFE;
 import com.quadient.connectors.evolve.internal.ObjectConverter;
 import com.quadient.connectors.evolve.internal.connection.Connection;
 import com.quadient.connectors.evolve.internal.operation.HttpResponseAttributes;
+import com.quadient.connectors.evolve.internal.operation.generatev6.batch.BatchJobStatusOperation;
 import com.quadient.connectors.generated.model.v6.batch.BatchJobDto;
 import com.quadient.connectors.generated.model.v6.batch.BatchStatusJobResponse;
 import junit.framework.TestCase;
