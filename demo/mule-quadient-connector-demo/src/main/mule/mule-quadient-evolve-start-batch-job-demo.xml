@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule  xmlns:quadient="http://www.mulesoft.org/schema/mule/quadient" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule/quadient/current/mule-quadient.xsd">
+    <http:listener-config name="HTTP_Listener_config5" doc:name="HTTP Listener config" doc:id="c15937cb-fe1b-449e-a3bb-1424ed0e6de5" >
+        <http:listener-connection host="0.0.0.0" port="8081" />
+    </http:listener-config>
+    <configuration-properties doc:name="Configuration properties" doc:id="44539a0a-d0a5-40a8-a6ed-b53bec7dbf88" file="application.properties" />
+    <quadient:config name="Quadient_Evolve_Batch_Config" doc:name="Quadient Evolve Config" doc:id="bdb197ce-9104-4931-8e45-e846dc4a142f" >
+        <quadient:connection companyHostname="${quadient.evolve.company_url}" apiToken="${quadient.evolve.batch.api_key}" applicationType="GENERATE_BATCH" />
+    </quadient:config>
+    
+    <flow name="startBatchJob" doc:id="60ce73a1-77dd-402c-a0ad-f6fb00f683b6" >
+        <http:listener doc:name="Listener" doc:id="ee61f96b-1adb-4ba2-aefc-10f401055fc8" config-ref="HTTP_Listener_config5" path="/startBatch"/>
+        <quadient:batch-start-batch-job doc:name="Batch - Start batch job" doc:id="5b895b76-e07f-4571-b6b5-2e3a6db542a0" config-ref="Quadient_Evolve_Batch_Config" pipelineName="${quadient.evolve.batch.pipeline_name}"/>
+        <set-payload value="#[payload]" doc:name="Set Payload" doc:id="67cd058a-91df-4683-80a0-f91c99db1c60" />
+    </flow>
+</mule>

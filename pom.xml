@@ -28,6 +28,7 @@
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <jackson.version>2.17.2</jackson.version>
         <jakarta.version>2.1.6</jakarta.version>
+        <mule.maven.plugin.version>4.2.0</mule.maven.plugin.version>
         <runtimeVersion>4.6.3</runtimeVersion>
         <runtimeProduct>MULE_EE</runtimeProduct>
         <muleJavaEeBomVersion>4.6.3</muleJavaEeBomVersion>
@@ -108,7 +109,7 @@
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>${mule.maven.plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <classifier>mule-application</classifier>
