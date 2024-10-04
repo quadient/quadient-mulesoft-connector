@@ -11,8 +11,6 @@
     <name>Quadient Evolve Connector - Mule 4</name>
     <description>Quadient Evolve Connector for Mule 4</description>
 
-    <!--todo  LICENSE.md -->
-    <!--todo  README.md -->
     <parent>
         <groupId>org.mule.extensions</groupId>
         <artifactId>mule-modules-parent</artifactId>
