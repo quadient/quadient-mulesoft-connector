@@ -89,15 +89,15 @@ public class FrontOfficeCreateTicketOperationTest extends TestCase {
         
         input.createTicketContexts = new ArrayList<>();
         ContextFE contextFE = new ContextFE();
-        contextFE.path = new ArrayList<>();
-        contextFE.path.add("path1");
-        contextFE.path.add("path2");
+        contextFE.paths = new ArrayList<>();
+        contextFE.paths.add("path1");
+        contextFE.paths.add("path2");
         contextFE.value = "value";
         input.createTicketContexts.add(contextFE);
         ContextFE contextFE2 = new ContextFE();
-        contextFE2.path = new ArrayList<>();
-        contextFE2.path.add("2path1");
-        contextFE2.path.add("2path2");
+        contextFE2.paths = new ArrayList<>();
+        contextFE2.paths.add("2path1");
+        contextFE2.paths.add("2path2");
         contextFE2.value = "2value";
         input.createTicketContexts.add(contextFE2);
         input.createTicketCopyOf = 20;

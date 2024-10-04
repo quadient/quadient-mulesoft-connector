@@ -53,6 +53,7 @@ public class ContentAuthorTemplatesOperation {
             uriParams.put("approvalStates", input.getApprovalStates());
         }
         if (input.getCondition() != null) {
+            
             uriParams.put("condition", new ObjectConverter().convertToJson(convertCondition(input.getCondition())));
         }
         return connection.sendRequest(HttpConstants.Method.GET, ENDPOINT, null, uriParams);

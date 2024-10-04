@@ -8,6 +8,9 @@ import com.quadient.connectors.evolve.api.contentauthor.MetadataConditionFE;
 import com.quadient.connectors.evolve.api.contentauthor.OperatorEnumFE;
 import com.quadient.connectors.evolve.internal.ObjectConverter;
 import com.quadient.connectors.evolve.internal.connection.Connection;
+import com.quadient.connectors.generated.model.ca.CategorizationCondition;
+import com.quadient.connectors.generated.model.ca.Condition;
+import com.quadient.connectors.generated.model.ca.MetadataCondition;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +54,7 @@ public class ContentAuthorTemplatesOperationTest extends TestCase {
         input.holder = "holder";
         input.approvalStates = "approvalStates";
 
-        input.condition = createCondition("prefixA");
+        input.condition = createConditionFE("prefixA");
         input.condition.conditions = new ArrayList<>();
         input.condition.conditions.add(objectConverter.convertToJson(createCondition("prefixB")));
         input.condition.conditions.add(objectConverter.convertToJson(createCondition("prefixC")));
@@ -69,21 +72,35 @@ public class ContentAuthorTemplatesOperationTest extends TestCase {
         assertEquals("holder", capturedParams.get("holder"));
     }
 
-    private ConditionFE createCondition(String prefix) {
+    private ConditionFE createConditionFE(String prefix) {
         ConditionFE condition = new ConditionFE();
         condition.categorizations = new ArrayList<>();
-        condition.categorizations.add(createCategorizationCondition(prefix + "fieldName", "name", "value", true, OperatorEnumFE.BEGINWITH));
-        condition.categorizations.add(createCategorizationCondition(prefix + "fieldName2", "name2", "value2", false, OperatorEnumFE.EMPTY));
+        condition.categorizations.add(createCategorizationConditionFE(prefix + "fieldName", "name", "value", true, OperatorEnumFE.BEGINWITH));
+        condition.categorizations.add(createCategorizationConditionFE(prefix + "fieldName2", "name2", "value2", false, OperatorEnumFE.EMPTY));
         condition.metadata = new ArrayList<>();
-        condition.metadata.add(createMetadataCondition(prefix + "name", "value", true, OperatorEnumFE.EQUAL));
-        condition.metadata.add(createMetadataCondition(prefix + "name2", "value2", false, OperatorEnumFE.EMPTY));
+        condition.metadata.add(createMetadataConditionFE(prefix + "name", "value", true, OperatorEnumFE.EQUAL));
+        condition.metadata.add(createMetadataConditionFE(prefix + "name2", "value2", false, OperatorEnumFE.EMPTY));
         condition.negation = true;
         condition.operator = LogicalOperatorFE.AND;
         condition.conditions = new ArrayList<>();
         return condition;
     }
 
-    private CategorizationConditionFE createCategorizationCondition(String fieldName, String name, String value, boolean negation, OperatorEnumFE operator) {
+    private Condition createCondition(String prefix) {
+        Condition condition = new Condition();
+        condition.setCategorizations(new ArrayList<>());
+        condition.getCategorizations().add(createCategorizationCondition(prefix + "fieldName", "name", "value", true, OperatorEnumFE.BEGINWITH));
+        condition.getCategorizations().add(createCategorizationCondition(prefix + "fieldName2", "name2", "value2", false, OperatorEnumFE.EMPTY));
+        condition.setMetadata(new ArrayList<>());
+        condition.getMetadata().add(createMetadataCondition(prefix + "name", "value", true, OperatorEnumFE.EQUAL));
+        condition.getMetadata().add(createMetadataCondition(prefix + "name2", "value2", false, OperatorEnumFE.EMPTY));
+        condition.setNegation(true);
+        condition.setOperator(Condition.OperatorEnum.AND);
+        condition.setConditions(new ArrayList<>());
+        return condition;
+    }
+
+    private CategorizationConditionFE createCategorizationConditionFE(String fieldName, String name, String value, boolean negation, OperatorEnumFE operator) {
         CategorizationConditionFE condition = new CategorizationConditionFE();
         condition.fieldName = fieldName;
         condition.name = name;
@@ -93,12 +110,31 @@ public class ContentAuthorTemplatesOperationTest extends TestCase {
         return condition;
     }
 
-    private MetadataConditionFE createMetadataCondition(String name, String value, boolean negation, OperatorEnumFE operator) {
+    private CategorizationCondition createCategorizationCondition(String fieldName, String name, String value, boolean negation, OperatorEnumFE operator) {
+        CategorizationCondition condition = new CategorizationCondition();
+        condition.setFieldName(fieldName);
+        condition.setName(name);
+        condition.setValue(value);
+        condition.setNegation(negation);
+        condition.setOperator(CategorizationCondition.OperatorEnum.fromValue(operator.getValue()));
+        return condition;
+    }
+
+    private MetadataConditionFE createMetadataConditionFE(String name, String value, boolean negation, OperatorEnumFE operator) {
         MetadataConditionFE metadataCondition = new MetadataConditionFE();
         metadataCondition.name = name;
         metadataCondition.value = value;
         metadataCondition.negation = negation;
         metadataCondition.operator = operator;
+        return metadataCondition;
+    }
+
+    private MetadataCondition createMetadataCondition(String name, String value, boolean negation, OperatorEnumFE operator) {
+        MetadataCondition metadataCondition = new MetadataCondition();
+        metadataCondition.setName(name);
+        metadataCondition.setValue(value);
+        metadataCondition.setNegation(negation);
+        metadataCondition.setOperator(MetadataCondition.OperatorEnum.fromValue(operator.getValue()));
         return metadataCondition;
     }
 }

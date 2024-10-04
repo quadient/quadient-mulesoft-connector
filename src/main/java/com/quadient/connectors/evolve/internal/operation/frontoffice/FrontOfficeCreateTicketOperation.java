@@ -61,7 +61,7 @@ public class FrontOfficeCreateTicketOperation {
 
         }
         if (input.getCreateTicketContexts() != null) {
-            input.getCreateTicketContexts().forEach(context -> createTicket.getDocumentData().addContextItem(new Context().path(context.path).value(context.value)));
+            input.getCreateTicketContexts().forEach(context -> createTicket.getDocumentData().addContextItem(new Context().path(context.paths).value(context.value)));
         }
         if (input.getCreateTicketCopyOf() != null) {
             createTicket.getDocumentData().copyOf(input.getCreateTicketCopyOf().longValue());

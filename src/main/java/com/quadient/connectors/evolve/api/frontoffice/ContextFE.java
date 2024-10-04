@@ -6,13 +6,13 @@ import java.util.List;
 
 public class ContextFE {
     @Parameter
-    public List<String> path;
+    public List<String> paths;
 
     @Parameter
     public String value;
 
-    public List<String> getPath() {
-        return path;
+    public List<String> getPaths() {
+        return paths;
     }
 
     public String getValue() {
