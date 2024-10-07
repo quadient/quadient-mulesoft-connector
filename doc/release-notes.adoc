@@ -1,0 +1,47 @@
+= Quadient Evolve Connector Release Notes
+:keywords: Quadient Evolve
+
+The Anypoint Quadient Evolve Connector provides a solution for integrating the functionality of Quadient Evolve into your business applications. You can easily manage and customize your communications with Quadient Evolve.
+
+== Quadient Evolve Connector 1.0.0
+
+Quadient Evolve Connector is available on Mule 4.6 or later.
+
+
+[%header%autowidth]
+|===
+|Application/Service |Version
+|Mule Runtime	     |  4.6 or later
+|Java	             |  1.8, 11, 17
+|===
+
+
+=== New Features
+
+The Quadient Evolve Connector supports the following operations:
+
+#### On-demand application
+
+* On-demand job - Starts and receives results of on-demand jobs in Quadient Evolve. Includes PDF generation and downloading.
+
+#### Batch application
+* Create a new batch job - Creates a new batch job in Quadient Evolve.
+* Get batch job status - Gets the status of a batch jobs in Quadient Evolve.
+* Create working folder - Creates a working folder in Quadient Evolve.
+
+
+#### Content Author application
+* Get templates from Content Author - Gets templates from Content Author in Quadient Evolve.
+
+#### Front Office application
+* Create Ticket - Creates a ticket via Front Office in Quadient Evolve.
+
+Add this dependency to your application pom.xml
+```
+
+<groupId>com.quadient.connectors</groupId>
+<artifactId>mule-quadient-evolve-connector</artifactId>
+<version>1.0.0</version>
+<classifier>mule-plugin</classifier>
+
+```
