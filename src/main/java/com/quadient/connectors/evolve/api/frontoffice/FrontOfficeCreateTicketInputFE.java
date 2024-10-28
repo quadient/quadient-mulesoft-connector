@@ -18,12 +18,13 @@ public class FrontOfficeCreateTicketInputFE {
 
     @Parameter
     @Summary("Define the holder of the ticket.")
+    @DisplayName("Holder")
     @Example("lee@vital.com")
     public String holderValue;
 
     @Parameter
     @Summary("Define the holder of the ticket.")
-    @DisplayName("Holder Type")
+    @DisplayName("Holder type")
     public HolderTypeFE createTicketHolderType;
 
     @Parameter
