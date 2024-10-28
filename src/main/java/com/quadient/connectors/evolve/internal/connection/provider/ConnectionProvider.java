@@ -21,6 +21,7 @@ import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Example;
 import org.mule.sdk.api.annotation.param.display.Placement;
 import org.mule.sdk.api.annotation.param.display.Summary;
+import org.mule.sdk.api.annotation.semantics.security.Password;
 import org.mule.sdk.api.connectivity.CachedConnectionProvider;
 import org.mule.sdk.api.connectivity.ConnectionValidationResult;
 import org.mule.sdk.api.exception.ModuleException;
@@ -40,6 +41,7 @@ public class ConnectionProvider implements
 
     @DisplayName("Api token")
     @Parameter
+    @Password
     @Summary("Bearer token for authenticating your request. You need to generate an API key for a user role with relevant permissions in Settings | Aministration | API Keys.")
     private String apiToken;
 
