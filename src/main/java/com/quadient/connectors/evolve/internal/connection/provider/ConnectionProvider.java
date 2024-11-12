@@ -39,7 +39,7 @@ public class ConnectionProvider implements
     @Parameter
     private String companyHostname;
 
-    @DisplayName("Api token")
+    @DisplayName("API key")
     @Parameter
     @Password
     @Summary("Bearer token for authenticating your request. You need to generate an API key for a user role with relevant permissions in Settings | Aministration | API Keys.")
