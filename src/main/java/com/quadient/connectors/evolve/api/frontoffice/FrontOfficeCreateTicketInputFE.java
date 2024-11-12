@@ -63,9 +63,10 @@ public class FrontOfficeCreateTicketInputFE {
     @Parameter
     @Example("'Gift Voucher - GPK Adventure - Africa.jpg', 'Gift Voucher - Froodeco - Bouquet.pdf'")
     @Summary("Attachments to be added to the ticket.")
+    @DisplayName("Attachments")
     @Optional
     @NullSafe
-    public List<String> attachments;
+    public List<String> createTicketAttachments;
 
     @Parameter
     @Summary("Define the contract details.")
@@ -161,8 +162,8 @@ public class FrontOfficeCreateTicketInputFE {
         return createTicketApprovalProcessPath;
     }
 
-    public List<String> getAttachments() {
-        return attachments;
+    public List<String> getCreateTicketAttachments() {
+        return createTicketAttachments;
     }
 
     public ContractFE getCreateTicketContract() {

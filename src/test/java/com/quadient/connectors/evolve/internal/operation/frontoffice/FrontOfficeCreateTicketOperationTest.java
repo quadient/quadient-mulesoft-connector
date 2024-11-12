@@ -61,9 +61,9 @@ public class FrontOfficeCreateTicketOperationTest extends TestCase {
         approvalProcessPathFE.resolveDepartment = true;
         approvalProcessPathFE.value = "value";
         input.createTicketApprovalProcessPath = approvalProcessPathFE;
-        input.attachments = new ArrayList<>();
-        input.attachments.add("attachment1");
-        input.attachments.add("attachment2");
+        input.createTicketAttachments = new ArrayList<>();
+        input.createTicketAttachments.add("attachment1");
+        input.createTicketAttachments.add("attachment2");
         ContractFE contractFE = new ContractFE();
         contractFE.contractId = "contractId";
         contractFE.contractName = "contractName";

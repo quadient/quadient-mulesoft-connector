@@ -46,7 +46,7 @@ public class FrontOfficeCreateTicketOperation {
         if (input.getCreateTicketApprovalProcessPath() != null) {
             createTicket.setApprovalProcessPath(new ApprovalProcessPath().resolveDepartment(input.getCreateTicketApprovalProcessPath().isResolveDepartment()).value(input.getCreateTicketApprovalProcessPath().getValue()));
         }
-        createTicket.setAttachments(input.getAttachments());
+        createTicket.setAttachments(input.getCreateTicketAttachments());
         if (input.getCreateTicketContract() != null) {
             createTicket.setContract(new Contract().contractId(input.getCreateTicketContract().getContractId()).contractName(input.getCreateTicketContract().getContractName()));
         }
