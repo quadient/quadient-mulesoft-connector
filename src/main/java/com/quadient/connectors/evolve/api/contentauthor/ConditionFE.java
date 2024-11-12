@@ -3,6 +3,7 @@ package com.quadient.connectors.evolve.api.contentauthor;
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
+import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Summary;
 
 import java.util.List;
@@ -11,8 +12,9 @@ public class ConditionFE {
 
     @Parameter
     @Optional
+    @DisplayName("Categorizations")
     @NullSafe
-    public List<CategorizationConditionFE> categorizations;
+    public List<CategorizationConditionFE> contentAuthorConditionCategorizations;
 
     @Parameter
     @Summary("List of conditions is JSON format.")
@@ -22,8 +24,9 @@ public class ConditionFE {
 
     @Parameter
     @Optional
+    @DisplayName("Metadata")
     @NullSafe
-    public List<MetadataConditionFE> metadata;
+    public List<MetadataConditionFE> contentAuthorConditionMetadata;
 
     @Parameter
     @Optional(defaultValue = "false")
@@ -32,25 +35,26 @@ public class ConditionFE {
 
     @Parameter
     @Summary("Operator (and, or).")
-    public LogicalOperatorFE operator;
+    @DisplayName("Operator")
+    public LogicalOperatorFE contentAuthorConditionOperator;
 
-    public List<CategorizationConditionFE> getCategorizations() {
-        return categorizations;
+    public List<CategorizationConditionFE> getContentAuthorConditionCategorizations() {
+        return contentAuthorConditionCategorizations;
     }
 
     public List<String> getConditions() {
         return conditions;
     }
 
-    public List<MetadataConditionFE> getMetadata() {
-        return metadata;
+    public List<MetadataConditionFE> getContentAuthorConditionMetadata() {
+        return contentAuthorConditionMetadata;
     }
 
     public boolean isNegation() {
         return negation;
     }
 
-    public LogicalOperatorFE getOperator() {
-        return operator;
+    public LogicalOperatorFE getContentAuthorConditionOperator() {
+        return contentAuthorConditionOperator;
     }
 }

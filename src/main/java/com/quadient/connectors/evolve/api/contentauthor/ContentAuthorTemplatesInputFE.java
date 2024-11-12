@@ -2,6 +2,7 @@ package com.quadient.connectors.evolve.api.contentauthor;
 
 import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
+import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Example;
 import org.mule.sdk.api.annotation.param.display.Summary;
 
@@ -40,7 +41,8 @@ public class ContentAuthorTemplatesInputFE {
     @Parameter
     @Optional
     @Summary("Conditions can be nested and can contain the same elements as the main condition.")
-    public ConditionFE condition;
+    @DisplayName("Condition")
+    public ConditionFE contentAuthorTemplatesCondition;
 
     public String getFolder() {
         return folder;
@@ -66,7 +68,7 @@ public class ContentAuthorTemplatesInputFE {
         return approvalStates;
     }
 
-    public ConditionFE getCondition() {
-        return condition;
+    public ConditionFE getContentAuthorTemplatesCondition() {
+        return contentAuthorTemplatesCondition;
     }
 }

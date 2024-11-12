@@ -1,6 +1,6 @@
 package com.quadient.connectors.evolve.internal.operation.generatev6.ondemand;
 
-import com.quadient.connectors.evolve.api.generate.ondemand.OndemandOnDemandInputFE;
+import com.quadient.connectors.evolve.api.generate.ondemand.OnDemandOnDemandInputFE;
 import com.quadient.connectors.evolve.internal.connection.Connection;
 import com.quadient.connectors.evolve.internal.ObjectConverter;
 import com.quadient.connectors.evolve.internal.error.provider.ExecuteErrorsProvider;
@@ -28,9 +28,9 @@ public class OnDemandOnDemandOperation {
     @DisplayName("OnDemand - OnDemand")
     public Result<InputStream, HttpResponseAttributes> onDemandOnDemand(
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-            @ParameterGroup(name = "OnDemand") OndemandOnDemandInputFE input
+            @ParameterGroup(name = "OnDemand") OnDemandOnDemandInputFE input
     ) {
-        if (input.getVariables() != null && input.getVariables().size() > 50) {
+        if (input.getOnDemandOnDemandVariables() != null && input.getOnDemandOnDemandVariables().size() > 50) {
             throw new InvalidInputParameterException(new Exception("The number of variables cannot exceed 50."));
         }
 
@@ -38,16 +38,16 @@ public class OnDemandOnDemandOperation {
         request.setPipelineName(input.getPipelineName());
         request.setUseDraftPipeline(input.isUseDraftPipeline());
         request.setUseDraftResources(input.isUseDraftResources());
-        if (input.getVariables() != null) {
-            input.getVariables().forEach(v -> request.addVariablesItem(new BatchVariableWithTypeEnterpriseDto()
-                    .type(BatchVariableWithTypeEnterpriseDto.TypeEnum.fromValue(v.getType().toString()))
+        if (input.getOnDemandOnDemandVariables() != null) {
+            input.getOnDemandOnDemandVariables().forEach(v -> request.addVariablesItem(new BatchVariableWithTypeEnterpriseDto()
+                    .type(BatchVariableWithTypeEnterpriseDto.TypeEnum.fromValue(v.getInputVariablesType().toString()))
                     .codeName(v.getCodeName())
                     .value(v.getValue())
-                    .options(v.getOptions())));
+                    .options(v.getInputVariablesOptions())));
         }
 
-        if (input.getAttachments() != null && !input.getAttachments().isEmpty()) {
-            return connection.sendRequestMultiPart(HttpConstants.Method.POST, ENDPOINT, new ObjectConverter().convertToJson(request), input.getAttachments());
+        if (input.getOnDemandOnDemandAttachments() != null && !input.getOnDemandOnDemandAttachments().isEmpty()) {
+            return connection.sendRequestMultiPart(HttpConstants.Method.POST, ENDPOINT, new ObjectConverter().convertToJson(request), input.getOnDemandOnDemandAttachments());
         }
 
         return connection.sendPOSTRequest(ENDPOINT, new ObjectConverter().convertToJson(request));

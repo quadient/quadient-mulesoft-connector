@@ -3,7 +3,7 @@ package com.quadient.connectors.evolve.internal.operation.generate_v6.ondemand;
 import com.quadient.connectors.evolve.api.generate.InputVariablesOptionsFE;
 import com.quadient.connectors.evolve.api.generate.MultipartAttachmentFE;
 import com.quadient.connectors.evolve.api.generate.VariableTypeFE;
-import com.quadient.connectors.evolve.api.generate.ondemand.OndemandOnDemandInputFE;
+import com.quadient.connectors.evolve.api.generate.ondemand.OnDemandOnDemandInputFE;
 import com.quadient.connectors.evolve.internal.connection.Connection;
 import com.quadient.connectors.evolve.internal.error.exception.InvalidInputParameterException;
 import com.quadient.connectors.evolve.internal.operation.generatev6.ondemand.OnDemandOnDemandOperation;
@@ -49,18 +49,18 @@ public class OnDemandOnDemandOperationTest extends TestCase {
 
         when(connection.sendPOSTRequest(anyString(), anyString())).thenReturn(null);
 
-        OndemandOnDemandInputFE input = new OndemandOnDemandInputFE();
+        OnDemandOnDemandInputFE input = new OnDemandOnDemandInputFE();
         input.pipelineName = "pipelineName";
         input.useDraftPipeline = true;
         input.useDraftResources = true;
 
-        input.variables = new ArrayList<>();
+        input.onDemandOnDemandVariables = new ArrayList<>();
         InputVariablesOptionsFE inputVariablesOptionsFE1 = createVariable("codeName1", VariableTypeFE.PIPELINE, "value1", "option1", "option2");
         InputVariablesOptionsFE inputVariablesOptionsFE2 = createVariable("codeName2", VariableTypeFE.STEP, "value2", "option1");
-        input.variables.add(inputVariablesOptionsFE1);
-        input.variables.add(inputVariablesOptionsFE2);
+        input.onDemandOnDemandVariables.add(inputVariablesOptionsFE1);
+        input.onDemandOnDemandVariables.add(inputVariablesOptionsFE2);
 
-        input.attachments = new ArrayList<>();
+        input.onDemandOnDemandAttachments = new ArrayList<>();
 
         onDemandOnDemandOperation.onDemandOnDemand(connection, input);
 
@@ -74,22 +74,22 @@ public class OnDemandOnDemandOperationTest extends TestCase {
         OnDemandOnDemandOperation onDemandOnDemandOperation = new OnDemandOnDemandOperation();
         when(connection.sendRequestMultiPart(eq(HttpConstants.Method.POST), anyString(), anyString(), anyList())).thenReturn(null);
 
-        OndemandOnDemandInputFE input = new OndemandOnDemandInputFE();
+        OnDemandOnDemandInputFE input = new OnDemandOnDemandInputFE();
         input.pipelineName = "pipelineName";
         input.useDraftPipeline = true;
         input.useDraftResources = true;
 
-        input.variables = new ArrayList<>();
+        input.onDemandOnDemandVariables = new ArrayList<>();
         InputVariablesOptionsFE inputVariablesOptionsFE1 = createVariable("codeName1", VariableTypeFE.PIPELINE, "value1", "option1", "option2");
         InputVariablesOptionsFE inputVariablesOptionsFE2 = createVariable("codeName2", VariableTypeFE.STEP, "value2", "option1");
-        input.variables.add(inputVariablesOptionsFE1);
-        input.variables.add(inputVariablesOptionsFE2);
+        input.onDemandOnDemandVariables.add(inputVariablesOptionsFE1);
+        input.onDemandOnDemandVariables.add(inputVariablesOptionsFE2);
 
-        input.attachments = new ArrayList<>();
+        input.onDemandOnDemandAttachments = new ArrayList<>();
         MultipartAttachmentFE attachment = new MultipartAttachmentFE();
         attachment.name = "attachmentName";
         attachment.multipartData = new TypedValue<>(new ByteArrayInputStream("attachmentData".getBytes()), DataType.BYTE_ARRAY);
-        input.attachments.add(attachment);
+        input.onDemandOnDemandAttachments.add(attachment);
 
         onDemandOnDemandOperation.onDemandOnDemand(connection, input);
 
@@ -105,14 +105,14 @@ public class OnDemandOnDemandOperationTest extends TestCase {
     public void testTooManyVariables() {
         OnDemandOnDemandOperation onDemandOnDemandOperation = new OnDemandOnDemandOperation();
 
-        OndemandOnDemandInputFE input = new OndemandOnDemandInputFE();
+        OnDemandOnDemandInputFE input = new OnDemandOnDemandInputFE();
         input.pipelineName = "pipelineName";
-        input.variables = new ArrayList<>();
+        input.onDemandOnDemandVariables = new ArrayList<>();
         for (int i = 0; i < 51; i++) {
             InputVariablesOptionsFE inputVariablesOptionsFE = createVariable("codeName" + i, VariableTypeFE.PIPELINE, "value" + i, "option" + i);
-            input.variables.add(inputVariablesOptionsFE);
+            input.onDemandOnDemandVariables.add(inputVariablesOptionsFE);
         }
-        input.attachments = new ArrayList<>();
+        input.onDemandOnDemandAttachments = new ArrayList<>();
 
         onDemandOnDemandOperation.onDemandOnDemand(connection, input);
     }
@@ -120,10 +120,10 @@ public class OnDemandOnDemandOperationTest extends TestCase {
     private InputVariablesOptionsFE createVariable(String codeName, VariableTypeFE type, String value, String... options) {
         InputVariablesOptionsFE variable = new InputVariablesOptionsFE();
         variable.codeName = codeName;
-        variable.type = type;
+        variable.inputVariablesType = type;
         variable.value = value;
-        variable.options = new ArrayList<>();
-        variable.options.addAll(Arrays.asList(options));
+        variable.inputVariablesOptions = new ArrayList<>();
+        variable.inputVariablesOptions.addAll(Arrays.asList(options));
         return variable;
     }
 }

@@ -54,10 +54,10 @@ public class ContentAuthorTemplatesOperationTest extends TestCase {
         input.holder = "holder";
         input.approvalStates = "approvalStates";
 
-        input.condition = createConditionFE("prefixA");
-        input.condition.conditions = new ArrayList<>();
-        input.condition.conditions.add(objectConverter.convertToJson(createCondition("prefixB")));
-        input.condition.conditions.add(objectConverter.convertToJson(createCondition("prefixC")));
+        input.contentAuthorTemplatesCondition = createConditionFE("prefixA");
+        input.contentAuthorTemplatesCondition.conditions = new ArrayList<>();
+        input.contentAuthorTemplatesCondition.conditions.add(objectConverter.convertToJson(createCondition("prefixB")));
+        input.contentAuthorTemplatesCondition.conditions.add(objectConverter.convertToJson(createCondition("prefixC")));
         operation.contentAuthorGetTemplates(connection, input);
 
         verify(connection).sendRequest(any(HttpConstants.Method.class), anyString(), isNull(), uriParamsCapture.capture());
@@ -74,14 +74,14 @@ public class ContentAuthorTemplatesOperationTest extends TestCase {
 
     private ConditionFE createConditionFE(String prefix) {
         ConditionFE condition = new ConditionFE();
-        condition.categorizations = new ArrayList<>();
-        condition.categorizations.add(createCategorizationConditionFE(prefix + "fieldName", "name", "value", true, OperatorEnumFE.BEGINWITH));
-        condition.categorizations.add(createCategorizationConditionFE(prefix + "fieldName2", "name2", "value2", false, OperatorEnumFE.EMPTY));
-        condition.metadata = new ArrayList<>();
-        condition.metadata.add(createMetadataConditionFE(prefix + "name", "value", true, OperatorEnumFE.EQUAL));
-        condition.metadata.add(createMetadataConditionFE(prefix + "name2", "value2", false, OperatorEnumFE.EMPTY));
+        condition.contentAuthorConditionCategorizations = new ArrayList<>();
+        condition.contentAuthorConditionCategorizations.add(createCategorizationConditionFE(prefix + "fieldName", "name", "value", true, OperatorEnumFE.BEGINWITH));
+        condition.contentAuthorConditionCategorizations.add(createCategorizationConditionFE(prefix + "fieldName2", "name2", "value2", false, OperatorEnumFE.EMPTY));
+        condition.contentAuthorConditionMetadata = new ArrayList<>();
+        condition.contentAuthorConditionMetadata.add(createMetadataConditionFE(prefix + "name", "value", true, OperatorEnumFE.EQUAL));
+        condition.contentAuthorConditionMetadata.add(createMetadataConditionFE(prefix + "name2", "value2", false, OperatorEnumFE.EMPTY));
         condition.negation = true;
-        condition.operator = LogicalOperatorFE.AND;
+        condition.contentAuthorConditionOperator = LogicalOperatorFE.AND;
         condition.conditions = new ArrayList<>();
         return condition;
     }

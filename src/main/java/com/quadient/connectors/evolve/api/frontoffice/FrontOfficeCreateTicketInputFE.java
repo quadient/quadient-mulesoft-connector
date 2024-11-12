@@ -25,7 +25,7 @@ public class FrontOfficeCreateTicketInputFE {
     @Parameter
     @Summary("Define the holder of the ticket.")
     @DisplayName("Holder type")
-    public HolderTypeFE createTicketHolderType;
+    public HolderTypeFE frontOfficeCreateTicketHolderType;
 
     @Parameter
     @Summary("Name of the processing pipeline to be run.")
@@ -50,15 +50,16 @@ public class FrontOfficeCreateTicketInputFE {
     @Parameter
     @Example("SMS, EMAIL, EMAIL_WITH_ATTACHMENT, PRINT")
     @Summary("Determines which production actions will be available in the ticket.")
+    @DisplayName("Production Actions")
     @Optional
     @NullSafe
-    public List<String> productionActions;
+    public List<String> frontOfficeCreateTicketProductionActions;
 
     @Parameter
     @Summary("This parameter overrides the default selection of the ticket approval process.")
     @DisplayName("Approval Process Path")
     @Optional
-    public ApprovalProcessPathFE createTicketApprovalProcessPath;
+    public ApprovalProcessPathFE frontOfficeCreateTicketApprovalProcessPath;
 
     @Parameter
     @Example("'Gift Voucher - GPK Adventure - Africa.jpg', 'Gift Voucher - Froodeco - Bouquet.pdf'")
@@ -66,19 +67,19 @@ public class FrontOfficeCreateTicketInputFE {
     @DisplayName("Attachments")
     @Optional
     @NullSafe
-    public List<String> createTicketAttachments;
+    public List<String> frontOfficeCreateTicketAttachments;
 
     @Parameter
     @Summary("Define the contract details.")
     @DisplayName("Contract")
     @Optional
-    public ContractFE createTicketContract;
+    public ContractFE frontOfficeCreateTicketContract;
 
     @Parameter
     @Summary("Define the required ticket properties.")
     @DisplayName("Properties")
     @Optional
-    public PropertiesFE createTicketProperties;
+    public PropertiesFE frontOfficeCreateTicketProperties;
 
     //End of CreateTicketBaseDto
 
@@ -94,27 +95,29 @@ public class FrontOfficeCreateTicketInputFE {
 
     @Parameter
     @Summary("A command related to the way of processing a JLD file.")
+    @DisplayName("Commands")
     @Optional
     @NullSafe
-    public List<CommandFE> commands;
+    public List<CommandFE> frontOfficeCreateTicketCommands;
 
     @Parameter
     @Summary("Sets document's data context.")
     @DisplayName("Context")
     @NullSafe
     @Optional
-    public List<ContextFE> createTicketContexts;
+    public List<ContextFE> frontOfficeCreateTicketContexts;
 
     @Parameter
     @Summary("Create clone of another document specified in create ticket request (index).")
     @DisplayName("Copy Of")
     @Optional
-    public Integer createTicketCopyOf;
+    public Integer frontOfficeCreateTicketCopyOf;
 
     @Parameter
+    @DisplayName("Data Definitions")
     @Optional
     @NullSafe
-    public List<DataDefinitionFE> dataDefinitions;
+    public List<DataDefinitionFE> frontOfficeCreateTicketDataDefinitions;
 
     @Parameter
     @Summary("Define the brand for the document.")
@@ -134,8 +137,8 @@ public class FrontOfficeCreateTicketInputFE {
         return holderValue;
     }
 
-    public HolderTypeFE getCreateTicketHolderType() {
-        return createTicketHolderType;
+    public HolderTypeFE getFrontOfficeCreateTicketHolderType() {
+        return frontOfficeCreateTicketHolderType;
     }
 
     public boolean isAddAttachmentFromGlobalStorageEnabled() {
@@ -154,24 +157,24 @@ public class FrontOfficeCreateTicketInputFE {
         return uploadAttachmentFromLocalDriveEnabled;
     }
 
-    public List<String> getProductionActions() {
-        return productionActions;
+    public List<String> getFrontOfficeCreateTicketProductionActions() {
+        return frontOfficeCreateTicketProductionActions;
     }
 
-    public ApprovalProcessPathFE getCreateTicketApprovalProcessPath() {
-        return createTicketApprovalProcessPath;
+    public ApprovalProcessPathFE getFrontOfficeCreateTicketApprovalProcessPath() {
+        return frontOfficeCreateTicketApprovalProcessPath;
     }
 
-    public List<String> getCreateTicketAttachments() {
-        return createTicketAttachments;
+    public List<String> getFrontOfficeCreateTicketAttachments() {
+        return frontOfficeCreateTicketAttachments;
     }
 
-    public ContractFE getCreateTicketContract() {
-        return createTicketContract;
+    public ContractFE getFrontOfficeCreateTicketContract() {
+        return frontOfficeCreateTicketContract;
     }
 
-    public PropertiesFE getCreateTicketProperties() {
-        return createTicketProperties;
+    public PropertiesFE getFrontOfficeCreateTicketProperties() {
+        return frontOfficeCreateTicketProperties;
     }
 
     public String getTemplateName() {
@@ -182,20 +185,20 @@ public class FrontOfficeCreateTicketInputFE {
         return brand;
     }
 
-    public List<CommandFE> getCommands() {
-        return commands;
+    public List<CommandFE> getFrontOfficeCreateTicketCommands() {
+        return frontOfficeCreateTicketCommands;
     }
 
-    public List<ContextFE> getCreateTicketContexts() {
-        return createTicketContexts;
+    public List<ContextFE> getFrontOfficeCreateTicketContexts() {
+        return frontOfficeCreateTicketContexts;
     }
 
-    public Integer getCreateTicketCopyOf() {
-        return createTicketCopyOf;
+    public Integer getFrontOfficeCreateTicketCopyOf() {
+        return frontOfficeCreateTicketCopyOf;
     }
 
-    public List<DataDefinitionFE> getDataDefinitions() {
-        return dataDefinitions;
+    public List<DataDefinitionFE> getFrontOfficeCreateTicketDataDefinitions() {
+        return frontOfficeCreateTicketDataDefinitions;
     }
 
     public String getDescription() {

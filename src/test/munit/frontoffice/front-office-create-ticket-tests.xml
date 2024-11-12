@@ -17,7 +17,7 @@ http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule
     <munit:test name="create ticket" doc:id="9a7aa1fa-362d-4a31-8f07-89a0cfd0ad90">
         <munit:execution>
             <quadient:front-office-create-ticket
-                    createTicketHolderType="USER_NAME"
+                    frontOfficeCreateTicketHolderType="USER_NAME"
                     doc:name="Front Office - Create ticket"
                     config-ref="Config_Success"
                     holderValue="${quadient.evolve.fo.holder}"
@@ -34,7 +34,7 @@ http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule
     <munit:test name="create ticket wrong name" expectedErrorType="QUADIENT:BAD_REQUEST">
         <munit:execution>
             <quadient:front-office-create-ticket
-                    createTicketHolderType="USER_NAME"
+                    frontOfficeCreateTicketHolderType="USER_NAME"
                     doc:name="Front Office - Create ticket"
                     config-ref="Config_Success"
                     holderValue="wrong@email.com"

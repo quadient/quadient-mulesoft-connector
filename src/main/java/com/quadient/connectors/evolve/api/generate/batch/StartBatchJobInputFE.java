@@ -5,6 +5,7 @@ import com.quadient.connectors.evolve.api.generate.MultipartAttachmentFE;
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
+import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Example;
 import org.mule.sdk.api.annotation.param.display.Summary;
 
@@ -28,8 +29,9 @@ public class StartBatchJobInputFE {
     @Parameter
     @Optional
     @NullSafe
+    @DisplayName("Variables")
     @Summary("List of processing pipeline variables. It can be used to override values of existing variables in the given processing pipeline. E.g. when a variable is used in the pipeline&#39;s output path, by defining a different value for the same codeName, you can easily change the output path as you start the pipeline without having to re-configure the pipeline itself.")
-    public List<InputVariablesOptionsFE> variables;
+    public List<InputVariablesOptionsFE> startBatchJobVariables;
 
     @Parameter
     @Optional(defaultValue = "")
@@ -56,8 +58,9 @@ public class StartBatchJobInputFE {
 
     @Parameter
     @Optional
+    @DisplayName("Attachments")
     @NullSafe
-    public List<MultipartAttachmentFE> attachments;
+    public List<MultipartAttachmentFE> startBatchJobAttachments;
 
     public String getPipelineName() {
         return pipelineName;
@@ -71,8 +74,8 @@ public class StartBatchJobInputFE {
         return description;
     }
 
-    public List<InputVariablesOptionsFE> getVariables() {
-        return variables;
+    public List<InputVariablesOptionsFE> getStartBatchJobVariables() {
+        return startBatchJobVariables;
     }
 
     public Long getPriority() {
@@ -91,7 +94,7 @@ public class StartBatchJobInputFE {
         return useDraftResources;
     }
 
-    public List<MultipartAttachmentFE> getAttachments() {
-        return attachments;
+    public List<MultipartAttachmentFE> getStartBatchJobAttachments() {
+        return startBatchJobAttachments;
     }
 }

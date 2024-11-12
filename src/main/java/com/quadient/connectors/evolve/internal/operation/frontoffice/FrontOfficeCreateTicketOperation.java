@@ -37,41 +37,41 @@ public class FrontOfficeCreateTicketOperation {
     ) {
         CreateTicket createTicket = new CreateTicket();
         createTicket.setStateId(input.getStateId());
-        createTicket.setHolder(new Holder().holder(input.getHolderValue()).type(Holder.TypeEnum.fromValue(input.getCreateTicketHolderType().getValue())));
+        createTicket.setHolder(new Holder().holder(input.getHolderValue()).type(Holder.TypeEnum.fromValue(input.getFrontOfficeCreateTicketHolderType().getValue())));
         createTicket.setAddAttachmentFromGlobalStorageEnabled(input.isAddAttachmentFromGlobalStorageEnabled());
         createTicket.setAsynchronousProcessing(input.isAsynchronousProcessing());
         createTicket.setMultipleRecord(input.isMultipleRecord());
         createTicket.setUploadAttachmentFromLocalDriveEnabled(input.isUploadAttachmentFromLocalDriveEnabled());
-        createTicket.setProductionActions(input.getProductionActions());
-        if (input.getCreateTicketApprovalProcessPath() != null) {
-            createTicket.setApprovalProcessPath(new ApprovalProcessPath().resolveDepartment(input.getCreateTicketApprovalProcessPath().isResolveDepartment()).value(input.getCreateTicketApprovalProcessPath().getValue()));
+        createTicket.setProductionActions(input.getFrontOfficeCreateTicketProductionActions());
+        if (input.getFrontOfficeCreateTicketApprovalProcessPath() != null) {
+            createTicket.setApprovalProcessPath(new ApprovalProcessPath().resolveDepartment(input.getFrontOfficeCreateTicketApprovalProcessPath().isResolveDepartment()).value(input.getFrontOfficeCreateTicketApprovalProcessPath().getValue()));
         }
-        createTicket.setAttachments(input.getCreateTicketAttachments());
-        if (input.getCreateTicketContract() != null) {
-            createTicket.setContract(new Contract().contractId(input.getCreateTicketContract().getContractId()).contractName(input.getCreateTicketContract().getContractName()));
+        createTicket.setAttachments(input.getFrontOfficeCreateTicketAttachments());
+        if (input.getFrontOfficeCreateTicketContract() != null) {
+            createTicket.setContract(new Contract().contractId(input.getFrontOfficeCreateTicketContract().getContractId()).contractName(input.getFrontOfficeCreateTicketContract().getContractName()));
         }
-        if (input.getCreateTicketProperties() != null) {
-            createTicket.setProperties(new Properties().properties(input.getCreateTicketProperties().getCreateTicketPropertiesMap()).overrideAlsoNotEmptyProperties(input.getCreateTicketProperties().isOverrideAlsoNotEmptyProperties()));
+        if (input.getFrontOfficeCreateTicketProperties() != null) {
+            createTicket.setProperties(new Properties().properties(input.getFrontOfficeCreateTicketProperties().getCreateTicketPropertiesMap()).overrideAlsoNotEmptyProperties(input.getFrontOfficeCreateTicketProperties().isOverrideAlsoNotEmptyProperties()));
         }
 
         createTicket.getDocumentData().brand(input.getBrand());
 
-        if (!input.getCommands().isEmpty()) {
-            input.getCommands().forEach(command -> createTicket.getDocumentData().addCommandsItem(new Command().name(command.name).value(command.value)));
+        if (!input.getFrontOfficeCreateTicketCommands().isEmpty()) {
+            input.getFrontOfficeCreateTicketCommands().forEach(command -> createTicket.getDocumentData().addCommandsItem(new Command().name(command.name).value(command.value)));
 
         }
-        if (input.getCreateTicketContexts() != null) {
-            input.getCreateTicketContexts().forEach(context -> createTicket.getDocumentData().addContextItem(new Context().path(context.paths).value(context.value)));
+        if (input.getFrontOfficeCreateTicketContexts() != null) {
+            input.getFrontOfficeCreateTicketContexts().forEach(context -> createTicket.getDocumentData().addContextItem(new Context().path(context.frontOfficeContextPaths).value(context.value)));
         }
-        if (input.getCreateTicketCopyOf() != null) {
-            createTicket.getDocumentData().copyOf(input.getCreateTicketCopyOf().longValue());
+        if (input.getFrontOfficeCreateTicketCopyOf() != null) {
+            createTicket.getDocumentData().copyOf(input.getFrontOfficeCreateTicketCopyOf().longValue());
         }
 
-        if (input.getDataDefinitions() != null) {
-            input.getDataDefinitions().forEach(dataDefinition -> createTicket.getDocumentData().addDataDefinitionsItem(
+        if (input.getFrontOfficeCreateTicketDataDefinitions() != null) {
+            input.getFrontOfficeCreateTicketDataDefinitions().forEach(dataDefinition -> createTicket.getDocumentData().addDataDefinitionsItem(
                     new DataDefinition()
                             .moduleName(dataDefinition.moduleName)
-                            .type(DataDefinition.TypeEnum.fromValue(dataDefinition.type.getValue()))
+                            .type(DataDefinition.TypeEnum.fromValue(dataDefinition.frontOfficeDataDefinitionType.getValue()))
                             .value(dataDefinition.value)));
         }
         createTicket.getDocumentData().description(input.getDescription());

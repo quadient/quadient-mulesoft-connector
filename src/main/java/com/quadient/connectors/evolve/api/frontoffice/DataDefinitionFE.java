@@ -1,6 +1,7 @@
 package com.quadient.connectors.evolve.api.frontoffice;
 
 import org.mule.sdk.api.annotation.param.Parameter;
+import org.mule.sdk.api.annotation.param.display.DisplayName;
 import org.mule.sdk.api.annotation.param.display.Summary;
 
 public class DataDefinitionFE {
@@ -11,7 +12,8 @@ public class DataDefinitionFE {
 
     @Parameter
     @Summary("Define the data input type.")
-    public DataDefinitionTypeFE type;
+    @DisplayName("Type")
+    public DataDefinitionTypeFE frontOfficeDataDefinitionType;
 
     @Parameter
     @Summary("You can define binary data (binaryBase64Data), enter the source ICM location, or define XML/JSON directly.")
@@ -21,8 +23,8 @@ public class DataDefinitionFE {
         return moduleName;
     }
 
-    public DataDefinitionTypeFE getType() {
-        return type;
+    public DataDefinitionTypeFE getFrontOfficeDataDefinitionType() {
+        return frontOfficeDataDefinitionType;
     }
 
     public String getValue() {

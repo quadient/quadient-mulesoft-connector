@@ -28,7 +28,7 @@ public class OnDemandCustomDataOperation {
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
             @ParameterGroup(name = "OnDemand Custom Data") OnDemandCustomDataInputFE input
     ) {
-        if (input.getPipelineVariables() != null && input.getPipelineVariables().size() > 50) {
+        if (input.getOnDemandCustomDataPipelineVariables() != null && input.getOnDemandCustomDataPipelineVariables().size() > 50) {
             throw new InvalidInputParameterException(new Exception("The number of variables cannot exceed 50."));
         }
 
@@ -42,10 +42,10 @@ public class OnDemandCustomDataOperation {
 
         headers.put("useDraftPipeline", Boolean.toString(input.isUseDraftPipeline()));
         headers.put("useDraftResources", Boolean.toString(input.isUseDraftResources()));
-        if (input.getPipelineVariables() != null) {
-            input.getPipelineVariables().forEach((key, value) -> headers.put("c-variable-" + key, value));
+        if (input.getOnDemandCustomDataPipelineVariables() != null) {
+            input.getOnDemandCustomDataPipelineVariables().forEach((key, value) -> headers.put("c-variable-" + key, value));
         }
         
-        return connection.sendPOSTRequest(ENDPOINT + "/" + input.getPipelineName(), input.getCustomData(), headers);
+        return connection.sendPOSTRequest(ENDPOINT + "/" + input.getPipelineName(), input.getOnDemandCustomDataCustomData(), headers);
     }
 }

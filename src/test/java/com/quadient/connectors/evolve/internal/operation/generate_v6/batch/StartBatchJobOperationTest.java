@@ -59,12 +59,12 @@ public class StartBatchJobOperationTest extends TestCase {
         input.useDraftPipeline = true;
         input.useDraftResources = true;
         input.expiration = "2024-07-10T10:15:30+01:00";
-        input.variables = new ArrayList<>();
+        input.startBatchJobVariables = new ArrayList<>();
         InputVariablesOptionsFE inputVariablesOptionsFE1 = createVariable("codeName1", VariableTypeFE.PIPELINE, "value1", "option1", "option2");
         InputVariablesOptionsFE inputVariablesOptionsFE2 = createVariable("codeName2", VariableTypeFE.STEP, "value2", "option1");
-        input.variables.add(inputVariablesOptionsFE1);
-        input.variables.add(inputVariablesOptionsFE2);
-        input.attachments = new ArrayList<>();
+        input.startBatchJobVariables.add(inputVariablesOptionsFE1);
+        input.startBatchJobVariables.add(inputVariablesOptionsFE2);
+        input.startBatchJobAttachments = new ArrayList<>();
 
         startBatchJobOperation.batchStartBatchJob(connection, input);
 
@@ -87,16 +87,16 @@ public class StartBatchJobOperationTest extends TestCase {
         input.useDraftPipeline = true;
         input.useDraftResources = true;
         input.expiration = "2024-07-10T10:15:30+01:00";
-        input.variables = new ArrayList<>();
+        input.startBatchJobVariables = new ArrayList<>();
         InputVariablesOptionsFE inputVariablesOptionsFE1 = createVariable("codeName1", VariableTypeFE.PIPELINE, "value1", "option1", "option2");
         InputVariablesOptionsFE inputVariablesOptionsFE2 = createVariable("codeName2", VariableTypeFE.STEP, "value2", "option1");
-        input.variables.add(inputVariablesOptionsFE1);
-        input.variables.add(inputVariablesOptionsFE2);
-        input.attachments = new ArrayList<>();
+        input.startBatchJobVariables.add(inputVariablesOptionsFE1);
+        input.startBatchJobVariables.add(inputVariablesOptionsFE2);
+        input.startBatchJobAttachments = new ArrayList<>();
         MultipartAttachmentFE attachment = new MultipartAttachmentFE();
         attachment.name = "attachmentName";
         attachment.multipartData = new TypedValue<>(new ByteArrayInputStream("attachmentData".getBytes()), DataType.BYTE_ARRAY);
-        input.attachments.add(attachment);
+        input.startBatchJobAttachments.add(attachment);
 
         startBatchJobOperation.batchStartBatchJob(connection, input);
 
@@ -123,9 +123,9 @@ public class StartBatchJobOperationTest extends TestCase {
         StartBatchJobOperation startBatchJobOperation = new StartBatchJobOperation();
         StartBatchJobInputFE startBatchJobInputFE = new StartBatchJobInputFE();
         startBatchJobInputFE.priority = 50L;
-        startBatchJobInputFE.variables = new ArrayList<>();
+        startBatchJobInputFE.startBatchJobVariables = new ArrayList<>();
         for (int i = 0; i < 51; i++) {
-            startBatchJobInputFE.variables.add(new InputVariablesOptionsFE());
+            startBatchJobInputFE.startBatchJobVariables.add(new InputVariablesOptionsFE());
         }
         startBatchJobOperation.batchStartBatchJob(connection, startBatchJobInputFE);
     }
@@ -140,10 +140,10 @@ public class StartBatchJobOperationTest extends TestCase {
     private InputVariablesOptionsFE createVariable(String codeName, VariableTypeFE type, String value, String... options) {
         InputVariablesOptionsFE variable = new InputVariablesOptionsFE();
         variable.codeName = codeName;
-        variable.type = type;
+        variable.inputVariablesType = type;
         variable.value = value;
-        variable.options = new ArrayList<>();
-        variable.options.addAll(Arrays.asList(options));
+        variable.inputVariablesOptions = new ArrayList<>();
+        variable.inputVariablesOptions.addAll(Arrays.asList(options));
         return variable;
     }
 }

@@ -20,9 +20,9 @@ http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule
             <quadient:on-demand-on-demand-custom-data doc:name="OnDemand - OnDemand Custom Data"
                                                       config-ref="Config_Success"
                                                       pipelineName="${quadient.evolve.ondemand.pipeline.customdata.name}">
-                <quadient:custom-data><![CDATA[{
+                <quadient:on-demand-custom-data-custom-data><![CDATA[{
 	"id": "correctValue"
-}]]></quadient:custom-data>
+}]]></quadient:on-demand-custom-data-custom-data>
             </quadient:on-demand-on-demand-custom-data>
         </munit:execution>
         <munit:validation>
@@ -37,9 +37,9 @@ http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule
             <quadient:on-demand-on-demand-custom-data doc:name="OnDemand - OnDemand Custom Data"
                                                       config-ref="Config_Success"
                                                       pipelineName="${quadient.evolve.ondemand.pipeline.customdata.name}">
-                <quadient:custom-data><![CDATA[{
+                <quadient:on-demand-custom-data-custom-data><![CDATA[{
 	"id": "wrongValue"
-}]]></quadient:custom-data>
+}]]></quadient:on-demand-custom-data-custom-data>
             </quadient:on-demand-on-demand-custom-data>
         </munit:execution>
     </munit:test>

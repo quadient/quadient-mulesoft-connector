@@ -34,7 +34,7 @@ public class StartBatchJobOperation {
         if (input.getPriority() != null && (input.getPriority() < 1 || input.getPriority() > 100)) {
             throw new InvalidInputParameterException(new Exception("Priority must be between 1 and 100"));
         }
-        if (input.getVariables() != null && input.getVariables().size() > 50) {
+        if (input.getStartBatchJobVariables() != null && input.getStartBatchJobVariables().size() > 50) {
             throw new InvalidInputParameterException(new Exception("Variables must be less than 50"));
         }
 
@@ -56,16 +56,16 @@ public class StartBatchJobOperation {
         }
         request.setUseDraftPipeline(input.isUseDraftPipeline());
         request.setUseDraftResources(input.isUseDraftResources());
-        if (input.getVariables() != null) {
-            input.getVariables().forEach(v -> request.addVariablesItem(new BatchVariableWithTypeEnterpriseDto()
-                    .type(BatchVariableWithTypeEnterpriseDto.TypeEnum.fromValue(v.getType().getValue()))
+        if (input.getStartBatchJobVariables() != null) {
+            input.getStartBatchJobVariables().forEach(v -> request.addVariablesItem(new BatchVariableWithTypeEnterpriseDto()
+                    .type(BatchVariableWithTypeEnterpriseDto.TypeEnum.fromValue(v.getInputVariablesType().getValue()))
                     .codeName(v.getCodeName())
                     .value(v.getValue())
-                    .options(v.getOptions())));
+                    .options(v.getInputVariablesOptions())));
         }
 
-        if (input.getAttachments() != null && !input.getAttachments().isEmpty()) {
-            return connection.sendRequestMultiPart(HttpConstants.Method.POST, ENDPOINT, new ObjectConverter().convertToJson(request), input.getAttachments());
+        if (input.getStartBatchJobAttachments() != null && !input.getStartBatchJobAttachments().isEmpty()) {
+            return connection.sendRequestMultiPart(HttpConstants.Method.POST, ENDPOINT, new ObjectConverter().convertToJson(request), input.getStartBatchJobAttachments());
         }
 
         return connection.sendPOSTRequest(ENDPOINT, new ObjectConverter().convertToJson(request));

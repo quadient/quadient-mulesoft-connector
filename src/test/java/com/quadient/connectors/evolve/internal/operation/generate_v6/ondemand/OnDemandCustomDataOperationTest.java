@@ -50,14 +50,14 @@ public class OnDemandCustomDataOperationTest extends TestCase {
         input.folder = "folder";
         input.useDraftPipeline = true;
         input.useDraftResources = true;
-        input.pipelineVariables = new MultiMap<>();
-        input.pipelineVariables.put("codeName", "value");
-        input.customData = new TypedValue<>(new Object(), null);
+        input.onDemandCustomDataPipelineVariables = new MultiMap<>();
+        input.onDemandCustomDataPipelineVariables.put("codeName", "value");
+        input.onDemandCustomDataCustomData = new TypedValue<>(new Object(), null);
         onDemandCustomDataOperation.onDemandOnDemandCustomData(connection, input);
 
         verify(connection).sendPOSTRequest(endpointCaptor.capture(), customDataCaptor.capture(), headersCaptor.capture());
         assertEquals(5, headersCaptor.getValue().size());
-        assertEquals(input.customData, customDataCaptor.getValue());
+        assertEquals(input.onDemandCustomDataCustomData, customDataCaptor.getValue());
         assertEquals(ServiceEndpoint.ON_DEMAND_ON_DEMAND_CUSTOM_DATA + "/" + input.pipelineName, endpointCaptor.getValue());
         assertEquals("value", headersCaptor.getValue().get("c-variable-codeName"));
         assertEquals("fileName", headersCaptor.getValue().get("filename"));
@@ -72,9 +72,9 @@ public class OnDemandCustomDataOperationTest extends TestCase {
 
         OnDemandCustomDataInputFE input = new OnDemandCustomDataInputFE();
         input.pipelineName = "pipelineName";
-        input.pipelineVariables = new MultiMap<>();
+        input.onDemandCustomDataPipelineVariables = new MultiMap<>();
         for (int i = 0; i < 51; i++) {
-            input.pipelineVariables.put("codeName" + i, "value" + i);
+            input.onDemandCustomDataPipelineVariables.put("codeName" + i, "value" + i);
         }
         onDemandCustomDataOperation.onDemandOnDemandCustomData(connection, input);
     }

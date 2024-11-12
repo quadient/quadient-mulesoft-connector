@@ -29,7 +29,7 @@ public class OnDemandCustomDataInputFE {
     @NullSafe
     @DisplayName("Variables")
     @Summary("List of pipeline variables used for the job. The maximum number of these variables is 50.")
-    public MultiMap<String, String> pipelineVariables;
+    public MultiMap<String, String> onDemandCustomDataPipelineVariables;
 
     @Parameter
     @Optional(defaultValue = "false")
@@ -42,8 +42,9 @@ public class OnDemandCustomDataInputFE {
     public boolean useDraftResources;
 
     @Parameter
+    @DisplayName("Custom Data")
     @Content(primary = true)
-    public TypedValue<Object> customData;
+    public TypedValue<Object> onDemandCustomDataCustomData;
 
     public String getPipelineName() {
         return pipelineName;
@@ -57,8 +58,8 @@ public class OnDemandCustomDataInputFE {
         return folder;
     }
 
-    public MultiMap<String, String> getPipelineVariables() {
-        return pipelineVariables;
+    public MultiMap<String, String> getOnDemandCustomDataPipelineVariables() {
+        return onDemandCustomDataPipelineVariables;
     }
 
     public boolean isUseDraftPipeline() {
@@ -69,7 +70,7 @@ public class OnDemandCustomDataInputFE {
         return useDraftResources;
     }
 
-    public TypedValue<Object> getCustomData() {
-        return customData;
+    public TypedValue<Object> getOnDemandCustomDataCustomData() {
+        return onDemandCustomDataCustomData;
     }
 }

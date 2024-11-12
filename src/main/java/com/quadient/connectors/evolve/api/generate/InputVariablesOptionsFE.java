@@ -3,13 +3,15 @@ package com.quadient.connectors.evolve.api.generate;
 import org.mule.sdk.api.annotation.param.NullSafe;
 import org.mule.sdk.api.annotation.param.Optional;
 import org.mule.sdk.api.annotation.param.Parameter;
+import org.mule.sdk.api.annotation.param.display.DisplayName;
 
 import java.util.List;
 
 public class InputVariablesOptionsFE {
 
     @Parameter
-    public VariableTypeFE type;
+    @DisplayName("Type")
+    public VariableTypeFE inputVariablesType;
 
     @Parameter
     public String codeName;
@@ -19,11 +21,12 @@ public class InputVariablesOptionsFE {
 
     @Parameter
     @Optional
+    @DisplayName("Options")
     @NullSafe
-    public List<String> options;
+    public List<String> inputVariablesOptions;
 
-    public VariableTypeFE getType() {
-        return type;
+    public VariableTypeFE getInputVariablesType() {
+        return inputVariablesType;
     }
 
     public String getCodeName() {
@@ -34,7 +37,7 @@ public class InputVariablesOptionsFE {
         return value;
     }
 
-    public List<String> getOptions() {
-        return options;
+    public List<String> getInputVariablesOptions() {
+        return inputVariablesOptions;
     }
 }

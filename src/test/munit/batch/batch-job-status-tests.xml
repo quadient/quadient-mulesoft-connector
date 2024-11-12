@@ -17,8 +17,7 @@ http://www.mulesoft.org/schema/mule/quadient http://www.mulesoft.org/schema/mule
     <munit:test name="job-status" doc:id="e877c923-c0f1-4a1a-9baa-14834173d15f"
                 description="start and check job status">
         <munit:execution>
-            <quadient:batch-start-batch-job doc:name="Batch - Start batch job"
-                                            doc:id="25879b67-06b9-4457-9ebc-9e045c7ca3d7" config-ref="Config_Success"
+            <quadient:batch-start-batch-job doc:name="Batch - Start batch job" config-ref="Config_Success"
                                             pipelineName="${quadient.evolve.batch.pipeline.name}"
                                             workingFolderId="${quadient.evolve.batch.workingfolder.id}"
                                             description="description"/>

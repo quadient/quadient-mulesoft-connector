@@ -52,9 +52,9 @@ public class ContentAuthorTemplatesOperation {
         if (input.getApprovalStates() != null && !input.getApprovalStates().isEmpty()) {
             uriParams.put("approvalStates", input.getApprovalStates());
         }
-        if (input.getCondition() != null) {
+        if (input.getContentAuthorTemplatesCondition() != null) {
             
-            uriParams.put("condition", new ObjectConverter().convertToJson(convertCondition(input.getCondition())));
+            uriParams.put("condition", new ObjectConverter().convertToJson(convertCondition(input.getContentAuthorTemplatesCondition())));
         }
         return connection.sendRequest(HttpConstants.Method.GET, ENDPOINT, null, uriParams);
     }
@@ -62,10 +62,10 @@ public class ContentAuthorTemplatesOperation {
     private Condition convertCondition(ConditionFE condition) {
         Condition resultCondition = new Condition();
         resultCondition.setNegation(condition.isNegation());
-        resultCondition.setOperator(Condition.OperatorEnum.fromValue(condition.getOperator().getValue()));
+        resultCondition.setOperator(Condition.OperatorEnum.fromValue(condition.getContentAuthorConditionOperator().getValue()));
 
-        if (condition.getMetadata() != null) {
-            for (MetadataConditionFE metadataConditionFE : condition.getMetadata()) {
+        if (condition.getContentAuthorConditionMetadata() != null) {
+            for (MetadataConditionFE metadataConditionFE : condition.getContentAuthorConditionMetadata()) {
                 MetadataCondition metadataCondition = new MetadataCondition();
                 metadataCondition.setName(metadataConditionFE.getName());
                 metadataCondition.setNegation(metadataConditionFE.isNegation());
@@ -75,8 +75,8 @@ public class ContentAuthorTemplatesOperation {
             }
         }
 
-        if (condition.getCategorizations() != null) {
-            for (CategorizationConditionFE categorizationConditionFE : condition.getCategorizations()) {
+        if (condition.getContentAuthorConditionCategorizations() != null) {
+            for (CategorizationConditionFE categorizationConditionFE : condition.getContentAuthorConditionCategorizations()) {
                 CategorizationCondition categorizationCondition = new CategorizationCondition();
                 categorizationCondition.setFieldName(categorizationConditionFE.getFieldName());
                 categorizationCondition.setName(categorizationConditionFE.getName());
