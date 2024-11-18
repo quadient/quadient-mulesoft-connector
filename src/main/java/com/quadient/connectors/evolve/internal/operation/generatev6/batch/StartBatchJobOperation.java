@@ -26,10 +26,10 @@ public class StartBatchJobOperation {
     @OutputJsonType(schema = "jsonSchema/batch_startBatchJobOperation.json")
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Starts a batch job using a defined processing pipeline")
-    @DisplayName("Batch - Start batch job")
+    @DisplayName("Batch - Start Batch Job")
     public Result<InputStream, HttpResponseAttributes> batchStartBatchJob(
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-            @ParameterGroup(name = "Start batch job") StartBatchJobInputFE input
+            @ParameterGroup(name = "Start Batch Job") StartBatchJobInputFE input
     ) {
         if (input.getPriority() != null && (input.getPriority() < 1 || input.getPriority() > 100)) {
             throw new InvalidInputParameterException(new Exception("Priority must be between 1 and 100"));

@@ -30,10 +30,10 @@ public class FrontOfficeCreateTicketOperation {
     @OutputJsonType(schema = "jsonSchema/fo-frontOfficeCreateTicketOperation.json")
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Creates a ticket.")
-    @DisplayName("Front Office - Create ticket")
+    @DisplayName("Front Office - Create Ticket")
     public Result<InputStream, HttpResponseAttributes> frontOfficeCreateTicket(
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-            @ParameterGroup(name = "Create ticket") FrontOfficeCreateTicketInputFE input
+            @ParameterGroup(name = "Create Ticket") FrontOfficeCreateTicketInputFE input
     ) {
         CreateTicket createTicket = new CreateTicket();
         createTicket.setStateId(input.getStateId());

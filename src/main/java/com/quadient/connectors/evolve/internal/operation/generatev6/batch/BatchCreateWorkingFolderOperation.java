@@ -26,10 +26,10 @@ public class BatchCreateWorkingFolderOperation {
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Creates a working folder for your batch job and returns working folder id.\n" +
             "Output contains working folder id.")
-    @DisplayName("Batch - Create working folder")
+    @DisplayName("Batch - Create Working Folder")
     public Result<String, HttpResponseAttributes> batchCreateWorkingFolder(
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-            @ParameterGroup(name = "Create working folder") BatchCreateWorkingFolderInputFE input
+            @ParameterGroup(name = "Create Working Folder") BatchCreateWorkingFolderInputFE input
     ) {
         if (input.getName().isEmpty() || input.getName().length() > 20) {
             throw new InvalidInputParameterException(new Exception("Name must be between 1 and 20 characters."));

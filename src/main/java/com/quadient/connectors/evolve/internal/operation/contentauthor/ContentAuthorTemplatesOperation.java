@@ -29,11 +29,11 @@ public class ContentAuthorTemplatesOperation {
 
     @OutputJsonType(schema = "jsonSchema/ca_contentAuthorTemplatesOperation.json")
     @Throws(ExecuteErrorsProvider.class)
-    @Summary("Lists templates.")
-    @DisplayName("Content Author - Get Templates")
+    @Summary("List templates.")
+    @DisplayName("Content Author - List Templates")
     public Result<InputStream, HttpResponseAttributes> contentAuthorGetTemplates(
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-            @ParameterGroup(name = "Get Templates") ContentAuthorTemplatesInputFE input
+            @ParameterGroup(name = "List Templates") ContentAuthorTemplatesInputFE input
     ) {
         if (input.getLimit() > 100) {
             throw new InvalidInputParameterException(new Exception("The number of items to return cannot exceed 100."));
