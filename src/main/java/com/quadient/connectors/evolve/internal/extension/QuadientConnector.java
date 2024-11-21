@@ -10,6 +10,7 @@ import org.mule.sdk.api.annotation.JavaVersionSupport;
 import org.mule.sdk.api.annotation.SubTypeMapping;
 import org.mule.sdk.api.annotation.dsl.xml.Xml;
 import org.mule.sdk.api.annotation.error.ErrorTypes;
+import org.mule.sdk.api.annotation.license.RequiresEnterpriseLicense;
 import org.mule.sdk.api.meta.Category;
 
 import static org.mule.sdk.api.meta.JavaVersion.JAVA_11;
@@ -26,6 +27,7 @@ import static org.mule.sdk.api.meta.JavaVersion.JAVA_8;
 @ErrorTypes(QuadientModuleErrorType.class)
 @Configurations(Configuration.class)
 @JavaVersionSupport({JAVA_8, JAVA_11, JAVA_17})
+@RequiresEnterpriseLicense(allowEvaluationLicense = true)
 @SubTypeMapping(baseType = ProxyConfig.class, subTypes = {DefaultProxyConfig.class})
 public class QuadientConnector {
 
