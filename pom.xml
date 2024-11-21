@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.quadient.connectors</groupId>
-    <artifactId>mule-quadient-evolve-connector</artifactId>
+    <artifactId>mule4-quadient-evolve-connector</artifactId>
     <version>1.0.0</version>
     <packaging>mule-extension</packaging>
     <name>Quadient Evolve Connector - Mule 4</name>
