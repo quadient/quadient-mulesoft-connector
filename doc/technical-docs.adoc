@@ -20,7 +20,7 @@ Default configuration
 | Name | Type | Description | Default Value | Required
 |Name | String | The name for this configuration. Connectors reference the configuration with this name. | | *x*{nbsp}
 | Connection a| <<Config_Connection, Connection>>
-| The connection types that can be provided to this configuration. | | *x*{nbsp}
+ | The connection types that can be provided to this configuration. | | *x*{nbsp}
 | Name a| String |  The identifier of this element used to reference it in other components |  | *x*{nbsp}
 | Expiration Policy a| <<ExpirationPolicy>> |  Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit. |  | {nbsp}
 |===
@@ -35,9 +35,9 @@ Default configuration
 [%header%autowidth.spread]
 |===
 | Name | Type | Description | Default Value | Required
-| Quadient company hostname a| String |  The hostname of the Quadient company |  | *x*{nbsp}
+| Quadient company address a| String |  The address of the Quadient company |  | *x*{nbsp}
 | API key a| String |  Bearer token for authenticating your request. You need to generate an API key for a user role with relevant permissions in Settings | Aministration | API Keys. |  | *x*{nbsp}
-| Application Type a| Enumeration, one of:
+| Application a| Enumeration, one of:
 
 ** GENERATE_ON_DEMAND
 ** GENERATE_BATCH
@@ -130,7 +130,7 @@ Default configuration
 | Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
 | Name a| String |  Name of the job working folder. It will be visible in GUI and will be a part of the folder's ID. |  | *x*{nbsp}
 | Expiration a| String |  Date and time the folder will expire and be deleted (date/time format according to the ISO 8601 standard).
-The behavior of the parameter changes based on the isJobDedicated settings, i.e. if isJobDedicated is true or undefined, expiration cannot be set to more than 90 days and leaving expiration undefined sets the expiration to 90 days; if isJobDedicated is false, expiration can be set to an arbitrary date and leaving expiration undefined causes the folder to never expire. |  | {nbsp}
+ The behavior of the parameter changes based on the isJobDedicated settings, i.e. if isJobDedicated is true or undefined, expiration cannot be set to more than 90 days and leaving expiration undefined sets the expiration to 90 days; if isJobDedicated is false, expiration can be set to an arbitrary date and leaving expiration undefined causes the folder to never expire. |  | {nbsp}
 | Is Job Dedicated a| Boolean |  If true, the working folder will behave as an automatically created working folder while allowing you to prepare input data in advance. |  true | {nbsp}
 | Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
 | Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
@@ -183,8 +183,8 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 | Description a| String |  Custom description of the job. |  | {nbsp}
 | Variables a| Array of <<InputVariablesOptionsFe>> |  List of processing pipeline variables. It can be used to override values of existing variables in the given processing pipeline. E.g. when a variable is used in the pipeline&#39;s output path, by defining a different value for the same codeName, you can easily change the output path as you start the pipeline without having to re-configure the pipeline itself. |  | {nbsp}
 | Priority a| Number |  Specifies the job priority. Jobs with higher priority are run first. The  value set here overwrites any priority set when designing the pipeline.
-* minimum: 1
-* maximum: 100 |   | {nbsp}
+   * minimum: 1
+   * maximum: 100 |   | {nbsp}
 | Expiration a| String |  Date and time  the batch expires (date/time format according to the ISO 8601 standard). Once expired, the job is deleted. If undefined, the job will expire in 90 days. |  | {nbsp}
 | Use Draft Pipeline a| Boolean |  If true, the job will be run using a draft version of the processing pipeline. |  false | {nbsp}
 | Use Draft Resources a| Boolean |  If true, the job will be run using a draft version of the relevant resources (scripts, connectors). |  false | {nbsp}
@@ -288,7 +288,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 | Streaming Strategy a| * <<RepeatableInMemoryStream>>
 * <<RepeatableFileStoreStream>>
 * non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
-| State Id a| String |  Initial state of the ticket, the state must be in the approval process. |  | *x*{nbsp}
+| State ID a| String |  Initial state of the ticket, the state must be in the approval process. |  | *x*{nbsp}
 | Holder a| String |  Define the holder of the ticket. |  | *x*{nbsp}
 | Holder type a| Enumeration, one of:
 
@@ -303,7 +303,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 | Attachments a| Array of String |  Attachments to be added to the ticket. |  | {nbsp}
 | Contract a| <<ContractFe>> |  Define the contract details. |  | {nbsp}
 | Properties a| <<PropertiesFe>> |  Define the required ticket properties. |  | {nbsp}
-| Template Name a| String |  Path to an existing template the ticket will be created from. |  | *x*{nbsp}
+| Template path a| String |  Path to an existing template the ticket will be created from. |  | *x*{nbsp}
 | Brand a| String |  Define the brand for the document. |  | {nbsp}
 | Commands a| Array of <<CommandFe>> |  A command related to the way of processing a JLD file. |  | {nbsp}
 | Context a| Array of <<ContextFe>> |  Sets document's data context. |  | {nbsp}
@@ -454,9 +454,9 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 [cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
 |======================
 | Field | Type | Description | Default Value | Required
-| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  |
+| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | 
 | Reconnection Strategy a| * <<Reconnect>>
-* <<ReconnectForever>> | The reconnection strategy to use |  |
+* <<ReconnectForever>> | The reconnection strategy to use |  | 
 |======================
 
 [[Reconnect]]
@@ -465,9 +465,9 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 [cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
 |======================
 | Field | Type | Description | Default Value | Required
-| Frequency a| Number | How often (in ms) to reconnect |  |
-| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  |
-| Count a| Number | How many reconnection attempts to make |  |
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+| Count a| Number | How many reconnection attempts to make |  | 
 |======================
 
 [[ReconnectForever]]
@@ -476,8 +476,8 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 [cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
 |======================
 | Field | Type | Description | Default Value | Required
-| Frequency a| Number | How often (in ms) to reconnect |  |
-| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  |
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
 |======================
 
 [[ExpirationPolicy]]
@@ -486,7 +486,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 [cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
 |======================
 | Field | Type | Description | Default Value | Required
-| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  |
+| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  | 
 | Time Unit a| Enumeration, one of:
 
 ** NANOSECONDS
@@ -495,7 +495,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 ** SECONDS
 ** MINUTES
 ** HOURS
-** DAYS | A time unit that qualifies the maxIdleTime attribute |  |
+** DAYS | A time unit that qualifies the maxIdleTime attribute |  | 
 |======================
 
 [[ErrorMapping]]
@@ -516,7 +516,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 ** ROUTING
 ** CONNECTIVITY
 ** RETRY_EXHAUSTED
-** TIMEOUT |  |  |
+** TIMEOUT |  |  | 
 | Target a| String |  |  | x
 |======================
 
@@ -526,15 +526,15 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 [cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
 |======================
 | Field | Type | Description | Default Value | Required
-| Initial Buffer Size a| Number | This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. |  |
-| Buffer Size Increment a| Number | This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. |  |
-| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  |
+| Initial Buffer Size a| Number | This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. |  | 
+| Buffer Size Increment a| Number | This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. |  | 
+| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  | 
 | Buffer Unit a| Enumeration, one of:
 
 ** BYTE
 ** KB
 ** MB
-** GB | The unit in which all these attributes are expressed |  |
+** GB | The unit in which all these attributes are expressed |  | 
 |======================
 
 [[RepeatableFileStoreStream]]
@@ -543,13 +543,13 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 [cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
 |======================
 | Field | Type | Description | Default Value | Required
-| In Memory Size a| Number | Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk. |  |
+| In Memory Size a| Number | Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk. |  | 
 | Buffer Unit a| Enumeration, one of:
 
 ** BYTE
 ** KB
 ** MB
-** GB | The unit in which maxInMemorySize is expressed |  |
+** GB | The unit in which maxInMemorySize is expressed |  | 
 |======================
 
 [[InputVariablesOptionsFe]]
@@ -567,7 +567,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 ** STEP |  |  | x
 | Code Name a| String |  |  | x
 | Value a| String |  |  | x
-| Input Variables Options a| Array of String |  |  |
+| Input Variables Options a| Array of String |  |  | 
 |======================
 
 [[MultipartAttachmentFe]]
@@ -586,10 +586,10 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 [cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
 |======================
 | Field | Type | Description | Default Value | Required
-| Content Author Condition Categorizations a| Array of <<CategorizationConditionFe>> |  |  |
-| Conditions a| Array of String |  |  |
-| Content Author Condition Metadata a| Array of <<MetadataConditionFe>> |  |  |
-| Negation a| Boolean |  | false |
+| Content Author Condition Categorizations a| Array of <<CategorizationConditionFe>> |  |  | 
+| Conditions a| Array of String |  |  | 
+| Content Author Condition Metadata a| Array of <<MetadataConditionFe>> |  |  | 
+| Negation a| Boolean |  | false | 
 | Content Author Condition Operator a| Enumeration, one of:
 
 ** AND
@@ -604,7 +604,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 | Field | Type | Description | Default Value | Required
 | Field Name a| String |  |  | x
 | Name a| String |  |  | x
-| Negation a| Boolean |  | false |
+| Negation a| Boolean |  | false | 
 | Operator a| Enumeration, one of:
 
 ** EQUAL
@@ -630,7 +630,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 |======================
 | Field | Type | Description | Default Value | Required
 | Name a| String |  |  | x
-| Negation a| Boolean |  | false |
+| Negation a| Boolean |  | false | 
 | Operator a| Enumeration, one of:
 
 ** EQUAL
@@ -655,7 +655,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 [cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
 |======================
 | Field | Type | Description | Default Value | Required
-| Resolve Department a| Boolean |  | false |
+| Resolve Department a| Boolean |  | false | 
 | Value a| String |  |  | x
 |======================
 
@@ -675,7 +675,7 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 [cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
 |======================
 | Field | Type | Description | Default Value | Required
-| Override Also Not Empty Properties a| Boolean |  | false |
+| Override Also Not Empty Properties a| Boolean |  | false | 
 | Create Ticket Properties Map a| Object |  |  | x
 |======================
 
@@ -723,8 +723,8 @@ The behavior of the parameter changes based on the isJobDedicated settings, i.e.
 | Field | Type | Description | Default Value | Required
 | Host a| String | Host where the proxy requests will be sent. |  | x
 | Port a| Number | Port where the proxy requests will be sent. |  | x
-| Username a| String | The username to authenticate against the proxy. |  |
-| Password a| String | The password to authenticate against the proxy. |  |
-| Non Proxy Hosts a| String | A list of comma separated hosts against which the proxy should not be used |  |
+| Username a| String | The username to authenticate against the proxy. |  | 
+| Password a| String | The password to authenticate against the proxy. |  | 
+| Non Proxy Hosts a| String | A list of comma separated hosts against which the proxy should not be used |  | 
 |======================
 

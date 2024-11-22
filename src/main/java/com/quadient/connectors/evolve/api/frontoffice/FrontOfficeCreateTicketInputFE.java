@@ -12,6 +12,7 @@ import java.util.List;
 
 public class FrontOfficeCreateTicketInputFE {
     @Parameter
+    @DisplayName("State ID")
     @Summary("Initial state of the ticket, the state must be in the approval process.")
     @Example("S_simple_scenario_writer_assigned")
     public String stateId;
@@ -84,6 +85,7 @@ public class FrontOfficeCreateTicketInputFE {
     //End of CreateTicketBaseDto
 
     @Parameter
+    @DisplayName("Template path")
     @Summary("Path to an existing template the ticket will be created from.")
     @Placement(order = 1)
     public String templateName;
