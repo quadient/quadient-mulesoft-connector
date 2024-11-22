@@ -33,9 +33,9 @@ import java.util.concurrent.TimeUnit;
 public class ConnectionProvider implements
         CachedConnectionProvider<Connection>, Startable, Stoppable {
 
-    @DisplayName("Quadient company hostname")
+    @DisplayName("Quadient company address")
     @Example("https://company.quadient.com")
-    @Summary("The hostname of the Quadient company")
+    @Summary("The address of the Quadient company")
     @Parameter
     private String companyHostname;
 
@@ -45,7 +45,7 @@ public class ConnectionProvider implements
     @Summary("Bearer token for authenticating your request. You need to generate an API key for a user role with relevant permissions in Settings | Aministration | API Keys.")
     private String apiToken;
 
-
+    @DisplayName("Application")
     @Parameter
     @Summary("Type of the API key. It will be used for validation of connection.")
     private ApplicationType applicationType;
