@@ -25,10 +25,10 @@ public class OnDemandOnDemandOperation {
     @MediaType(MediaType.ANY)
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Starts and processes an on-demand job using a defined processing pipeline.")
-    @DisplayName("OnDemand - OnDemand")
+    @DisplayName("On Demand - Start On-Demand Job")
     public Result<InputStream, HttpResponseAttributes> onDemandOnDemand(
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-            @ParameterGroup(name = "OnDemand") OnDemandOnDemandInputFE input
+            @ParameterGroup(name = "Start On-Demand Job") OnDemandOnDemandInputFE input
     ) {
         if (input.getOnDemandOnDemandVariables() != null && input.getOnDemandOnDemandVariables().size() > 50) {
             throw new InvalidInputParameterException(new Exception("The number of variables cannot exceed 50."));

@@ -23,10 +23,10 @@ public class OnDemandCustomDataOperation {
     @MediaType(MediaType.ANY)
     @Throws(ExecuteErrorsProvider.class)
     @Summary("Starts and processes an on-demand job (using a defined processing pipeline) and uploads custom data to an internal location (these data files are later automatically deleted).")
-    @DisplayName("OnDemand - OnDemand Custom Data")
+    @DisplayName("On Demand - Start Job with Custom Data")
     public Result<InputStream, HttpResponseAttributes> onDemandOnDemandCustomData(
             @org.mule.runtime.extension.api.annotation.param.Connection Connection connection,
-            @ParameterGroup(name = "OnDemand Custom Data") OnDemandCustomDataInputFE input
+            @ParameterGroup(name = "Start Job with Custom Data") OnDemandCustomDataInputFE input
     ) {
         if (input.getOnDemandCustomDataPipelineVariables() != null && input.getOnDemandCustomDataPipelineVariables().size() > 50) {
             throw new InvalidInputParameterException(new Exception("The number of variables cannot exceed 50."));

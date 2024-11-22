@@ -343,7 +343,7 @@ Default configuration
 
 
 [[OnDemandOnDemand]]
-== OnDemand - OnDemand
+== On Demand - Start On-Demand Job
 `<quadient:on-demand-on-demand>`
 
 
@@ -394,7 +394,7 @@ Default configuration
 
 
 [[OnDemandOnDemandCustomData]]
-== OnDemand - OnDemand Custom Data
+== On Demand - Start Job with Custom Data
 `<quadient:on-demand-on-demand-custom-data>`
 
 
