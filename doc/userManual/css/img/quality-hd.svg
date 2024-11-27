@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+    <defs>
+        <style>.cls-1{fill:#40484b;}.cls-2{fill:#ffffff;}</style>
+    </defs>
+    <title>hd-quality-green</title>
+    <rect class="cls-1" y="2" width="20" height="16" />
+    <path class="cls-2" d="M14.25,7.71H12.94l-.64,4.58h1.4A2.47,2.47,0,0,0,16.07,10,1.82,1.82,0,0,0,14.25,7.71Z" />
+    <path class="cls-2" d="M0,2V18H20V2ZM9,13.85H7l.42-3H4.27l-.42,3h-2L3,6.15h2L4.49,9.32H7.68l.45-3.17h2ZM18.06,10a4.53,4.53,0,0,1-4.71,3.85H10.12l1.08-7.7h3.31C16.93,6.15,18.39,7.71,18.06,10Z" />
+</svg>
