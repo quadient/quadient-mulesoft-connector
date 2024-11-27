@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mulesoft.connectors.examples</groupId>
-	<artifactId>mule-quadient-connector-demo</artifactId>
+	<artifactId>mule-quadient-connector-general-demo</artifactId>
 	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
