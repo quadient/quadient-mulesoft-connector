@@ -37,7 +37,7 @@ Add this dependency to your application's pom.xml
 
 ```
 <groupId>com.quadient.connectors</groupId>
-<artifactId>mule-quadient-evolve-connector</artifactId>
+<artifactId>mule4-quadient-evolve-connector</artifactId>
 <version>1.0.0</version>
 <classifier>mule-plugin</classifier>
 ```
