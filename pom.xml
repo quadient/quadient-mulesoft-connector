@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.mule.extensions</groupId>
         <artifactId>mule-modules-parent</artifactId>
-        <version>1.6.3</version> <!-- engine Mule 4.6 -->
+        <version>1.6.0</version> <!-- engine Mule 4.6 -->
     </parent>
 
     <properties>
