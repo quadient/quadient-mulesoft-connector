@@ -27,13 +27,12 @@
         <jackson.version>2.17.2</jackson.version>
         <jakarta.version>2.1.6</jakarta.version>
         <mule.maven.plugin.version>4.2.0</mule.maven.plugin.version>
-        <runtimeVersion>4.6.3</runtimeVersion>
         <runtimeProduct>MULE_EE</runtimeProduct>
-        <muleJavaEeBomVersion>4.6.3</muleJavaEeBomVersion>
+        <muleJavaEeBomVersion>4.6.0</muleJavaEeBomVersion>
         <mavenResourcesVersion>3.0.2</mavenResourcesVersion>
-        <munit.extensions.maven.plugin.version>1.3.1</munit.extensions.maven.plugin.version>
-        <munit.runtime.version>4.6.3</munit.runtime.version>
+        <munit.extensions.maven.plugin.version>1.2.0</munit.extensions.maven.plugin.version>
         <munit.mtftool.version>1.2.0</munit.mtftool.version>
+        <munit.version>3.1.0</munit.version>
     </properties>
 
     <dependencyManagement>
