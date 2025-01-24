@@ -11,7 +11,7 @@ public class ServiceEndpoint {
 
 
     public static final String CA_TEMPLATES = "/authoring/api/system/v1/templates";
-    public static final String CA_HEALTH = "/server/health";
+    public static final String CA_HEALTH = "/authoring/api/system/v1/server/health";
 
     public static final String FO_TICKETS = "/frontoffice/api/system/v2/tickets";
 
